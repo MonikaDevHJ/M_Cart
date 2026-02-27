@@ -1,6 +1,7 @@
 "use client"
 import { useState } from "react";
 import { ShoppingCart, Menu, X, Search } from "lucide-react";
+import Link from "next/link";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -12,9 +13,9 @@ const Navbar = () => {
 
           {/* Logo */}
           <div className="flex items-center gap-20">
-            <h1 className="text-3xl font-bold text-fuchsia-600 cursor-pointer">
+            <Link href= "/" className="text-3xl font-bold text-fuchsia-600 cursor-pointer">
               M_Cart
-            </h1>
+            </Link>
 
             {/* Search Bar - Hidden on small screens */}
             <div className="hidden md:flex items-center bg-fuchsia-100 rounded-full px-4 py-2 w-96 border border-fuchsia-400">
