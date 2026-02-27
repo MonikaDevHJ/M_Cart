@@ -7,18 +7,18 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white shadow-md w-full border-2  rounded-4xl border-fuchsia-700 ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-1 ">
           <div className="flex justify-between items-center h-16">
 
           {/* Logo */}
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-20">
             <h1 className="text-3xl font-bold text-fuchsia-600 cursor-pointer">
               M_Cart
             </h1>
 
             {/* Search Bar - Hidden on small screens */}
-            <div className="hidden md:flex items-center bg-gray-100 rounded-full px-4 py-2 w-80">
-              <Search className="text-gray-500 w-5 h-5" />
+            <div className="hidden md:flex items-center bg-fuchsia-100 rounded-full px-4 py-2 w-96 border border-fuchsia-400">
+              <Search className="text-gray-500 w-5 h-6" />
               <input
                 type="text"
                 placeholder="Search for products..."
@@ -28,7 +28,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8 font-medium text-gray-700">
+          <div className="hidden md:flex items-center gap-20 font-medium text-gray-700">
             <button className="hover:text-fuchsia-600 font-bold text-xl transition">
               Buyer
             </button>
