@@ -2,7 +2,7 @@
 const Filter = () => {
   return (
     <div>
-      <p>Filter Pages</p>
+      <p>Filter Part</p>
     </div>
   )
 }
