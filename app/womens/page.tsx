@@ -3,7 +3,7 @@ import Items from "../component/womens/Items"
 
 const WomensPage = () => {
   return (
-    <div className="w-full grid grid-cols-5  gap-4">
+    <div className="w-full grid grid-cols-5  gap-4 p-5">
       
       <div className="col-span-2 border">
         <Filter />
