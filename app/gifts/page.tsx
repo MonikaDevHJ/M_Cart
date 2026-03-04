@@ -1,8 +1,7 @@
-import React from 'react'
 
 const GiftPage = () => {
   return (
-    <div>
+    <div className="">
       <p className='text-center justify-center'>GiftPages</p>
     </div>
   )
