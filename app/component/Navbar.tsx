@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState } from "react";
 import { ShoppingCart, Menu, X, Search } from "lucide-react";
 import Link from "next/link";
@@ -7,13 +7,16 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="bg-white shadow-md w-full border-2  rounded-4xl border-fuchsia-700 ">
+    <nav className="sticky top-0 z-50 bg-white shadow-md w-full border-2 rounded-4xl border-fuchsia-700">
+      {" "}
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-1 ">
-          <div className="flex justify-between items-center h-16">
-
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center gap-20">
-            <Link href= "/" className="text-3xl font-bold text-fuchsia-600 cursor-pointer">
+            <Link
+              href="/"
+              className="text-3xl font-bold text-fuchsia-600 cursor-pointer"
+            >
               M_Cart
             </Link>
 
@@ -52,11 +55,9 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-
       {/* Mobile Dropdown */}
       {open && (
         <div className="md:hidden px-4 pb-4 space-y-4 bg-white shadow">
-          
           <div className="flex items-center bg-gray-100 rounded-full px-4 py-2">
             <Search className="text-gray-500 w-5 h-5" />
             <input
