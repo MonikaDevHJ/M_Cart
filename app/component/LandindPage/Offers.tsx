@@ -15,7 +15,7 @@ const Offers = () => {
   return (
     <div className="overflow-hidden    mt-20 ">
       <p className="font-extrabold text-4xl text-fuchsia-700 flex items-center gap-3">
-        🎉 Today's Offers
+        Today's Offers  🎉
       </p>
       <div className="flex gap-8 animate-scroll w-max mt-10">
 
