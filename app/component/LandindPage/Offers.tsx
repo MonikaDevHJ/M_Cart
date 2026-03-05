@@ -14,9 +14,9 @@ const images = [
 const Offers = () => {
   return (
     <div className="overflow-hidden    mt-20 ">
-      <div className="">
-        <p className="font-extrabold text-4xl text-fuchsia-700 ">Today's Offers</p>
-      </div>
+      <p className="font-extrabold text-4xl text-fuchsia-700 flex items-center gap-3">
+        🎉 Today's Offers
+      </p>
       <div className="flex gap-8 animate-scroll w-max mt-10">
 
         {/* Duplicate once only (important for smooth loop) */}
