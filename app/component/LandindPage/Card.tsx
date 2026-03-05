@@ -16,7 +16,7 @@ const Main = () => {
 
 
   return (
-    <div className="p-5  ">
+    <div className="  ">
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5 mt-9">
         {cards.map((card, index) => (
           <Link
