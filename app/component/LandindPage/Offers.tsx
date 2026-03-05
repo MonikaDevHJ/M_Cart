@@ -13,8 +13,11 @@ const images = [
 
 const Offers = () => {
   return (
-    <div className="overflow-hidden   p-8 mt-15 ">
-      <div className="flex gap-8 animate-scroll w-max">
+    <div className="overflow-hidden    mt-20 ">
+      <div className="">
+        <p className="font-extrabold text-4xl text-fuchsia-700 ">Today's Offers</p>
+      </div>
+      <div className="flex gap-8 animate-scroll w-max mt-10">
 
         {/* Duplicate once only (important for smooth loop) */}
         {[...images, ...images].map((img, i) => (
