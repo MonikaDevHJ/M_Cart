@@ -10,6 +10,8 @@ import one_piece from "../../../public/assets/one_piece.png"
 import realme_Bluetooh from "../../../public/assets/realme_Bluetooh.png"
 import Samsung_mobile from "../../../public/assets/SamsungOffers.png"
 import Water_flowers from "../../../public/assets/Water_flowers.png"
+import Jewlery_RecentView from "../../../public/assets/Jewlery_RecentView.png"
+import Strug_RecentView from "../../../public/assets/Strug_RecentView.png"
 
 const RecentViewProducts = () => {
 
@@ -21,6 +23,8 @@ const RecentViewProducts = () => {
     { img: realme_Bluetooh, name: "True Wireless" },
     { img: Samsung_mobile, name: "Mobiles" },
     { img: Water_flowers, name: "Flowers" },
+    { img: Jewlery_RecentView, name: "Jewleries" },
+    { img: Strug_RecentView , name:"Strug"},
   ]
 
   // ✅ Correct TypeScript type
