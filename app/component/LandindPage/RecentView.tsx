@@ -16,13 +16,13 @@ import RecentView_Samsungimg from "../../../public/assets/RecentView_Samsungimg.
 const RecentViewProducts = () => {
 
   const products = [
-    { img: RecentView_Bluetooth, name: "Earrings" },
-    { img: RecentView_Brideimg, name: "Bun Clip" },
-    { img: RecentView_earringimg, name: "Women's Skirts" },
-    { img: RecentView_Kurthaimg, name: "Casseroles" },
-    { img: RecentView_Miltonimg, name: "True Wireless" },
-    { img: RecentView_neightDress, name: "Mobiles" },
-    { img: RecentView_Samsungimg, name: "Flowers" },
+    { img: RecentView_Bluetooth, name: "Bluetooth" },
+    { img: RecentView_Brideimg, name: "Briding" },
+    { img: RecentView_earringimg, name: "Earings" },
+    { img: RecentView_Kurthaimg, name: "Kurtha" },
+    { img: RecentView_Miltonimg, name: "HotBoxes" },
+    { img: RecentView_neightDress, name: "Neight Dress" },
+    { img: RecentView_Samsungimg, name: "Samasung_Mobile" },
     { img: Jewlery_RecentView, name: "Jewleries" },
     { img: Strug_RecentView , name:"Strug"},
   ]
@@ -76,7 +76,7 @@ const RecentViewProducts = () => {
               className="rounded-lg"
             />
 
-            <p className="text-sm mt-2 font-medium">
+            <p className="text-xl mt-2 font-bold">
               {item.name}
             </p>
           </div>
