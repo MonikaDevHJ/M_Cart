@@ -3,26 +3,26 @@
 import { useRef } from "react"
 import Image from "next/image"
 
-import earings from "../../../public/assets/earings.png"
-import Kurta from "../../../public/assets/Kurta.png"
-import MiltonHotBoxes from "../../../public/assets/MiltonHotBoxes.png"
-import one_piece from "../../../public/assets/one_piece.png"
-import realme_Bluetooh from "../../../public/assets/realme_Bluetooh.png"
-import Samsung_mobile from "../../../public/assets/SamsungOffers.png"
-import Water_flowers from "../../../public/assets/Water_flowers.png"
+
 import Jewlery_RecentView from "../../../public/assets/Jewlery_RecentView.png"
 import Strug_RecentView from "../../../public/assets/Strug_RecentView.png"
-
+import RecentView_Bluetooth from "../../../public/assets/RecentView_Bluetooth.png"
+import RecentView_Brideimg from "../../../public/assets/RecentView_Brideimg.png"
+import RecentView_earringimg from "../../../public/assets/RecentView_Bluetooth.png"
+import RecentView_Kurthaimg from "../../../public/assets/RecentView_Kurthaimg.png"
+import RecentView_Miltonimg from "../../../public/assets/RecentView_Miltonimg.png"
+import RecentView_neightDress from "../../../public/assets/RecentView_neightDress.png"
+import RecentView_Samsungimg from "../../../public/assets/RecentView_Samsungimg.png"
 const RecentViewProducts = () => {
 
   const products = [
-    { img: earings, name: "Earrings" },
-    { img: Kurta, name: "Bun Clip" },
-    { img: one_piece, name: "Women's Skirts" },
-    { img: MiltonHotBoxes, name: "Casseroles" },
-    { img: realme_Bluetooh, name: "True Wireless" },
-    { img: Samsung_mobile, name: "Mobiles" },
-    { img: Water_flowers, name: "Flowers" },
+    { img: RecentView_Bluetooth, name: "Earrings" },
+    { img: RecentView_Brideimg, name: "Bun Clip" },
+    { img: RecentView_earringimg, name: "Women's Skirts" },
+    { img: RecentView_Kurthaimg, name: "Casseroles" },
+    { img: RecentView_Miltonimg, name: "True Wireless" },
+    { img: RecentView_neightDress, name: "Mobiles" },
+    { img: RecentView_Samsungimg, name: "Flowers" },
     { img: Jewlery_RecentView, name: "Jewleries" },
     { img: Strug_RecentView , name:"Strug"},
   ]
