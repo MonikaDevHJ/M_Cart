@@ -1,6 +1,7 @@
 import Card from "../app/component/LandindPage/Card";
 import Offers from "../app/component/LandindPage/Offers";
 import RecentViewProducts from "../app/component/LandindPage/RecentView"
+import Footer from "../app/component/Footer"
  
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
       <Card />
       <Offers/>
       <RecentViewProducts/>
+      <Footer/>
     </div>
   );
 }
