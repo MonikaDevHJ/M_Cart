@@ -17,14 +17,41 @@ const Footer = () => {
           </div>
           <div className="">
             <p className="text-gray-300   font-bold">Group Companies</p>
+
+            <div className="mt-5">
+              <p className="text-white">Flip_Cart</p>
+              <p className="text-white">Mesho</p>
+              <p className="text-white">Purple</p>
+
+              <p className="text-white">Nyakaa</p>
+            </div>
           </div>
 
           <div className="">
             <p className="text-gray-300 font-bold">Help</p>
+
+            <div className="mt-5">
+              <p className="text-white">Payements</p>
+              <p className="text-white">Shipping</p>
+              <p className="text-white">Cancelattion</p>
+
+              <p className="text-white">FAQ</p>
+            </div>
           </div>
 
           <div className="">
             <p className="text-gray-300 font-bold">Consumer Policy</p>
+            <div className="mt-5">
+              <p className="text-white">Cancelattion And Return</p>
+              <p className="text-white">Terms Of Use</p>
+              <p className="text-white">Security</p>
+
+              <p className="text-white">Privacy</p>
+              <p className="text-white">Sitemap</p>
+              <p className="text-white">Grievance Redressal</p>
+              <p className="text-white">EPR Compliance</p>
+              <p className="text-white">FSSAI Food Safety Connect App</p>
+            </div>
           </div>
 
           <div className="">
