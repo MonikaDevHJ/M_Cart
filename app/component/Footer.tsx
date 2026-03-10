@@ -1,71 +1,89 @@
 const Footer = () => {
   return (
-    <div className="mt-10">
-      <div className="bg-gray-900  rounded-2xl">
-        <div className="flex px-10 py-15 gap-36">
-          <div className="">
-            <p className="text-gray-300 font-bold"> About</p>
+    <footer className="mt-12 bg-gray-900 text-white rounded-2xl">
+      <div className="max-w-7xl mx-auto px-6 py-12">
 
-            <div className="mt-5">
-              <p className="text-white">Contact Us</p>
-              <p className="text-white">About Us</p>
-              <p className="text-white">Carrear</p>
+        {/* Grid Section */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-10">
 
-              <p className="text-white">Press</p>
-              <p className="text-white">Corparate Information</p>
-            </div>
-          </div>
-          <div className="">
-            <p className="text-gray-300   font-bold">Group Companies</p>
-
-            <div className="mt-5">
-              <p className="text-white">Flip_Cart</p>
-              <p className="text-white">Mesho</p>
-              <p className="text-white">Purple</p>
-
-              <p className="text-white">Nyakaa</p>
-            </div>
+          {/* About */}
+          <div>
+            <h3 className="text-gray-400 font-semibold mb-4">About</h3>
+            <ul className="space-y-2 text-sm">
+              <li className="hover:text-gray-300 cursor-pointer">Contact Us</li>
+              <li className="hover:text-gray-300 cursor-pointer">About Us</li>
+              <li className="hover:text-gray-300 cursor-pointer">Career</li>
+              <li className="hover:text-gray-300 cursor-pointer">Press</li>
+              <li className="hover:text-gray-300 cursor-pointer">Corporate Information</li>
+            </ul>
           </div>
 
-          <div className="">
-            <p className="text-gray-300 font-bold">Help</p>
-
-            <div className="mt-5">
-              <p className="text-white">Payements</p>
-              <p className="text-white">Shipping</p>
-              <p className="text-white">Cancelattion</p>
-
-              <p className="text-white">FAQ</p>
-            </div>
+          {/* Group Companies */}
+          <div>
+            <h3 className="text-gray-400 font-semibold mb-4">Group Companies</h3>
+            <ul className="space-y-2 text-sm">
+              <li className="hover:text-gray-300 cursor-pointer">Flipkart</li>
+              <li className="hover:text-gray-300 cursor-pointer">Meesho</li>
+              <li className="hover:text-gray-300 cursor-pointer">Purplle</li>
+              <li className="hover:text-gray-300 cursor-pointer">Nykaa</li>
+            </ul>
           </div>
 
-          <div className="">
-            <p className="text-gray-300 font-bold">Consumer Policy</p>
-            <div className="mt-5">
-              <p className="text-white">Cancelattion And Return</p>
-              <p className="text-white">Terms Of Use</p>
-              <p className="text-white">Security</p>
-
-              <p className="text-white">Privacy</p>
-              <p className="text-white">Sitemap</p>
-              <p className="text-white">Grievance Redressal</p>
-              <p className="text-white">EPR Compliance</p>
-              <p className="text-white">FSSAI Food Safety Connect App</p>
-            </div>
+          {/* Help */}
+          <div>
+            <h3 className="text-gray-400 font-semibold mb-4">Help</h3>
+            <ul className="space-y-2 text-sm">
+              <li className="hover:text-gray-300 cursor-pointer">Payments</li>
+              <li className="hover:text-gray-300 cursor-pointer">Shipping</li>
+              <li className="hover:text-gray-300 cursor-pointer">Cancellation</li>
+              <li className="hover:text-gray-300 cursor-pointer">FAQ</li>
+            </ul>
           </div>
 
-          <div className="">
-            <p className="text-gray-300 font-bold">Mail Us</p>
+          {/* Consumer Policy */}
+          <div>
+            <h3 className="text-gray-400 font-semibold mb-4">Consumer Policy</h3>
+            <ul className="space-y-2 text-sm">
+              <li className="hover:text-gray-300 cursor-pointer">Cancellation & Return</li>
+              <li className="hover:text-gray-300 cursor-pointer">Terms Of Use</li>
+              <li className="hover:text-gray-300 cursor-pointer">Security</li>
+              <li className="hover:text-gray-300 cursor-pointer">Privacy</li>
+              <li className="hover:text-gray-300 cursor-pointer">Sitemap</li>
+            </ul>
           </div>
 
-          <div className="">
-            <p className="text-gray-300 font-bold">
-              Register Offfice Addresses
+          {/* Mail Us */}
+          <div>
+            <h3 className="text-gray-400 font-semibold mb-4">Mail Us</h3>
+            <ul className="space-y-2 text-sm">
+              <li>mcart@gmail.com</li>
+              <li>customercare@gmail.com</li>
+              <li>mailus@gmail.com</li>
+              <li>help@gmail.com</li>
+            </ul>
+          </div>
+
+          {/* Address */}
+          <div>
+            <h3 className="text-gray-400 font-semibold mb-4">Registered Office</h3>
+            <p className="text-sm">
+              Bommanahalli, Bangalore <br />
+              Karnataka, India
             </p>
           </div>
+
         </div>
+
+        {/* Divider */}
+        <div className="border-t border-gray-700 my-8"></div>
+
+        {/* Bottom */}
+        <div className="text-center text-sm text-gray-400">
+          © {new Date().getFullYear()} M-Cart. All rights reserved.
+        </div>
+
       </div>
-    </div>
+    </footer>
   );
 };
 
