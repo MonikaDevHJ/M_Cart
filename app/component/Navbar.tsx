@@ -10,7 +10,7 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 bg-white shadow-md w-full border-2 rounded-4xl border-fuchsia-700">
       {" "}
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-1 ">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-16">  
           {/* Logo */}
           <div className="flex items-center gap-20">
             <Link
@@ -33,13 +33,18 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-20 font-medium text-gray-700">
-            <button className="hover:text-fuchsia-600 font-bold text-xl transition">
+            <Link
+              href="/buyer"
+              className="hover:text-fuchsia-600 font-bold text-xl transition"
+            >
               Buyer
-            </button>
+            </Link>
 
-            <button className="hover:text-fuchsia-600 font-bold text-xl transition">
+            <Link  
+            href="/seller"
+            className="hover:text-fuchsia-600 font-bold text-xl transition">
               Seller
-            </button>
+            </Link>
 
             <button className="flex items-center gap-2 bg-fuchsia-600 text-white px-4 py-2 rounded-full hover:bg-fuchsia-700 transition">
               <ShoppingCart size={18} />
