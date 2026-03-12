@@ -1,10 +1,16 @@
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
-const Seller = () => {
+export default async function Seller() {
+  const { userId } = await auth();
+
+  if (!userId) {
+    redirect("/sign-in");
+  }
+
   return (
     <div>
-      <p className="text-black">Seller</p>
+      <h1 className="text-2xl font-bold">Seller Dashboard</h1>
     </div>
-  )
+  );
 }
-
-export default Seller
