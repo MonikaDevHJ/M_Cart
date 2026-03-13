@@ -3,13 +3,13 @@ import Items from "../component/womens/Items"
 
 const WomensPage = () => {
   return (
-    <div className="w-full grid grid-cols-5  gap-4 p-5">
+    <div className="w-full grid grid-cols-5  gap-4 p-5 mt-5">
       
-      <div className="col-span-2 border">
+      <div className="col-span-1">
         <Filter />
       </div>
 
-      <div className="col-span-3 border">
+      <div className="col-span-4 ">
         <Items />
       </div>
 
