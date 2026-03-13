@@ -1,82 +1,187 @@
+"use client"
+
+import { useState } from "react";
+
 const Filter = () => {
+
+  const [openOccasion, setOpenOccasion] = useState(true);
+
+  const categories = ["Dresses", "Tops", "Jeans", "Skirts"];
+  const occasions = ["Casual", "Party", "Formal", "Beach Wear"];
+  const brands = ["Zara", "H&M", "Biba"];
+
   return (
-    <div className="bg-white shadow-lg rounded-xl p-6 sticky top-5">
+    <div className="w-full bg-white border border-gray-200 rounded-2xl shadow-sm p-4 sm:p-5 lg:p-6 sticky top-6">
 
       {/* Title */}
-      <div className="border-b pb-3 mb-4">
-        <p className="text-2xl font-bold text-fuchsia-700">Filters</p>
+      <div className="flex items-center justify-between border-b pb-4 mb-4">
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-800">
+          Filters
+        </h2>
+
+        <button className="text-sm text-fuchsia-600 hover:underline">
+          Clear
+        </button>
       </div>
 
-      {/* Category */}
-      <div className="mb-6">
-        <p className="font-semibold mb-2 text-gray-700">Category</p>
+      {/* CATEGORY */}
+      <div className="border-b py-4">
+        <p className="font-semibold text-gray-800 text-sm tracking-wide">
+          CATEGORY
+        </p>
 
-        <select className="w-full border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-fuchsia-500">
-          <option>All</option>
-          <option>Dresses</option>
-          <option>Tops</option>
-          <option>Jeans</option>
-          <option>Skirts</option>
-        </select>
-      </div>
+        <div className="flex flex-col gap-2 mt-3 text-gray-600 text-sm">
 
-      {/* Price */}
-      <div className="mb-6">
-        <p className="font-semibold mb-2 text-gray-700">Price</p>
+          {categories.map((cat, index) => (
+            <label
+              key={index}
+              className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600 transition"
+            >
+              <input
+                type="checkbox"
+                className="accent-fuchsia-600"
+              />
+              {cat}
+            </label>
+          ))}
 
-        <select className="w-full border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-fuchsia-500">
-          <option>Under ₹500</option>
-          <option>₹500 - ₹1000</option>
-          <option>₹1000 - ₹2000</option>
-          <option>Above ₹2000</option>
-        </select>
-      </div>
-
-      {/* Brand */}
-      <div className="mb-6">
-        <p className="font-semibold mb-2 text-gray-700">Brand</p>
-
-        <div className="flex flex-col gap-2 text-gray-600">
-          <label className="flex gap-2">
-            <input type="checkbox" /> Zara
-          </label>
-
-          <label className="flex gap-2">
-            <input type="checkbox" /> H&M
-          </label>
-
-          <label className="flex gap-2">
-            <input type="checkbox" /> Biba
-          </label>
         </div>
       </div>
 
-      {/* Rating */}
-      <div className="mb-6">
-        <p className="font-semibold mb-2 text-gray-700">Rating</p>
+      {/* OCCASION */}
+      <div className="border-b py-4">
 
-        <div className="flex flex-col gap-2 text-gray-600">
-          <label className="flex gap-2">
-            <input type="radio" name="rating" /> 4★ & above
+        <button
+          onClick={() => setOpenOccasion(!openOccasion)}
+          className="flex w-full items-center justify-between"
+        >
+          <p className="font-semibold text-gray-800 text-sm tracking-wide">
+            OCCASION
+          </p>
+
+          <span
+            className={`transition-transform duration-300 text-gray-500 ${
+              openOccasion ? "rotate-180" : ""
+            }`}
+          >
+            ▼
+          </span>
+        </button>
+
+        {openOccasion && (
+          <div className="flex flex-col gap-2 mt-3 text-gray-600 text-sm">
+
+            {occasions.map((item, index) => (
+              <label
+                key={index}
+                className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600 transition"
+              >
+                <input
+                  type="checkbox"
+                  className="accent-fuchsia-600"
+                />
+                {item}
+              </label>
+            ))}
+
+          </div>
+        )}
+
+      </div>
+
+      {/* PRICE */}
+      <div className="border-b py-4">
+
+        <p className="font-semibold text-gray-800 text-sm tracking-wide">
+          PRICE
+        </p>
+
+        <div className="flex flex-col gap-2 mt-3 text-gray-600 text-sm">
+
+          <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
+            <input type="radio" name="price" className="accent-fuchsia-600"/>
+            Under ₹500
           </label>
 
-          <label className="flex gap-2">
-            <input type="radio" name="rating" /> 3★ & above
+          <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
+            <input type="radio" name="price" className="accent-fuchsia-600"/>
+            ₹500 – ₹1000
           </label>
 
-          <label className="flex gap-2">
-            <input type="radio" name="rating" /> 2★ & above
+          <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
+            <input type="radio" name="price" className="accent-fuchsia-600"/>
+            ₹1000 – ₹2000
           </label>
+
+          <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
+            <input type="radio" name="price" className="accent-fuchsia-600"/>
+            Above ₹2000
+          </label>
+
         </div>
       </div>
 
-      {/* Button */}
-      <button className="w-full bg-fuchsia-600 text-white py-2 rounded-lg hover:bg-fuchsia-700 transition">
-        Apply Filter
+      {/* BRAND */}
+      <div className="border-b py-4">
+
+        <p className="font-semibold text-gray-800 text-sm tracking-wide">
+          BRAND
+        </p>
+
+        <div className="flex flex-col gap-2 mt-3 text-gray-600 text-sm">
+
+          {brands.map((brand, index) => (
+            <label
+              key={index}
+              className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600 transition"
+            >
+              <input
+                type="checkbox"
+                className="accent-fuchsia-600"
+              />
+              {brand}
+            </label>
+          ))}
+
+        </div>
+
+      </div>
+
+      {/* RATING */}
+      <div className="py-4">
+
+        <p className="font-semibold text-gray-800 text-sm tracking-wide">
+          RATING
+        </p>
+
+        <div className="flex flex-col gap-2 mt-3 text-gray-600 text-sm">
+
+          <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
+            <input type="radio" name="rating" className="accent-fuchsia-600"/>
+            4★ & above
+          </label>
+
+          <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
+            <input type="radio" name="rating" className="accent-fuchsia-600"/>
+            3★ & above
+          </label>
+
+          <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
+            <input type="radio" name="rating" className="accent-fuchsia-600"/>
+            2★ & above
+          </label>
+
+        </div>
+
+      </div>
+
+      {/* APPLY BUTTON */}
+      <button className="w-full mt-5 bg-fuchsia-600 hover:bg-fuchsia-700 text-white py-2.5 rounded-lg text-sm sm:text-base font-medium transition">
+        Apply Filters
       </button>
 
     </div>
-  )
-}
+  );
+};
 
-export default Filter
+export default Filter;
