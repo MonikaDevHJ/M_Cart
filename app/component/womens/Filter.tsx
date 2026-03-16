@@ -61,7 +61,7 @@ const Filter = () => {
 
           <span
             className={`transition-transform duration-300 text-gray-500 ${
-              openOccasion ? "rotate-180" : ""
+              openOccasion ? "rotate-180" : " "
             }`}
           >
             ▼
