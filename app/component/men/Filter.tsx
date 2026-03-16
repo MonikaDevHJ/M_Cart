@@ -41,13 +41,16 @@ const Filter = () => {
 
       {/* Occasion */}
       <div className="border-b py-4">
-        <button className="flex w-full items-center justify-between">
-          {" "}
+        <button
+          onClick={() => setOpenOccasion(!openOccasion)}
+          className="flex w-full items-center justify-between"
+        >
+          
           <p className="font-semibold text-gray-800 text-sm tracking-wide">
             OCCASION
           </p>
           <span
-            className={`transition-transform duration-300 text-gray-500  ${openOccasion ? "rotate-180" : ""}  `}
+            className={`transition-transform duration-300 text-gray-500  ${openOccasion ? "rotate-180" : ""}`}
           >
             ▼
           </span>
@@ -63,8 +66,40 @@ const Filter = () => {
           </label>
         ))}
       </div>
+
+      {/* Price */}
+      <div className="border-b py-4">
+        <p className="font-semibold text-gray-800 text-sm tracking-wide">PRICE</p>
+
+        <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
+          <input type="radio" className="accent-fuchsia-600"/>
+           Under ₹500
+        </label>
+
+        <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
+          <input type="radio" className="accent-fuchsia-600"/>
+             ₹500 – ₹1000
+        </label>
+
+          
+          <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
+          <input type="radio" className="accent-fuchsia-600"/>
+             ₹1000 – ₹2000
+        </label>
+
+         <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
+          <input type="radio" className="accent-fuchsia-600"/>
+             ₹2000 – ₹3000
+        </label>
+
+         <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
+          <input type="radio" className="accent-fuchsia-600"/>
+             ₹4000 – ₹5000
+        </label>
+      </div>
+    
+    
     </div>
-  );
-};
+  )}
 
 export default Filter;
