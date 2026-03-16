@@ -7,6 +7,7 @@ const Filter = () => {
 
   const categories = ["Shirt", "Pant", "Upper", "Skrit"];
   const occasion = ["casually", "Party", "Formal", "Beach Wear"];
+  const Brand = ["ZARA", "H&M", "Trends"];
   return (
     <div className="w-full bg-white border border-gray-200 rounded-2xl shadow-sm p-4 sm:p-5 lg:p-6 sticky top-6">
       {/* Tittle */}
@@ -45,7 +46,6 @@ const Filter = () => {
           onClick={() => setOpenOccasion(!openOccasion)}
           className="flex w-full items-center justify-between"
         >
-          
           <p className="font-semibold text-gray-800 text-sm tracking-wide">
             OCCASION
           </p>
@@ -69,37 +69,88 @@ const Filter = () => {
 
       {/* Price */}
       <div className="border-b py-4">
-        <p className="font-semibold text-gray-800 text-sm tracking-wide">PRICE</p>
+        <p className="font-semibold text-gray-800 text-sm tracking-wide">
+          PRICE
+        </p>
 
         <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
-          <input type="radio" className="accent-fuchsia-600"/>
-           Under ₹500
+          <input type="radio" className="accent-fuchsia-600" />
+          Under ₹500
         </label>
 
         <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
-          <input type="radio" className="accent-fuchsia-600"/>
-             ₹500 – ₹1000
+          <input type="radio" className="accent-fuchsia-600" />
+          ₹500 – ₹1000
         </label>
 
-          
-          <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
-          <input type="radio" className="accent-fuchsia-600"/>
-             ₹1000 – ₹2000
+        <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
+          <input type="radio" className="accent-fuchsia-600" />
+          ₹1000 – ₹2000
         </label>
 
-         <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
-          <input type="radio" className="accent-fuchsia-600"/>
-             ₹2000 – ₹3000
+        <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
+          <input type="radio" className="accent-fuchsia-600" />
+          ₹2000 – ₹3000
         </label>
 
-         <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
-          <input type="radio" className="accent-fuchsia-600"/>
-             ₹4000 – ₹5000
+        <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
+          <input type="radio" className="accent-fuchsia-600" />
+          ₹4000 – ₹5000
         </label>
       </div>
-    
-    
+
+      {/* BRAND */}
+      <div className="border-b py-4">
+        <p className="font-semibold text-gray-800 text-sm tracking-wide">
+          SELECT YOUR BRAND
+        </p>
+
+        <div className="flex flex-col gap-2 mt-3 text-gray-600 text-sm">
+          {Brand.map((brand, index) => (
+            <label
+              key={index}
+              className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600 transition"
+            >
+              <input type="checkbox" className="accent-fuchsia-600" />{brand}
+            </label>
+          ))}
+        </div>
+      </div>
+
+       {/* RATING */}
+      <div className="py-4">
+
+        <p className="font-semibold text-gray-800 text-sm tracking-wide">
+          RATING
+        </p>
+
+        <div className="flex flex-col gap-2 mt-3 text-gray-600 text-sm">
+
+          <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
+            <input type="radio" name="rating" className="accent-fuchsia-600"/>
+            4★ & above
+          </label>
+
+          <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
+            <input type="radio" name="rating" className="accent-fuchsia-600"/>
+            3★ & above
+          </label>
+
+          <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
+            <input type="radio" name="rating" className="accent-fuchsia-600"/>
+            2★ & above
+          </label>
+
+        </div>
+
+      </div>
+
+       {/* APPLY BUTTON */}
+      <button className="w-full mt-5 bg-fuchsia-600 hover:bg-fuchsia-700 text-white py-2.5 rounded-lg text-sm sm:text-base font-medium transition">
+        Apply Filters
+      </button>
     </div>
-  )}
+  );
+};
 
 export default Filter;
