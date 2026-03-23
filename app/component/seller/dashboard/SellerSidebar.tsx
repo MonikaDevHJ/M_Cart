@@ -1,45 +1,64 @@
 import Image from "next/image";
-import Mcartlogo1 from "../../../../public/assets/Mcartlogo1.png";
-import mcartlogo2 from "../../../../public/assets/mcartlogo2.png"
+import mcartlogo4 from "../../../../public/assets/mcartlogo4.png";
+
+import {
+  FaHome,
+  FaBox,
+  FaPlusCircle,
+  FaShoppingCart,
+  FaMoneyBill,
+  FaCog,
+} from "react-icons/fa";
+import { icons } from "lucide-react";
 
 const SellerSidebar = () => {
+
+const menu = [
+  { name : "DashBoard", icon : <FaHome/> },
+  {name: "Products", icons : <FaBox/>},
+  
+]
   return (
-    <div className="bg-gray-700 border rounded-2xl p-4 w-64 h-screen">
+    <div className="bg-gray-700 border rounded-2xl p-5 w-64 h-screen">
       
       {/* Logo Section */}
-      <div className="flex items-center gap-2">
-        <Image 
-          src={mcartlogo2} 
-          alt="M_Cart Logo" 
-          width={40} 
-          height={40} 
-        />
-
-        <p className="text-white text-lg font-semibold">M_Cart</p>
+      <div className="flex items-center gap-3">
+        <Image src={mcartlogo4} alt="M_Cart Logo" width={50} height={50} />
+        <p className="text-white text-2xl font-semibold">Cart</p>
       </div>
 
       {/* Menu */}
       <div className="mt-10 space-y-4 text-white">
 
-        <p className="hover:bg-gray-600 p-2 rounded-lg cursor-pointer">
-          Dashboard
-        </p>
+        <div className="flex items-center gap-3 hover:bg-gray-600 p-2 rounded-lg cursor-pointer">
+          <FaHome />
+          <span>Dashboard</span>
+        </div>
 
-        <p className="hover:bg-gray-600 p-2 rounded-lg cursor-pointer">
-          Products
-        </p>
+        <div className="flex items-center gap-3 hover:bg-gray-600 p-2 rounded-lg cursor-pointer">
+          <FaBox />
+          <span>Products</span>
+        </div>
 
-        <p className="hover:bg-gray-600 p-2 rounded-lg cursor-pointer">
-          Add Product
-        </p>
+        <div className="flex items-center gap-3 hover:bg-gray-600 p-2 rounded-lg cursor-pointer">
+          <FaPlusCircle />
+          <span>Add Product</span>
+        </div>
 
-        <p className="hover:bg-gray-600 p-2 rounded-lg cursor-pointer">
-          Earnings
-        </p>
+        <div className="flex items-center gap-3 hover:bg-gray-600 p-2 rounded-lg cursor-pointer">
+          <FaShoppingCart />
+          <span>Orders</span>
+        </div>
 
-        <p className="hover:bg-gray-600 p-2 rounded-lg cursor-pointer">
-          Settings
-        </p>
+        <div className="flex items-center gap-3 hover:bg-gray-600 p-2 rounded-lg cursor-pointer">
+          <FaMoneyBill />
+          <span>Earnings</span>
+        </div>
+
+        <div className="flex items-center gap-3 hover:bg-gray-600 p-2 rounded-lg cursor-pointer">
+          <FaCog />
+          <span>Settings</span>
+        </div>
 
       </div>
     </div>

@@ -2,7 +2,9 @@
 import { useState } from "react";
 import { ShoppingCart, Menu, X, Search } from "lucide-react";
 import Link from "next/link";
-import { UserButton } from "@clerk/nextjs";
+import Image from "next/image";
+
+import mcartlogo4 from "../../public/assets/mcartlogo4.png";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -14,11 +16,26 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center gap-20">
-            <Link
-              href="/"
-              className="text-3xl font-bold text-fuchsia-600 cursor-pointer"
-            >
-              M_Cart
+            <Link href="/">
+              <div className="flex ">
+                <div className="">
+                  <Image
+                    src={mcartlogo4}
+                    alt="M_Cart Logo"
+                    width={50}
+                    height={50}
+                  />
+                </div>
+
+                <div className="">
+                  <Link
+                    href="/"
+                    className="text-2xl font-bold text-fuchsia-600 cursor-pointer"
+                  >
+                    _Cart
+                  </Link>
+                </div>
+              </div>
             </Link>
 
             {/* Search Bar - Hidden on small screens */}
@@ -85,7 +102,6 @@ const Navbar = () => {
             <ShoppingCart size={18} />
             Cart
           </button>
-          
         </div>
       )}
     </nav>
