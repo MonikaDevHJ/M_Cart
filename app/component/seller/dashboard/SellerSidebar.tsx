@@ -7,59 +7,38 @@ import {
   FaPlusCircle,
   FaShoppingCart,
   FaMoneyBill,
-  FaCog,
+  FaCog
 } from "react-icons/fa";
 import { icons } from "lucide-react";
 
 const SellerSidebar = () => {
-
-const menu = [
-  { name : "DashBoard", icon : <FaHome/> },
-  {name: "Products", icons : <FaBox/>},
-  
-]
+  const menuItems = [
+    { name: "DashBoard", icon: <FaHome /> },
+    { name: "Products", icon: <FaBox /> },
+    { name: "Add Products", icon: <FaPlusCircle /> },
+    { name: "Orders", icon: <FaShoppingCart /> },
+    { name: "Earnings", icon: <FaMoneyBill /> },
+    { name: "Settings", icon: <FaCog /> }
+  ];
   return (
     <div className="bg-gray-700 border rounded-2xl p-5 w-64 h-screen">
-      
       {/* Logo Section */}
       <div className="flex items-center gap-3">
         <Image src={mcartlogo4} alt="M_Cart Logo" width={50} height={50} />
         <p className="text-white text-2xl font-semibold">Cart</p>
       </div>
 
-      {/* Menu */}
-      <div className="mt-10 space-y-4 text-white">
-
-        <div className="flex items-center gap-3 hover:bg-gray-600 p-2 rounded-lg cursor-pointer">
-          <FaHome />
-          <span>Dashboard</span>
-        </div>
-
-        <div className="flex items-center gap-3 hover:bg-gray-600 p-2 rounded-lg cursor-pointer">
-          <FaBox />
-          <span>Products</span>
-        </div>
-
-        <div className="flex items-center gap-3 hover:bg-gray-600 p-2 rounded-lg cursor-pointer">
-          <FaPlusCircle />
-          <span>Add Product</span>
-        </div>
-
-        <div className="flex items-center gap-3 hover:bg-gray-600 p-2 rounded-lg cursor-pointer">
-          <FaShoppingCart />
-          <span>Orders</span>
-        </div>
-
-        <div className="flex items-center gap-3 hover:bg-gray-600 p-2 rounded-lg cursor-pointer">
-          <FaMoneyBill />
-          <span>Earnings</span>
-        </div>
-
-        <div className="flex items-center gap-3 hover:bg-gray-600 p-2 rounded-lg cursor-pointer">
-          <FaCog />
-          <span>Settings</span>
-        </div>
-
+      <div className=" mt-5">
+        {/* Menu */}
+        {menuItems.map((item, index) => (
+          <div
+            key={index}
+            className="flex items-center gap-3 hover:bg-fuchsia-700 p-2 rounded-lg cursor-pointer"
+          >
+            {item.icon}
+            <span className="text-xl">{item.name}</span>
+          </div>
+        ))}
       </div>
     </div>
   );

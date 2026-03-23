@@ -15,9 +15,9 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-1 ">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex items-center gap-20">
+          <div className="flex items-center gap-30">
             <Link href="/">
-              <div className="flex ">
+              <div className="flex gap-5 ">
                 <div className="">
                   <Image
                     src={mcartlogo4}
@@ -32,7 +32,7 @@ const Navbar = () => {
                     href="/"
                     className="text-2xl font-bold text-fuchsia-600 cursor-pointer"
                   >
-                    _Cart
+                    Cart
                   </Link>
                 </div>
               </div>
