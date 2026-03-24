@@ -1,5 +1,6 @@
 import Image from "next/image";
 import mcartlogo4 from "../../../../public/assets/mcartlogo4.png";
+import Link from "next/link";
 
 import {
   FaHome,
@@ -9,7 +10,6 @@ import {
   FaMoneyBill,
   FaCog
 } from "react-icons/fa";
-import { icons } from "lucide-react";
 
 const SellerSidebar = () => {
   const menuItems = [
@@ -23,10 +23,13 @@ const SellerSidebar = () => {
   return (
     <div className="bg-gray-700 border rounded-2xl p-5 w-64 h-screen">
       {/* Logo Section */}
-      <div className="flex items-center gap-3">
-        <Image src={mcartlogo4} alt="M_Cart Logo" width={50} height={50} />
-        <p className="text-white text-2xl font-semibold">Cart</p>
-      </div>
+      <Link href="/">
+        <div className="flex items-center gap-3">
+          <Image src={mcartlogo4} alt="M_Cart Logo" width={50} height={50} />
+
+          <p className="text-white text-2xl font-semibold">Cart</p>
+        </div>
+      </Link>
 
       <div className=" mt-5">
         {/* Menu */}
