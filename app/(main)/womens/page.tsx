@@ -1,5 +1,5 @@
-import Filter from "../component/womens/Filter"
-import Items from "../component/womens/Items"
+import Filter from "../../component/womens/Filter"
+import Items from "../../component/womens/Items"
 
 const WomensPage = () => {
   return (

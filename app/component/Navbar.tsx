@@ -17,7 +17,7 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex items-center gap-30">
             <Link href="/">
-              <div className="flex gap-5 ">
+              <div className="flex gap-2 ">
                 <div className="">
                   <Image
                     src={mcartlogo4}
@@ -27,13 +27,8 @@ const Navbar = () => {
                   />
                 </div>
 
-                <div className="">
-                  <Link
-                    href="/"
-                    className="text-2xl font-bold text-fuchsia-600 cursor-pointer"
-                  >
-                    Cart
-                  </Link>
+                <div className="text-2xl font-bold text-fuchsia-600 cursor-pointer">
+                  Cart
                 </div>
               </div>
             </Link>
@@ -44,7 +39,7 @@ const Navbar = () => {
               <input
                 type="text"
                 placeholder="Search for products..."
-                className="bg-transparent outline-none px-2 w-full text-sm"
+                className="bg-fuchsia-50 outline-none px-2 w-full text-sm"
               />
             </div>
           </div>
