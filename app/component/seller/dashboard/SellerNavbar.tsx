@@ -1,10 +1,25 @@
-
 const SellerNavbar = () => {
   return (
-    <div>
-      <p>Seller Navbar</p>
-    </div>
-  )
-}
+    <div className="">
+      <div className="flex justify-between">
+        <div className="">
+          <p className="">Seller Dashboard</p>
+        </div>
 
-export default SellerNavbar
+        <div className="flex">
+          {/* Notification logo */}
+          <div>
+            <p>notification logo</p>
+          </div>
+
+          {/* Admin */}
+          <div>
+            <p>Admin </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SellerNavbar;
