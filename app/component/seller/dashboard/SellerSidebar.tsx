@@ -20,26 +20,47 @@ const SellerSidebar = () => {
     { name: "Earnings", icon: <FaMoneyBill /> },
     { name: "Settings", icon: <FaCog /> }
   ];
-  return (
-    <div className="bg-gray-700 border rounded-2xl p-5 w-64 h-screen">
-      {/* Logo Section */}
-      <Link href="/">
-        <div className="flex items-center gap-3">
-          <Image src={mcartlogo4} alt="M_Cart Logo" width={50} height={50} />
 
-          <p className="text-white text-2xl font-semibold">Cart</p>
+  return (
+    <div
+      className="
+        bg-gray-700 text-white 
+        h-auto md:h-screen 
+        w-full md:w-60 lg:w-72 
+        rounded-2xl p-4 sm:p-5
+      "
+    >
+      {/* Logo */}
+      <Link href="/">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Image
+            src={mcartlogo4}
+            alt="M_Cart Logo"
+            width={40}
+            height={40}
+            className="sm:w-12 sm:h-12"
+          />
+          <p className="text-lg sm:text-xl lg:text-2xl font-semibold">
+            Cart
+          </p>
         </div>
       </Link>
 
-      <div className=" mt-5">
-        {/* Menu */}
+      {/* Menu */}
+      <div className="mt-5 space-y-2">
         {menuItems.map((item, index) => (
           <div
             key={index}
-            className="flex items-center gap-3 hover:bg-fuchsia-700 p-2 rounded-lg cursor-pointer text-white"
+            className="
+              flex items-center gap-2 sm:gap-3 
+              p-2 rounded-lg cursor-pointer
+              hover:bg-fuchsia-700
+            "
           >
-            {item.icon}
-            <span className="text-xl">{item.name}</span>
+            <span className="text-lg sm:text-xl">{item.icon}</span>
+            <span className="text-sm sm:text-base lg:text-lg">
+              {item.name}
+            </span>
           </div>
         ))}
       </div>

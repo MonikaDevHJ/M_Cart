@@ -7,19 +7,23 @@ export default function SellerLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="p-5">
+    <div className="p-1 sm:p-5">
+      
+      <div className="flex flex-col md:flex-row">
+        
+        {/* Sidebar */}
+        <div className="md:w-1/4 lg:w-1/5">
+          <SellerSidebar />
+        </div>
 
-   
-    <div className="grid grid-cols-5 ">
-      <div className=" grid col-span-1">
-        <SellerSidebar />
+        {/* Main Content */}
+        <div className="flex-1  mt-4 md:mt-0">
+          <SellerNavbar />
+          {children}
+        </div>
+
       </div>
 
-      <div className="grid col-span-4">
-        <SellerNavbar />
-        {children}
-      </div>
     </div>
-     </div>
   );
 }
