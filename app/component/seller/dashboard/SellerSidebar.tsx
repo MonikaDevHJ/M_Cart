@@ -36,7 +36,7 @@ const SellerSidebar = () => {
         {menuItems.map((item, index) => (
           <div
             key={index}
-            className="flex items-center gap-3 hover:bg-fuchsia-700 p-2 rounded-lg cursor-pointer"
+            className="flex items-center gap-3 hover:bg-fuchsia-700 p-2 rounded-lg cursor-pointer text-white"
           >
             {item.icon}
             <span className="text-xl">{item.name}</span>
