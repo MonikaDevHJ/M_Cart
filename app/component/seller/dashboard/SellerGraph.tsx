@@ -21,32 +21,32 @@ const data = [
 
 const SellerGraph = () => {
   return (
-    <div className="mt-10 bg-white rounded-2xl shadow-sm border p-5">
+    <div className="mt-4 sm:mt-8 lg:mt-10 bg-white rounded-2xl shadow-sm border p-3 sm:p-5">
       
       {/* Title */}
-      <h2 className="text-lg font-semibold text-gray-700 mb-4">
+      <h2 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-700 mb-3 sm:mb-4">
         Sales Overview
       </h2>
 
       {/* Chart */}
-      <div className="w-full h-[250px]">
-        <ResponsiveContainer>
+      <div className="w-full h-[100px] sm:h-[220px] lg:h-[200px]">
+        <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data}>
             
-            {/* Grid (light lines like image) */}
+            {/* Grid */}
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
 
             {/* X Axis */}
             <XAxis
               dataKey="name"
-              tick={{ fontSize: 12, fill: "#6b7280" }}
+              tick={{ fontSize: 15, fill: "#6b7280" }}
               axisLine={false}
               tickLine={false}
             />
 
             {/* Y Axis */}
             <YAxis
-              tick={{ fontSize: 12, fill: "#6b7280" }}
+              tick={{ fontSize: 15, fill: "#6b7280" }}
               axisLine={false}
               tickLine={false}
             />
@@ -57,6 +57,7 @@ const SellerGraph = () => {
                 borderRadius: "10px",
                 border: "none",
                 boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+                fontSize: "12px",
               }}
             />
 
@@ -65,9 +66,9 @@ const SellerGraph = () => {
               type="monotone"
               dataKey="sales"
               stroke="#3b82f6"
-              strokeWidth={3}
-              dot={{ r: 4 }}
-              activeDot={{ r: 6 }}
+              strokeWidth={2.5}
+              dot={{ r: 3 }}
+              activeDot={{ r: 5 }}
             />
           </LineChart>
         </ResponsiveContainer>
