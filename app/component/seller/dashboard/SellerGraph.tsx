@@ -1,7 +1,7 @@
 
 const SellerGraph = () => {
   return (
-    <div>
+    <div className="mt-50">
       <p>Seller Graph</p>
     </div>
   )
