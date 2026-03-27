@@ -51,7 +51,7 @@ const SellerCard = () => {
             `}
           >
             {/* Top Section */}
-            <div className="flex items-center gap-5">
+            <div className="flex items-center gap-5 ">
               
               <div className="text-xl sm:text-2xl">
                 {card.icon}
