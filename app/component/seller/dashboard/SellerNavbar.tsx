@@ -2,7 +2,7 @@ import { Bell, User } from "lucide-react";
 
 const SellerNavbar = () => {
   return (
-    <div className="mt-2 px-3 sm:px-5">
+    <div className=" px-3 sm:px-5">
       
       <div className="flex justify-between items-center">
         

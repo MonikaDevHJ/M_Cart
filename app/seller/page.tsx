@@ -13,7 +13,7 @@ export default async function Seller() {
   }
 
   return (
-    <div className="p-5">
+    <div className="p-2">
       <SellerCard />
       <SellerGraph />
       <SellerRecentOrder />
