@@ -13,7 +13,7 @@ export default async function Seller() {
   }
 
   return (
-    <div className="p-2 bg-gray-100 rounded-2xl mt-2">
+    <div className="p-2 bg-gray-100 rounded-2xl ">
       <SellerCard />
       <SellerGraph />
       <SellerRecentOrder />
