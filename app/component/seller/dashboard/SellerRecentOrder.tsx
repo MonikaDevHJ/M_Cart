@@ -1,36 +1,36 @@
 const SellerRecentOrder = () => {
   const Order = [
     {
-      id: "#1021  ",
+      id: "#1021",
       Customer: "John Doe",
       status: "Delivered",
       Amount: "₹1,200",
-      Date: "Apr 20, 2025"
+      Date: "Apr 20, 2025",
     },
     {
       id: "#1022",
       Customer: "Emma Smith",
       status: "Pending",
       Amount: "₹850",
-      Date: "Apr 18, 2024"
+      Date: "Apr 18, 2024",
     },
     {
-      id: "#1021",
+      id: "#1023",
       Customer: "Michael Lee",
       status: "Shipped",
       Amount: "₹2,500",
-      Date: "Apr 17, 2024"
+      Date: "Apr 17, 2024",
     },
     {
       id: "#1020",
       Customer: "Sarah Khan",
       status: "Cancelled",
       Amount: "₹1,100",
-      Date: "Apr 15, 2024"
-    }
+      Date: "Apr 15, 2024",
+    },
   ];
 
-  const getStatusStyle = (status: any) => {
+  const getStatusStyle = (status: string) => {
     switch (status) {
       case "Delivered":
         return "bg-green-100 text-green-600";
@@ -46,47 +46,54 @@ const SellerRecentOrder = () => {
   };
 
   return (
-    <div className="bg-white mt-10 rounded-xl p-2 shadow-sm ">
-      <div className="">
-        <p className="font-bold text-xl">Recent Order</p>
-      </div>
+    <div className="bg-white mt-8 rounded-xl p-4 shadow-sm">
+      <p className="font-bold text-lg md:text-xl mb-4">
+        Recent Orders
+      </p>
 
-      {/* Tables Started */}
-      <div className="oberflow-x-auto">
-        <table className="w-full text-left border-collapse">
-          <thead className="w-full text-left  border-collapse">
-            <tr className="text-gray-500 border-b">
-              <th className="py-3">Order ID</th>
-              <th className="py-3">Customer</th>
-              <th className="py-3">Status</th>
-              <th className="py-3">Amount</th>
-              <th className="py-3">Date</th>
+      {/* Table Wrapper */}
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[600px] text-left border-collapse">
+          <thead>
+            <tr className="text-gray-500 border-b text-sm md:text-base">
+              <th className="py-3 px-2">Order ID</th>
+              <th className="py-3 px-2">Customer</th>
+              <th className="py-3 px-2">Status</th>
+              <th className="py-3 px-2">Amount</th>
+              <th className="py-3 px-2">Date</th>
             </tr>
           </thead>
 
           <tbody>
             {Order.map((order, index) => (
-              <tr key={index} className="border-b hover:bg-gray-50">
-                <td className="py-3 font-medium">{order.id}</td>
-                <td className="py-3 font-medium">{order.Customer}</td>
+              <tr
+                key={index}
+                className="border-b hover:bg-gray-50 text-sm md:text-base"
+              >
+                <td className="py-3 px-2 font-medium">{order.id}</td>
+                <td className="py-3 px-2">{order.Customer}</td>
 
-                <td className="py-3">
+                <td className="py-3 px-2">
                   <span
-                    className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusStyle(order.status)} `}
+                    className={`px-2 md:px-3 py-1 rounded-full text-xs md:text-sm font-medium ${getStatusStyle(
+                      order.status
+                    )}`}
                   >
                     {order.status}
                   </span>
                 </td>
 
-                <td className="py-3">{order.Amount}</td>
-                <td className="py-3">{order.Date}</td>
+                <td className="py-3 px-2">{order.Amount}</td>
+                <td className="py-3 px-2 whitespace-nowrap">
+                  {order.Date}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
     </div>
-  );  
+  );
 };
 
 export default SellerRecentOrder;

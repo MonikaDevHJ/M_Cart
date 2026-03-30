@@ -34,7 +34,7 @@ const SellerCard = () => {
   ];
 
   return (
-    <div className=" sm:mt-10 px-1 sm:px-0">
+    <div className="mt-1 lg:mt-6 sm:mt-10 px-1 sm:px-0">
       
       {/* Grid Layout */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

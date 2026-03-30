@@ -14,8 +14,9 @@ import {
 const SellerSidebar = () => {
   const menuItems = [
     { name: "DashBoard", icon: <FaHome /> },
-    { name: "Products", icon: <FaBox /> },
     { name: "Add Products", icon: <FaPlusCircle /> },
+    { name: "Products", icon: <FaBox /> },
+
     { name: "Orders", icon: <FaShoppingCart /> },
     { name: "Earnings", icon: <FaMoneyBill /> },
     { name: "Settings", icon: <FaCog /> }
@@ -40,9 +41,7 @@ const SellerSidebar = () => {
             height={40}
             className="sm:w-12 sm:h-12"
           />
-          <p className="text-lg sm:text-xl lg:text-2xl font-semibold">
-            Cart
-          </p>
+          <p className="text-lg sm:text-xl lg:text-2xl font-semibold">Cart</p>
         </div>
       </Link>
 
@@ -58,9 +57,7 @@ const SellerSidebar = () => {
             "
           >
             <span className="text-lg sm:text-xl">{item.icon}</span>
-            <span className="text-sm sm:text-base lg:text-lg">
-              {item.name}
-            </span>
+            <span className="text-sm sm:text-base lg:text-lg">{item.name}</span>
           </div>
         ))}
       </div>
