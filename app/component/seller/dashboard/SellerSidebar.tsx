@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import mcartlogo4 from "../../../../public/assets/mcartlogo4.png";
 import Link from "next/link";
@@ -7,8 +9,11 @@ import {
   FaPlusCircle,
   FaShoppingCart,
   FaMoneyBill,
-  FaCog
+  FaCog,
+  FaChevronRight
 } from "react-icons/fa";
+
+import { usePathname } from "next/navigation";
 
 type MenuItem = {
   name: string;
@@ -26,6 +31,9 @@ const SellerSidebar: React.FC = () => {
     { name: "Settings", icon: <FaCog />, link: "/seller/settings" }
   ];
 
+  // ✅ ADDED: get current path
+  const pathname = usePathname();
+
   return (
     <div className="bg-gray-700 text-white h-full md:h-screen lg:h-screen w-full md:w-60 lg:w-72 rounded-2xl p-4 sm:p-5">
       <Link href="/">
@@ -36,14 +44,26 @@ const SellerSidebar: React.FC = () => {
       </Link>
 
       <div className="mt-5 space-y-2">
-        {menuItems.map((item, index) => (
-          <Link href={item.link} key={index}>
-            <div className="flex items-center gap-3 p-2 rounded-lg cursor-pointer hover:bg-fuchsia-700">
-              <span className="text-lg">{item.icon}</span>
-              <span>{item.name}</span>
-            </div>
-          </Link>
-        ))}
+        {menuItems.map((item) => {
+          
+          // ✅ ADDED: check active route
+          const isActive = pathname === item.link;
+
+          return (
+            <Link href={item.link} key={item.name}>
+              <div
+                className={`flex items-center gap-3 p-2 rounded-lg cursor-pointer
+                ${isActive ? "bg-fuchsia-700" : "hover:bg-fuchsia-700"}`}
+              >
+                <span className="text-lg">{item.icon}</span>
+                <span>{item.name}</span>
+
+                {/* ✅ ADDED: arrow icon for active */}
+                {isActive && <FaChevronRight className="ml-auto" />}
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
