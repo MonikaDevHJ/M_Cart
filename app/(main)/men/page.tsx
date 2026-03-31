@@ -1,5 +1,5 @@
-import Filter from "../component/men/Filter";
-import Items from "../component/men/Items";
+import Filter from "../../component/men/Filter";
+import Items from "../../component/men/Items";
 const MenPage = () => {
   return (
     <div className="w-full grid grid-cols-5 gap-4 p-5 mt-5">
