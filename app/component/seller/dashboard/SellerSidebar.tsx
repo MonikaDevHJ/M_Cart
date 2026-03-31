@@ -13,20 +13,22 @@ import {
 
 const SellerSidebar = () => {
   const menuItems = [
-    { name: "DashBoard", icon: <FaHome /> },
-    { name: "Add Products", icon: <FaPlusCircle /> },
-    { name: "Products", icon: <FaBox /> },
-
-    { name: "Orders", icon: <FaShoppingCart /> },
-    { name: "Earnings", icon: <FaMoneyBill /> },
-    { name: "Settings", icon: <FaCog /> }
+    { name: "DashBoard", icon: <FaHome />, link: "/seller/dashboard" },
+    {
+      name: "Add Products",
+      icon: <FaPlusCircle />,
+      link: "/seller/addproduct"
+    },
+    { name: "Products", icon: <FaBox />, link: "/seller/products" },
+    { name: "Orders", icon: <FaShoppingCart />, link: "/seller/orders" },
+    { name: "Earnings", icon: <FaMoneyBill />, link: "/seller/earnings" },
+    { name: "Settings", icon: <FaCog />, link: "/seller/settings" }
   ];
-
   return (
     <div
       className="
         bg-gray-700 text-white 
-        h-auto md:h-screen 
+        h-full md:h-screen lg:h-screen
         w-full md:w-60 lg:w-72 
         rounded-2xl p-4 sm:p-5
       "
@@ -48,17 +50,12 @@ const SellerSidebar = () => {
       {/* Menu */}
       <div className="mt-5 space-y-2">
         {menuItems.map((item, index) => (
-          <div
-            key={index}
-            className="
-              flex items-center gap-2 sm:gap-3 
-              p-2 rounded-lg cursor-pointer
-              hover:bg-fuchsia-700
-            "
-          >
-            <span className="text-lg sm:text-xl">{item.icon}</span>
-            <span className="text-sm sm:text-base lg:text-lg">{item.name}</span>
-          </div>
+          <Link href={item.link} key={index}>
+            <div className="flex items-center gap-3 p-2 rounded-lg cursor-pointer hover:bg-fuchsia-700">
+              <span className="text-lg">{item.icon}</span>
+              <span>{item.name}</span>
+            </div>
+          </Link>
         ))}
       </div>
     </div>

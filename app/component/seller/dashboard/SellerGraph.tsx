@@ -11,7 +11,7 @@ import {
 } from "recharts";
 
 const data = [
-  { name: "Jan", sales: 14000 },
+  { name: "Jan", sales: 14000 },  
   { name: "Feb", sales: 27000 },
   { name: "Mar", sales: 23000 },
   { name: "Apr", sales: 38000 },
@@ -21,7 +21,7 @@ const data = [
 
 const SellerGraph = () => {
   return (
-    <div className="mt-3 sm:mt-8 lg:mt-5 bg-white rounded-2xl shadow-sm border p-3 sm:p-5">
+    <div className="mt-3 sm:mt-8 lg:mt-10  bg-white rounded-2xl shadow-sm border p-3 sm:p-5">
       
       {/* Title */}
       <h2 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-700 mb-3 sm:mb-4">
