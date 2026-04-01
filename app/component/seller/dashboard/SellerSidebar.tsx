@@ -35,7 +35,7 @@ const SellerSidebar: React.FC = () => {
   const pathname = usePathname();
 
   return (
-    <div className="bg-gray-700 text-white h-full md:h-screen lg:h-screen w-full md:w-60 lg:w-72 rounded-2xl p-4 sm:p-5">
+    <div className="bg-gray-700 text-white h-full md:h-screen lg:h-full w-full md:w-60 lg:w-80 rounded-2xl p-4 sm:p-5">
       <Link href="/">
         <div className="flex items-center gap-2 sm:gap-3">
           <Image src={mcartlogo4} alt="M_Cart Logo" width={40} height={40} />
