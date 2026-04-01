@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import SellerGraph from "../component/seller/dashboard/SellerGraph";
 import SellerRecentOrder from "../component/seller/dashboard/SellerRecentOrder";
 import SellerCard from "../component/seller/dashboard/SellerCard";
-
+import SellerNavbar from "../component/seller/dashboard/SellerNavbar";
 export default async function Seller() {
   const { userId } = await auth();
 
@@ -13,10 +13,16 @@ export default async function Seller() {
   }
 
   return (
-    <div className="p-1 bg-gray-100 rounded-2xl ">
-      <SellerCard />
-      <SellerGraph />
-      <SellerRecentOrder />
+    <div className="">
+      <div className="">
+        <SellerNavbar />
+      </div>
+
+      <div className="mt-4 bg-gray-200 p-2  rounded-2xl  ">
+        <SellerCard />
+        <SellerGraph />
+        <SellerRecentOrder />
+      </div>
     </div>
   );
 }
