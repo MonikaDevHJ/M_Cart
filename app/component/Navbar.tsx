@@ -93,13 +93,10 @@ const Navbar = () => {
           </Link>
 
           <button className="block w-full text-left hover:text-fuchsia-600">
-            Seller
-          </button>
-
-          <button className="block w-full font-bold text-left hover:text-fuchsia-600">
             Buyer
           </button>
 
+         
           <button className="flex items-center gap-2 bg-fuchsia-600 text-white px-4 py-2 rounded-full w-fit">
             <ShoppingCart size={18} />
             Cart
