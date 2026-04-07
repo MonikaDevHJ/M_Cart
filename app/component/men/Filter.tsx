@@ -111,41 +111,38 @@ const Filter = () => {
               key={index}
               className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600 transition"
             >
-              <input type="checkbox" className="accent-fuchsia-600" />{brand}
+              <input type="checkbox" className="accent-fuchsia-600" />
+              {brand}
             </label>
           ))}
         </div>
       </div>
 
-       {/* RATING */}
+      {/* RATING */}
       <div className="py-4">
-
         <p className="font-semibold text-gray-800 text-sm tracking-wide">
           RATING
         </p>
 
         <div className="flex flex-col gap-2 mt-3 text-gray-600 text-sm">
-
           <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
-            <input type="radio" name="rating" className="accent-fuchsia-600"/>
+            <input type="radio" name="rating" className="accent-fuchsia-600" />
             4★ & above
           </label>
 
           <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
-            <input type="radio" name="rating" className="accent-fuchsia-600"/>
+            <input type="radio" name="rating" className="accent-fuchsia-600" />
             3★ & above
           </label>
 
           <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
-            <input type="radio" name="rating" className="accent-fuchsia-600"/>
+            <input type="radio" name="rating" className="accent-fuchsia-600" />
             2★ & above
           </label>
-
         </div>
-
       </div>
 
-       {/* APPLY BUTTON */}
+      {/* APPLY BUTTON */}
       <button className="w-full mt-5 bg-fuchsia-600 hover:bg-fuchsia-700 text-white py-2.5 rounded-lg text-sm sm:text-base font-medium transition">
         Apply Filters
       </button>
