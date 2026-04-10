@@ -84,23 +84,30 @@ const Orders = () => {
                 >
                   <td className="px-4 py-3 font-medium">#{item.id}</td>
                   <td className="px-4 py-3 font-medium">{item.CustomerName}</td>
-                 
-                 
-                  <td className="px-4 py-3 font-medium">
-                    <span>
-                      
-                    </span>
-                    
-                    
-                    {item.Status}
 
+                  <td className="px-4 py-3 font-medium">
+                    <span
+                      className={`px-3 py-3 rounded-full text-xs font-semibold  ${
+                        item.Status === "Deliveried"
+                          ? "bg-green-300 text-green-800"
+                          : item.Status === "Rejected"
+                            ? "bg-red-100 text-red-700"
+                            : item.Status === "Pending"
+                              ? "bg-orange-100 text-orange-500"
+                              : "bg-gray-100 text-gray-700"
+                      }`}
+                    >
+                      {item.Status}
+                    </span>
                   </td>
-                 
-                 
+
                   <td className="px-4 py-3 font-medium"> ₹ {item.Amount}</td>
                   <td className="px-4 py-3 font-semibold">{item.Date}</td>
                   <td className="px-4 py-3 font-semibold">
-                    <button className="border rounded-lg px-3 py-2 bg-purple-800 text-white"> {item.Action}</button>
+                    <button className="border rounded-lg px-3 py-2 bg-purple-800 text-white">
+                      {" "}
+                      {item.Action}
+                    </button>
                   </td>
                 </tr>
               ))}
