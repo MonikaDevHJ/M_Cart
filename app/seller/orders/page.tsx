@@ -1,4 +1,31 @@
 const Orders = () => {
+  const Orders = [
+    {
+      id: 1022,
+      CustomerName: "John",
+      Status: "Pending",
+      Amount: 1900,
+      Date: "Apr 19, 2024",
+      Action: "View"
+    },
+    {
+      id: 1023,
+      CustomerName: "Smith",
+      Status: "Rejected",
+      Amount: 1899,
+      Date: "June 8 2000",
+      Action: "View"
+    },
+    {
+      id: 1024,
+      CustomerName: "Faris",
+      Status: "Deliveried",
+      Amount: 1699,
+      Date: "March 19 2026",
+      Action: "View"
+    }
+  ];
+
   return (
     <div className="bg-gray-100 min-h-screen p-4 md:p-6">
       {/* Title */}
@@ -49,7 +76,35 @@ const Orders = () => {
             </thead>
 
             {/* Body */}
-            <tbody></tbody>
+            <tbody className="text-gray-700">
+              {Orders.map((item) => (
+                <tr
+                  key={item.id}
+                  className="border-t hover:bg-gray-50 transition"
+                >
+                  <td className="px-4 py-3 font-medium">#{item.id}</td>
+                  <td className="px-4 py-3 font-medium">{item.CustomerName}</td>
+                 
+                 
+                  <td className="px-4 py-3 font-medium">
+                    <span>
+                      
+                    </span>
+                    
+                    
+                    {item.Status}
+
+                  </td>
+                 
+                 
+                  <td className="px-4 py-3 font-medium"> ₹ {item.Amount}</td>
+                  <td className="px-4 py-3 font-semibold">{item.Date}</td>
+                  <td className="px-4 py-3 font-semibold">
+                    <button className="border rounded-lg px-3 py-2 bg-purple-800 text-white"> {item.Action}</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
       </div>
