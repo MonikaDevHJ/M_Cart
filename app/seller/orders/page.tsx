@@ -1,19 +1,60 @@
-
-
 const Orders = () => {
   return (
     <div className="bg-gray-100 min-h-screen p-4 md:p-6">
       {/* Title */}
       <div>
-        <p className="text-2xl md:text-3xl font-semibold  text-gray-800">No Of  Orders</p>
+        <p className="text-2xl md:text-3xl font-semibold  text-gray-800">
+          No Of Orders
+        </p>
       </div>
 
       {/* Top Bar */}
       <div className="mt-5 flex flex-col md:flex-row justify-between items-center gap-4">
+        {/* Button */}
+        <button className="bg-blue-600 hover:bg-blue-400 text-white px-2 py-2 rounded-lg  font-medium shadow">
+          +ADD NEW
+        </button>
 
+        {/* Search Icons */}
+        <div className="flex gap-5">
+          <input
+            type="text"
+            placeholder="Search Product"
+            id=""
+            className="border rounded-lg px-3 py-2 w-full md:w-64 outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          <button className="bg-gray-200 p-2 rounded-lg hover:bg-gray-300">
+            ⚙️
+          </button>
+          <button className="bg-orange-500 text-white p-2 rounded-lg hover:bg-orange-600">
+            ⬛
+          </button>
+        </div>
+      </div>
+
+      {/* Tables */}
+      <div className="mt-6 bg-white rounded-xl shadow-sm overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left">
+            {/* Head */}
+            <thead className="bg-gray-50 text-gray-600 text-sm">
+              <tr>
+                <th className="px-4 py-3">Order ID</th>
+                <th className="px-4 py-3">Customer</th>
+                <th className="px-4 py-3">Status</th>
+                <th className="px-4 py-3">Amount</th>
+                <th className="px-4 py-3">Date</th>
+                <th className="px-4 py-3">Action</th>
+              </tr>
+            </thead>
+
+            {/* Body */}
+            <tbody></tbody>
+          </table>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Orders
+export default Orders;
