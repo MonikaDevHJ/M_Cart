@@ -6,7 +6,7 @@ const isProtectedRoute = createRouteMatcher(["/seller(.*)"]);
 export default clerkMiddleware(async (auth, req) => {
   const { userId } = await auth(); // ✅ FIX HERE
 
-  // ✅ If logged in → block going back to sign-in
+  // ✅ If logged in → block going back to sign-in  
   if (userId && req.nextUrl.pathname === "/sign-in") {
     return NextResponse.redirect(new URL("/seller", req.url));
   }
@@ -18,5 +18,5 @@ export default clerkMiddleware(async (auth, req) => {
 });
 
 export const config = {
-  matcher: ["/((?!_next|.*\\..*).*)"],
+  matcher: ["/((?!_next|.*\\..*).*)"]
 };
