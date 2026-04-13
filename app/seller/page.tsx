@@ -6,7 +6,7 @@ import SellerRecentOrder from "../component/seller/dashboard/SellerRecentOrder";
 import SellerCard from "../component/seller/dashboard/SellerCard";
 import SellerNavbar from "../component/seller/dashboard/SellerNavbar";
 export default async function Seller() {
-  const { userId } = await auth();
+const { userId } = await auth();
 
   if (!userId) {
     redirect("/sign-in");
