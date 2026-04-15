@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { url } from "node:inspector";
+import { SetStateAction, useState } from "react";
 
 const AddAproduct = () => {
   const [form, setForm] = useState({
@@ -8,7 +9,7 @@ const AddAproduct = () => {
     description: "",
     price: "",
     category: "",
-    stock: "",
+    stock: ""
   });
 
   const handleChange = (e: any) => {
@@ -20,7 +21,7 @@ const AddAproduct = () => {
     try {
       const res = await fetch("/api/products", {
         method: "POST",
-        body: JSON.stringify(form),
+        body: JSON.stringify(form)
       });
 
       const data = await res.json();
@@ -32,12 +33,17 @@ const AddAproduct = () => {
     }
   };
 
+  const [file, setFile] = useState(null);
+
+  const handleFile = (e) => {
+    setFile(e.target.files[0]);
+  };
+
   return (
     <div className="p-4 sm:p-6 lg:p-8">
       <p className="font-bold sm:text-2xl mb-4 text-xl">Add Product</p>
 
       <div className="bg-white rounded-2xl shadow p-5 sm:p-6 lg:p-8">
-        
         {/* Product Name */}
         <div className="mb-4">
           <label className="font-semibold block mb-1">Product Name</label>
@@ -65,7 +71,6 @@ const AddAproduct = () => {
 
         {/* Price & Category */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          
           <div>
             <p className="font-semibold mb-1">Price (₹)</p>
             <input
@@ -106,6 +111,32 @@ const AddAproduct = () => {
             placeholder="Enter Stock"
             className="w-full border rounded-lg px-3 py-2"
           />
+        </div>
+
+        {/* Product Image */}
+        <div className="mb-6">
+          <label className="font-semibold mb-1 block">Product Image</label>
+
+          <label className="flex flex-col items-center justify-center w-full h-80 border-2 border-dashed rounded-xl cursor-pointer hover:bg-gray-50">
+            <p className="text-gray-500">Click to Uploade Image</p>
+            <p className="text-sm text-gray-400">PNG. JPG, JPEG</p>
+            <input
+              type="file"
+              name=""
+              id=""
+              className="text-center ml-28 mt-2"
+              onChange={handleFile}
+            />
+
+            {/* Preview */}
+            {file && (
+              <img
+                src={URL.createObjectURL(file)}
+                alt="Preview"
+                className="mt-3 h-24 rounded-lg object-cover"
+              />
+            )}
+          </label>
         </div>
 
         {/* Button */}
