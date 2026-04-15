@@ -1,6 +1,6 @@
 "use client";
 
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 
 const AddAproduct = () => {
   const [form, setForm] = useState({
@@ -18,9 +18,22 @@ const AddAproduct = () => {
 
   const handleSubmit = async () => {
     try {
+      const formData = new FormData();
+
+      // Add Text Field
+      formData.append("name", form.name);
+      formData.append("description", form.description);
+      formData.append("price", form.price);
+      formData.append("category", form.category);
+      formData.append("stock", form.stock);
+
+      if (file) {
+        formData.append("image", file);
+      }
+
       const res = await fetch("/api/products", {
         method: "POST",
-        body: JSON.stringify(form)
+        body: formData
       });
 
       const data = await res.json();
@@ -118,7 +131,6 @@ const AddAproduct = () => {
           <label className="font-semibold mb-1 block">Product Image</label>
 
           <label className="flex flex-col items-center justify-center w-full h-80 border-2 border-dashed rounded-xl cursor-pointer hover:bg-gray-50">
-           
             <input
               type="file"
               name=""

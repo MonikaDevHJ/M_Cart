@@ -3,9 +3,13 @@ import { prisma } from "@/lib/prisma";
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
+    const data = await req.formData(); // ✅ change here
 
-    const { name, description, price, category, stock } = body;
+    const name = data.get("name") as string;
+    const description = data.get("description") as string;
+    const price = data.get("price") as string;
+    const category = data.get("category") as string;
+    const stock = data.get("stock") as string;
 
     const product = await prisma.product.create({
       data: {
