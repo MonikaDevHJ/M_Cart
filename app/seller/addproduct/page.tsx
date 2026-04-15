@@ -1,6 +1,5 @@
 "use client";
 
-import { url } from "node:inspector";
 import { SetStateAction, useState } from "react";
 
 const AddAproduct = () => {
@@ -33,9 +32,10 @@ const AddAproduct = () => {
     }
   };
 
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState<File | null>(null);
 
-  const handleFile = (e) => {
+  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
     setFile(e.target.files[0]);
   };
 
@@ -118,8 +118,7 @@ const AddAproduct = () => {
           <label className="font-semibold mb-1 block">Product Image</label>
 
           <label className="flex flex-col items-center justify-center w-full h-80 border-2 border-dashed rounded-xl cursor-pointer hover:bg-gray-50">
-            <p className="text-gray-500">Click to Uploade Image</p>
-            <p className="text-sm text-gray-400">PNG. JPG, JPEG</p>
+           
             <input
               type="file"
               name=""
@@ -129,11 +128,17 @@ const AddAproduct = () => {
             />
 
             {/* Preview */}
-            {file && (
+
+            {!file ? (
+              <>
+                <p className="text-gray-500">Click to Upload Image</p>
+                <p className="text-sm text-gray-400">PNG, JPG, JPEG</p>
+              </>
+            ) : (
               <img
                 src={URL.createObjectURL(file)}
                 alt="Preview"
-                className="mt-3 h-24 rounded-lg object-cover"
+                className="mt-3 h-32 rounded-lg object-cover"
               />
             )}
           </label>
