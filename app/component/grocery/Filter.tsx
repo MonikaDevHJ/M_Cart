@@ -5,9 +5,9 @@ import { useState } from "react";
 const Filter = () => {
   const [openOccasion, setOpenOccasion] = useState(true);
 
-  const categories = ["Shirt", "Pant", "Upper", "Skrit"];
+  const categories = ["Cooking Items", "Chockalates", "Snaks & Beverage", "Washing Items", "Tablets", "Pet Supplies"];
   const occasion = ["casually", "Party", "Formal", "Beach Wear"];
-  const Brand = ["ZARA", "H&M", "Trends"];
+  const Brand = ["MTR", "Achhie", "Iyenger", "FreeDom", "SunFlower", ];
   return (
     <div className="w-full bg-white border border-gray-200 rounded-2xl shadow-sm p-4 sm:p-5 lg:p-6 sticky top-6">
       {/* Tittle */}
@@ -75,27 +75,27 @@ const Filter = () => {
 
         <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
           <input type="radio" className="accent-fuchsia-600" />
-          Under ₹500
+          Under ₹100
         </label>
 
         <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
           <input type="radio" className="accent-fuchsia-600" />
-          ₹500 – ₹1000
+          ₹200 – ₹400
         </label>
 
         <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
           <input type="radio" className="accent-fuchsia-600" />
-          ₹1000 – ₹2000
+          ₹500 – ₹600
         </label>
 
         <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
           <input type="radio" className="accent-fuchsia-600" />
-          ₹2000 – ₹3000
+          ₹800 – ₹1000
         </label>
 
         <label className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
           <input type="radio" className="accent-fuchsia-600" />
-          ₹4000 – ₹5000
+          ₹1500 – ₹1800
         </label>
       </div>
 
