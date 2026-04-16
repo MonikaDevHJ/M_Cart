@@ -23,7 +23,31 @@ const Orders = () => {
       Amount: 1699,
       Date: "March 19 2026",
       Action: "View"
-    }
+    },
+     {
+      id: 1025,
+      CustomerName: "Chaii",
+      Status: "Pending",
+      Amount: 1999,
+      Date: "March 20 2022",
+      Action: "View"
+    },
+    {
+      id: 1026,
+      CustomerName: "Naduu",
+      Status: "Deliveried",
+      Amount: 1599,
+      Date: "Jan 29 2026",
+      Action: "View"
+    },
+    {
+      id: 1027,
+      CustomerName: "Guna",
+      Status: "Deliveried",
+      Amount: 1699,
+      Date: "Feb 28 2026",
+      Action: "View"
+    },
   ];
 
   return (
