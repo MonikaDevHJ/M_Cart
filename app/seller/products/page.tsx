@@ -1,52 +1,17 @@
 "use client";
 
-import { Delete } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const SellerProducts = () => {
-  //     price: 1499,
-  //     stock: 25,
-  //     image: "https://via.placeholder.com/50"
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Wireless Earbuds",
-  //     price: 2499,
-  //     stock: 40,
-  //     image: "https://via.placeholder.com/50"
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Smartwatch",
-  //     price: 3999,
-  //     stock: 15,
-  //     image: "https://via.placeholder.com/50"
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Cotton T-Shirt",
-  //     price: 499,
-  //     stock: 0,
-  //     image: "https://via.placeholder.com/50"
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "Leather Wallet",
-  //     price: 799,
-  //     stock: 8,
-  //     image: "https://via.placeholder.com/50"
-  //   }
-  // ];
-
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // 🔥 Fetch Products
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const res = await fetch("/api/products");
         const data = await res.json();
-
         setProducts(data);
       } catch (error) {
         console.log(error);
@@ -58,80 +23,45 @@ const SellerProducts = () => {
     fetchProducts();
   }, []);
 
-  // Delete Function
+  // 🔥 Delete Product
   const handleDelete = async (id: string) => {
     try {
-      await fetch(`/api/products/${id}`, {
+      const res = await fetch(`/api/products/${id}`, {
         method: "DELETE"
       });
-      // Remove from UI Instantly
+
+      if (!res.ok) {
+        alert("Deleted Failed Bro 😢");
+        return;
+      }
+      if(res.ok){
+        alert("Are u Sure want To delete! This data");
+        return;
+      }
+
+      // Remove from UI
       setProducts((prev) => prev.filter((item) => item.id !== id));
     } catch (error) {
       console.log(error);
     }
   };
 
+  // 🔥 Loading UI
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-100 to-gray-200">
-        {/* Glass Card */}
-        <div className="bg-white/70 backdrop-blur-md shadow-xl rounded-2xl p-8 flex flex-col items-center">
-          {/* Animated Gradient Spinner */}
-          <div className="w-16 h-16 rounded-full border-4 border-transparent border-t-blue-500 border-r-purple-500 animate-spin"></div>
-
-          {/* Image */}
-          <div className="mt-6 relative">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png"
-              alt="loading"
-              className="w-20 h-20 rounded-full object-cover shadow-md"
-            />
-
-            {/* Glow Effect */}
-            <div className="absolute inset-0 rounded-full bg-blue-400 opacity-20 blur-xl animate-pulse"></div>
-          </div>
-
-          {/* Text */}
-          <p className="mt-6 text-gray-700 font-semibold text-lg">
-            Loading Products
-          </p>
-
-          <p className="text-sm text-gray-500 mt-1">Please wait a moment...</p>
-        </div>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        <p className="mt-4 text-gray-600">Loading Products...</p>
       </div>
     );
   }
+
   return (
     <div className="bg-gray-100 min-h-screen p-4 md:p-6">
       {/* Title */}
       <h1 className="text-2xl md:text-3xl font-semibold text-gray-800">
         Products
       </h1>
-
-      {/* Top Bar */}
-      <div className="mt-5 flex flex-col md:flex-row justify-between items-center gap-4">
-        {/* Add Button */}
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium shadow">
-          + Add New
-        </button>
-
-        {/* Search + Icons */}
-        <div className="flex items-center gap-2 w-full md:w-auto">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="border rounded-lg px-3 py-2 w-full md:w-64 outline-none focus:ring-2 focus:ring-blue-400"
-          />
-
-          <button className="bg-gray-200 p-2 rounded-lg hover:bg-gray-300">
-            ⚙️
-          </button>
-
-          <button className="bg-orange-500 text-white p-2 rounded-lg hover:bg-orange-600">
-            ⬛
-          </button>
-        </div>
-      </div>
 
       {/* Table */}
       <div className="mt-6 bg-white rounded-xl shadow-sm overflow-hidden">
@@ -178,10 +108,10 @@ const SellerProducts = () => {
                   {/* Status */}
                   <td className="px-4 py-3">
                     <span
-                      className={`px-3 py-3 rounded-full text-xs font-semibold ${
+                      className={`px-3 py-1 rounded-full text-xs font-semibold ${
                         item.stock === 0
                           ? "bg-red-100 text-red-600"
-                          : "bg-green-300 text-green-800"
+                          : "bg-green-200 text-green-800"
                       }`}
                     >
                       {item.stock === 0 ? "Out of Stock" : "Active"}
@@ -191,12 +121,13 @@ const SellerProducts = () => {
                   {/* Actions */}
                   <td className="px-4 py-3">
                     <div className="flex justify-center gap-2">
-                      <button className="bg-purple-500 hover:bg-purple-600 text-white px-3 py-1 rounded-md text-semibold">
+                      <button className="bg-purple-500 hover:bg-purple-600 text-white px-3 py-1 rounded-md">
                         ✏️ Edit
                       </button>
 
-                      <button className="bg-red-100 hover:bg-red-200 text-red-600 px-3 py-1 rounded-md text-semibold"
-                      onClick={()=> handleDelete(item.id)}
+                      <button
+                        onClick={() => handleDelete(item.id)}
+                        className="bg-red-100 hover:bg-red-200 text-red-600 px-3 py-1 rounded-md"
                       >
                         🗑 Delete
                       </button>
@@ -213,18 +144,6 @@ const SellerProducts = () => {
           <p>
             Showing {products.length} of {products.length} products
           </p>
-
-          <div className="flex gap-2">
-            <button className="px-3 py-1 border rounded-md bg-gray-100">
-              ‹
-            </button>
-            <button className="px-3 py-1 border rounded-md bg-blue-600 text-white">
-              1
-            </button>
-            <button className="px-3 py-1 border rounded-md bg-gray-100">
-              ›
-            </button>
-          </div>
         </div>
       </div>
     </div>
