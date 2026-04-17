@@ -2,6 +2,24 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import cloudinary from "@/lib/cloudinary";
 
+// ✅ GET → Fetch products
+export async function GET() {
+  try {
+    const products = await prisma.product.findMany({
+      orderBy: { created_at: "desc" }
+    });
+
+    return NextResponse.json(products);
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { error: "Failed to fetch products" },
+      { status: 500 }
+    );
+  }
+}
+
+// ✅ POST → Add product
 export async function POST(req: Request) {
   try {
     const data = await req.formData();
@@ -12,13 +30,12 @@ export async function POST(req: Request) {
     const category = data.get("category") as string;
     const stock = data.get("stock") as string;
 
-    // ✅ Get image
     const file = data.get("image") as File;
 
     let imageUrl = "";
 
     if (file) {
-      const bytes = await file.arrayBuffer();
+      const bytes = await file.arrayBuffer(); // ✅ fixed
       const buffer = Buffer.from(bytes);
 
       const upload = await new Promise((resolve, reject) => {
@@ -33,7 +50,6 @@ export async function POST(req: Request) {
       imageUrl = (upload as any).secure_url;
     }
 
-    // ✅ Save in DB
     const product = await prisma.product.create({
       data: {
         name,
@@ -41,8 +57,8 @@ export async function POST(req: Request) {
         price: Number(price),
         category,
         stock: Number(stock),
-        image_url: imageUrl, // 🔥 important
-      },
+        image_url: imageUrl
+      }
     });
 
     return NextResponse.json(product);
