@@ -1,9 +1,9 @@
 "use client";
 
+import { Delete } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const SellerProducts = () => {
-
   //     price: 1499,
   //     stock: 25,
   //     image: "https://via.placeholder.com/50"
@@ -57,6 +57,19 @@ const SellerProducts = () => {
 
     fetchProducts();
   }, []);
+
+  // Delete Function
+  const handleDelete = async (id: string) => {
+    try {
+      await fetch(`/api/products/${id}`, {
+        method: "DELETE"
+      });
+      // Remove from UI Instantly
+      setProducts((prev) => prev.filter((item) => item.id !== id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (loading) {
     return (
@@ -182,7 +195,9 @@ const SellerProducts = () => {
                         ✏️ Edit
                       </button>
 
-                      <button className="bg-red-100 hover:bg-red-200 text-red-600 px-3 py-1 rounded-md text-semibold">
+                      <button className="bg-red-100 hover:bg-red-200 text-red-600 px-3 py-1 rounded-md text-semibold"
+                      onClick={()=> handleDelete(item.id)}
+                      >
                         🗑 Delete
                       </button>
                     </div>
