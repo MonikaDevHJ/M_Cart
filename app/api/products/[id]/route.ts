@@ -1,23 +1,28 @@
 import { NextResponse } from "next/server";
-
 import { prisma } from "@/lib/prisma";
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = params.id;
+    const { id } = await context.params; // ✅ FIX HERE
 
-    await prisma.product.delete({
+    console.log("Deleting ID:", id);
+
+    const deletedProduct = await prisma.product.delete({
       where: { id }
     });
-    return NextResponse.json({ message: "Product Deleted  ✅" });
+
+    console.log("Deleted:", deletedProduct);
+
+    return NextResponse.json({ message: "Product Deleted ✅" });
   } catch (error) {
-    console.log(error);
+    console.log("DELETE ERROR:", error);
+
     return NextResponse.json(
-      { error: "Failed to Deelet Product" },
+      { error: "Failed to delete product" },
       { status: 500 }
     );
   }
-}
+} 
