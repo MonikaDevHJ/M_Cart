@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const SellerProducts = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [deletedId, setDeletedId] = useState<string | null>(null);
 
   // 🔥 Fetch Products
   useEffect(() => {
@@ -23,29 +25,28 @@ const SellerProducts = () => {
     fetchProducts();
   }, []);
 
-  // 🔥 Delete Product
-  const handleDelete = async (id: string) => {
+  const confirmDelete = async () => {
+    if (!deletedId) return;
+
     try {
-      const res = await fetch(`/api/products/${id}`, {
+      const res = await fetch(`/api/products/${deletedId}`, {
         method: "DELETE"
       });
 
       if (!res.ok) {
-        alert("Deleted Failed Bro 😢");
-        return;
-      }
-      if(res.ok){
-        alert("Are u Sure want To delete! This data");
+        alert("Delete Failed 😢");
         return;
       }
 
-      // Remove from UI
-      setProducts((prev) => prev.filter((item) => item.id !== id));
+      // ✅ remove from UI
+      setProducts((prev) => prev.filter((item) => item.id !== deletedId));
+
+      setDeletedId(null);
+      alert("Deleted Successfully ✅");
     } catch (error) {
       console.log(error);
     }
   };
-
   // 🔥 Loading UI
   if (loading) {
     return (
@@ -62,6 +63,33 @@ const SellerProducts = () => {
       <h1 className="text-2xl md:text-3xl font-semibold text-gray-800">
         Products
       </h1>
+
+      {/* Top Bar */}
+      <div className="mt-5 flex flex-col md:flex-row justify-between items-center gap-4">
+        {/* Button */}
+        <Link
+          href={"/seller/addproduct"}
+          className="bg-blue-600 hover:bg-blue-400 text-white px-2 py-2 rounded-lg  font-medium shadow"
+        >
+          +ADD NEW
+        </Link>
+
+        {/* Search Icons */}
+        <div className="flex gap-5">
+          <input
+            type="text"
+            placeholder="Search Product"
+            id=""
+            className="border rounded-lg px-3 py-2 w-full md:w-64 outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          <button className="bg-gray-200 p-2 rounded-lg hover:bg-gray-300">
+            ⚙️
+          </button>
+          <button className="bg-orange-500 text-white p-2 rounded-lg hover:bg-orange-600">
+            ⬛
+          </button>
+        </div>
+      </div>
 
       {/* Table */}
       <div className="mt-6 bg-white rounded-xl shadow-sm overflow-hidden">
@@ -126,7 +154,7 @@ const SellerProducts = () => {
                       </button>
 
                       <button
-                        onClick={() => handleDelete(item.id)}
+                        onClick={() => setDeletedId(item.id)}
                         className="bg-red-100 hover:bg-red-200 text-red-600 px-3 py-1 rounded-md"
                       >
                         🗑 Delete
@@ -137,6 +165,36 @@ const SellerProducts = () => {
               ))}
             </tbody>
           </table>
+
+          {deletedId && (
+            <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm bg-black/20">
+              <div className="bg-white/70 backdrop-blur-md border border-white/30 rounded-2xl p-6 shadow-2xl w-80 transition-all duration-300 scale-100">
+                <h2 className="text-lg font-semibold text-gray-800">
+                  Confirm Delete
+                </h2>
+
+                <p className="text-sm text-gray-700 mt-2">
+                  Are you sure you want to delete this product?
+                </p>
+
+                <div className="flex justify-end gap-3 mt-5">
+                  <button
+                    onClick={() => setDeletedId(null)}
+                    className="px-4 py-2 rounded-lg bg-white/60 hover:bg-white/80 transition"
+                  >
+                    Cancel
+                  </button>
+
+                  <button
+                    onClick={confirmDelete}
+                    className="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Footer */}

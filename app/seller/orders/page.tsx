@@ -1,3 +1,5 @@
+import  Link  from "next/link";
+
 const Orders = () => {
   const Orders = [
     {
@@ -62,9 +64,9 @@ const Orders = () => {
       {/* Top Bar */}
       <div className="mt-5 flex flex-col md:flex-row justify-between items-center gap-4">
         {/* Button */}
-        <button className="bg-blue-600 hover:bg-blue-400 text-white px-2 py-2 rounded-lg  font-medium shadow">
+        <Link   href={"/seller/addproduct"} className="bg-blue-600 hover:bg-blue-400 text-white px-2 py-2 rounded-lg  font-medium shadow">
           +ADD NEW
-        </button>
+        </Link>
 
         {/* Search Icons */}
         <div className="flex gap-5">
