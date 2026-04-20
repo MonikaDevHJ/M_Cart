@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { promises } from "dns";
 
 export async function DELETE(
   req: Request,
@@ -25,4 +26,25 @@ export async function DELETE(
       { status: 500 }
     );
   }
-} 
+}
+
+export async function GET(
+  req: Request,
+  context: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await context.params;
+
+    const product = await prisma.product.findUnique({
+      where: { id }
+    });
+    return NextResponse.json(product);
+  } catch (error) {
+    console.log("GET ERROR:", error);
+
+    return NextResponse.json(
+      { error: "Failed to Fetch  Product " },
+      { status: 500 }
+    );
+  }
+}
