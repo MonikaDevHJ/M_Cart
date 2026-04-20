@@ -38,7 +38,7 @@ const AddAproduct = () => {
 
       const data = await res.json();
       console.log(data);
-      alert("Product Added ✅");
+      alert("Product SuscesFully Added ✅");
     } catch (error) {
       console.log(error);
       alert("Error ❌");
