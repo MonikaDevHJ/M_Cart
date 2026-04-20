@@ -30,6 +30,34 @@ const EditProduct = () => {
     if (id) fetchProducts();
   }, [id]);
 
+  const handleUpdate = async () => {
+    try {
+      const res = await fetch(`/api/products/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: form.name,
+          price: form.price,
+          stock: form.stock
+        })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert("Update Failed ❌");
+        return;
+      }
+
+      alert("Product Updated ✅");
+    } catch (error) {
+      console.log(error);
+      alert("Error ❌");
+    }
+  };
+
   return (
     <div className="p-5">
       <h1>Edit Your This Page</h1>
@@ -77,8 +105,10 @@ const EditProduct = () => {
                 />
               </div>
 
-              {/* Button */}
-              <button className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700">
+              <button
+                onClick={handleUpdate}
+                className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700"
+              >
                 Update Product
               </button>
             </div>
