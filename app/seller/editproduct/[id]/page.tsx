@@ -7,6 +7,11 @@ const EditProduct = () => {
   const { id } = useParams();
 
   const [product, setProducts] = useState<any>(null);
+  const [form, setForm] = useState({
+    name: "",
+    price: "",
+    stock: ""
+  });
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -14,6 +19,13 @@ const EditProduct = () => {
       const data = await res.json();
 
       setProducts(data);
+
+      //   Fill Form here
+      setForm({
+        name: data.name,
+        price: data.price,
+        stock: data.stock
+      });
     };
     if (id) fetchProducts();
   }, [id]);
@@ -25,19 +37,52 @@ const EditProduct = () => {
       {!product ? (
         <p>Loading..........</p>
       ) : (
-        <div>
-          <p>
-            <b>Name:</b>
-            {product.name}
-          </p>
-          <p>
-            <b>Price : </b>
-            {product.price}
-          </p>
-          <p>
-            <b>Stock : </b>
-            {product.stock}
-          </p>
+        <div className="p-6 max-w-xl mx-auto">
+          <h1 className="text-2xl font-bold mb-6">Edit Product</h1>
+
+          {!product ? (
+            <p>Loading...</p>
+          ) : (
+            <div className="bg-white shadow rounded-xl p-6 space-y-4">
+              {/* Name */}
+              <div>
+                <label className="block font-medium mb-1">Product Name</label>
+                <input
+                  type="text"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  className="w-full border rounded-lg px-3 py-2"
+                />
+              </div>
+
+              {/* Price */}
+              <div>
+                <label className="block font-medium mb-1">Price</label>
+                <input
+                  type="number"
+                  value={form.price}
+                  onChange={(e) => setForm({ ...form, price: e.target.value })}
+                  className="w-full border rounded-lg px-3 py-2"
+                />
+              </div>
+
+              {/* Stock */}
+              <div>
+                <label className="block font-medium mb-1">Stock</label>
+                <input
+                  type="number"
+                  value={form.stock}
+                  onChange={(e) => setForm({ ...form, stock: e.target.value })}
+                  className="w-full border rounded-lg px-3 py-2"
+                />
+              </div>
+
+              {/* Button */}
+              <button className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700">
+                Update Product
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>
