@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { promises } from "dns";
 
 export async function DELETE(
   req: Request,
