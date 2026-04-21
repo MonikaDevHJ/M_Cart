@@ -47,3 +47,44 @@ export async function GET(
     );
   }
 }
+
+
+export async function PUT(
+  req: Request,
+  context: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await context.params;
+
+    // ✅ read formData (NOT JSON)
+    const formData = await req.formData();
+
+    const name = formData.get("name") as string;
+    const description = formData.get("description") as string;
+    const price = Number(formData.get("price"));
+    const category = formData.get("category") as string;
+    const stock = Number(formData.get("stock"));
+
+    // ⚠️ ignore image for now (we fix later if needed)
+
+    const updatedProduct = await prisma.product.update({
+      where: { id },
+      data: {
+        name,
+        description,
+        price,
+        category,
+        stock
+      }
+    });
+
+    return NextResponse.json(updatedProduct);
+  } catch (error) {
+    console.log("PUT ERROR:", error);
+
+    return NextResponse.json(
+      { error: "Failed to update product" },
+      { status: 500 }
+    );
+  }
+}

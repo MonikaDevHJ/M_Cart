@@ -34,14 +34,18 @@ const AddAproduct = () => {
         formData.append("image", file);
       }
 
-      const res = await fetch("/api/products", {
-        method: "POST",
-        body: formData
-      });
+      const res = await fetch(
+        id ? `/api/products/${id}` : "/api/products",
+
+        {
+          method: id? "PUT" : "POST",
+          body: formData
+        }
+      );
 
       const data = await res.json();
       console.log(data);
-      alert("Product SuscesFully Added ✅");
+      alert(id?  "Product Edited SusceFully ✅": "Product SuscesFully Added ✅");
     } catch (error) {
       console.log(error);
       alert("Error ❌");
@@ -59,23 +63,23 @@ const AddAproduct = () => {
   const id = SearchParams.get("id");
 
   useEffect(() => {
-  if (!id) return; // 👉 only run for edit
+    if (!id) return; // 👉 only run for edit
 
-  const fetchProduct = async () => {
-    const res = await fetch(`/api/products/${id}`);
-    const data = await res.json();
+    const fetchProduct = async () => {
+      const res = await fetch(`/api/products/${id}`);
+      const data = await res.json();
 
-    setForm({
-      name: data.name || "",
-      description: data.description || "",
-      price: data.price || "",
-      category: data.category || "",
-      stock: data.stock || ""
-    });
-  };
+      setForm({
+        name: data.name || "",
+        description: data.description || "",
+        price: data.price || "",
+        category: data.category || "",
+        stock: data.stock || ""
+      });
+    };
 
-  fetchProduct();
-}, [id]);
+    fetchProduct();
+  }, [id]);
 
   return (
     <div className="p-4 sm:p-6 lg:p-8">
