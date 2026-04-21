@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import cloudinary from "@/lib/cloudinary";
 
 export async function DELETE(
   req: Request,
@@ -48,7 +49,6 @@ export async function GET(
   }
 }
 
-
 export async function PUT(
   req: Request,
   context: { params: Promise<{ id: string }> }
@@ -56,7 +56,6 @@ export async function PUT(
   try {
     const { id } = await context.params;
 
-    // ✅ read formData (NOT JSON)
     const formData = await req.formData();
 
     const name = formData.get("name") as string;
@@ -64,8 +63,26 @@ export async function PUT(
     const price = Number(formData.get("price"));
     const category = formData.get("category") as string;
     const stock = Number(formData.get("stock"));
+    const file = formData.get("image") as File;
 
-    // ⚠️ ignore image for now (we fix later if needed)
+    let image_url: string | undefined;
+
+    // ✅ Upload image if new one selected
+    if (file && file.size > 0) {
+      const bytes = await file.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+
+      const upload = await new Promise((resolve, reject) => {
+        cloudinary.uploader
+          .upload_stream({ folder: "products" }, (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          })
+          .end(buffer);
+      });
+
+      image_url = (upload as any).secure_url;
+    }
 
     const updatedProduct = await prisma.product.update({
       where: { id },
@@ -74,14 +91,14 @@ export async function PUT(
         description,
         price,
         category,
-        stock
+        stock,
+        ...(image_url && { image_url })
       }
     });
 
     return NextResponse.json(updatedProduct);
   } catch (error) {
-    console.log("PUT ERROR:", error);
-
+    console.log(error);
     return NextResponse.json(
       { error: "Failed to update product" },
       { status: 500 }
