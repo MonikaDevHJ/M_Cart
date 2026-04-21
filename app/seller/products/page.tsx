@@ -149,7 +149,7 @@ const SellerProducts = () => {
                   {/* Actions */}
                   <td className="px-4 py-3">
                     <div className="flex justify-center gap-2">
-                      <Link  href={`/seller/editproduct/${item.id}`}   className="bg-purple-500 hover:bg-purple-600 text-white px-3 py-1 rounded-md">
+                      <Link  href={`/seller/addproduct?id=${item.id}`}   className="bg-purple-500 hover:bg-purple-600 text-white px-3 py-1 rounded-md">
                         ✏️ Edit
                       </Link>
 

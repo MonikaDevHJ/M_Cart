@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+
 const AddAproduct = () => {
   const [form, setForm] = useState({
     name: "",
@@ -51,6 +54,28 @@ const AddAproduct = () => {
     if (!e.target.files) return;
     setFile(e.target.files[0]);
   };
+
+  const SearchParams = useSearchParams();
+  const id = SearchParams.get("id");
+
+  useEffect(() => {
+  if (!id) return; // 👉 only run for edit
+
+  const fetchProduct = async () => {
+    const res = await fetch(`/api/products/${id}`);
+    const data = await res.json();
+
+    setForm({
+      name: data.name || "",
+      description: data.description || "",
+      price: data.price || "",
+      category: data.category || "",
+      stock: data.stock || ""
+    });
+  };
+
+  fetchProduct();
+}, [id]);
 
   return (
     <div className="p-4 sm:p-6 lg:p-8">
