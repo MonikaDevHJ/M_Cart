@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
@@ -14,16 +13,30 @@ const AddAproduct = () => {
     stock: ""
   });
 
+  const [file, setFile] = useState<File | null>(null);
+
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
 
   const handleSubmit = async () => {
+
+    // ✅ Validation
+    if (!form.name || !form.price) {
+      alert("Name and Price are required ❌");
+      return;
+    }
+
+    // ✅ Only for ADD (not edit)
+    if (!file && !id) {
+      alert("Image is Required ❌");
+      return;
+    }
+
     try {
       const formData = new FormData();
 
-      // Add Text Field
       formData.append("name", form.name);
       formData.append("description", form.description);
       formData.append("price", form.price);
@@ -36,23 +49,26 @@ const AddAproduct = () => {
 
       const res = await fetch(
         id ? `/api/products/${id}` : "/api/products",
-
         {
-          method: id? "PUT" : "POST",
+          method: id ? "PUT" : "POST",
           body: formData
         }
       );
 
       const data = await res.json();
       console.log(data);
-      alert(id?  "Product Edited SusceFully ✅": "Product SuscesFully Added ✅");
+
+      alert(
+        id
+          ? "Product Edited Successfully ✅"
+          : "Product Successfully Added ✅"
+      );
+
     } catch (error) {
       console.log(error);
       alert("Error ❌");
     }
   };
-
-  const [file, setFile] = useState<File | null>(null);
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -63,7 +79,7 @@ const AddAproduct = () => {
   const id = SearchParams.get("id");
 
   useEffect(() => {
-    if (!id) return; // 👉 only run for edit
+    if (!id) return;
 
     const fetchProduct = async () => {
       const res = await fetch(`/api/products/${id}`);
@@ -162,13 +178,9 @@ const AddAproduct = () => {
           <label className="flex flex-col items-center justify-center w-full h-80 border-2 border-dashed rounded-xl cursor-pointer hover:bg-gray-50">
             <input
               type="file"
-              name=""
-              id=""
               className="text-center ml-28 mt-2"
               onChange={handleFile}
             />
-
-            {/* Preview */}
 
             {!file ? (
               <>
