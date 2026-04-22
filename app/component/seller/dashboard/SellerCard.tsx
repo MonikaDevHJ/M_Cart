@@ -32,6 +32,7 @@ const SellerCard = () => {
       color: "bg-orange-500"
     }
   ];
+  
 
   return (
     <div className="mt-1 lg:mt-6 sm:mt-10 px-1 sm:px-0">
