@@ -1,6 +1,6 @@
 import Filter from "@/app/component/grocery/Filter";
 import Items from "@/app/component/grocery/Items";
-
+ 
 const Grocery = () => {
   return (
     <div className="w-full grid grid-cols-5  gap-4 p-5 mt-5">
