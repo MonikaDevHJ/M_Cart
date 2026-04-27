@@ -10,7 +10,8 @@ const AddAproduct = () => {
     description: "",
     price: "",
     category: "",
-    stock: ""
+    stock: "",
+    image: ""
   });
 
   const [file, setFile] = useState<File | null>(null);
@@ -21,7 +22,6 @@ const AddAproduct = () => {
   };
 
   const handleSubmit = async () => {
-
     // ✅ Validation
     if (!form.name || !form.price) {
       alert("Name and Price are required ❌");
@@ -47,23 +47,17 @@ const AddAproduct = () => {
         formData.append("image", file);
       }
 
-      const res = await fetch(
-        id ? `/api/products/${id}` : "/api/products",
-        {
-          method: id ? "PUT" : "POST",
-          body: formData
-        }
-      );
+      const res = await fetch(id ? `/api/products/${id}` : "/api/products", {
+        method: id ? "PUT" : "POST",
+        body: formData
+      });
 
       const data = await res.json();
       console.log(data);
 
       alert(
-        id
-          ? "Product Edited Successfully ✅"
-          : "Product Successfully Added ✅"
+        id ? "Product Edited Successfully ✅" : "Product Successfully Added ✅"
       );
-
     } catch (error) {
       console.log(error);
       alert("Error ❌");
@@ -90,7 +84,8 @@ const AddAproduct = () => {
         description: data.description || "",
         price: data.price || "",
         category: data.category || "",
-        stock: data.stock || ""
+        stock: data.stock || "",
+        image: data.image_url || ""
       });
     };
 
@@ -182,17 +177,23 @@ const AddAproduct = () => {
               onChange={handleFile}
             />
 
-            {!file ? (
-              <>
-                <p className="text-gray-500">Click to Upload Image</p>
-                <p className="text-sm text-gray-400">PNG, JPG, JPEG</p>
-              </>
-            ) : (
+            {file ? (
               <img
                 src={URL.createObjectURL(file)}
                 alt="Preview"
                 className="mt-3 h-32 rounded-lg object-cover"
               />
+            ) : form.image ? (
+              <img
+                src={form.image}
+                alt="Existing"
+                className="mt-3 h-32 rounded-lg object-cover"
+              />
+            ) : (
+              <>
+                <p className="text-gray-500">Click to Upload Image</p>
+                <p className="text-sm text-gray-400">PNG, JPG, JPEG</p>
+              </>
             )}
           </label>
         </div>
