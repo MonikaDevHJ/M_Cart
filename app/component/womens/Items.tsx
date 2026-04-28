@@ -13,19 +13,6 @@ type Product = {
 const Items = () => {
   const [items, setItems] = useState<Product[]>([]);
 
-  const Card = [
-    {
-      image: "Kurtha Image",
-      Name: "Kurtha",
-      Amout: "Red Color"
-    },
-    {
-      image: "Jeans Image ",
-      Name: "Kurtha",
-      Amout: "Red Color"
-    }
-  ];
-
   useEffect(() => {
     const fetchItem = async () => {
       try {
@@ -36,34 +23,38 @@ const Items = () => {
         console.log(error);
       }
     };
+
     fetchItem();
   }, []);
 
   return (
     <div className="p-5">
+      <h1 className="text-2xl font-bold text-fuchsia-700">
+        Pick Your Dress
+      </h1>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-10">
-        {items.map((item, index) => (
+        {items.map((item) => (
           <div
-            key={index}
-            className="bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 p-4 cursor-pointer"
+            key={item.id}
+            className="bg-white rounded-2xl shadow-md hover:shadow-xl transition p-4"
           >
             {/* Image */}
             <div className="w-full h-48 bg-gray-100 flex items-center justify-center rounded-xl overflow-hidden">
               <img
-                src="https://via.placeholder.com/150"
+                src={item.image_url || "https://via.placeholder.com/150"}
                 alt={item.name}
-                className="object-cover h-full"
+                className="object-cover h-full w-full"
               />
             </div>
 
-            {/* Product Details */}
-            <div className="mt-4 space-y-1">
-              <p className="font-semibold text-lg">{item.price}</p>
-              <p className="text-gray-500 text-sm">{item.image_url}</p>
+            {/* Details */}
+            <div className="mt-4">
+              <p className="font-semibold">{item.name}</p>
+              <p className="text-gray-500 text-sm">₹ {item.price}</p>
             </div>
 
-            {/* Button */}
-            <button className="mt-4 w-full bg-fuchsia-600 text-white py-2 rounded-lg hover:bg-fuchsia-700 transition">
+            <button className="mt-4 w-full bg-fuchsia-600 text-white py-2 rounded-lg hover:bg-fuchsia-700">
               Add to Cart
             </button>
           </div>
