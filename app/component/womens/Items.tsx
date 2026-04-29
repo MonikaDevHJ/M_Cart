@@ -28,23 +28,23 @@ const Items = () => {
   }, []);
 
   return (
-    <div className="p-5">
-      <h1 className="text-2xl font-bold text-fuchsia-700">
+    <div className=" h-full rounded-2xl">
+      {/* <h1 className="text-2xl font-bold text-fuchsia-700">
         Pick Your Dress
-      </h1>
+      </h1> */}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-2 ">
         {items.map((item) => (
           <div
             key={item.id}
-            className="bg-white rounded-2xl shadow-md hover:shadow-xl transition p-4"
+            className="bg-white rounded-2xl shadow-2xl hover:shadow-xl  transition p-4"
           >
             {/* Image */}
-            <div className="w-full h-48 bg-gray-100 flex items-center justify-center rounded-xl overflow-hidden">
+            <div className="w-full h-50  flex items-center justify-center rounded-xl overflow-hidden   p-5">
               <img
                 src={item.image_url || "https://via.placeholder.com/150"}
                 alt={item.name}
-                className="object-cover h-full w-full"
+                className="object-cover h-44 w-full rounded-4xl"
               />
             </div>
 
