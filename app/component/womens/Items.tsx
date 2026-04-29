@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 type Product = {
   id: string;
@@ -12,6 +13,7 @@ type Product = {
 
 const Items = () => {
   const [items, setItems] = useState<Product[]>([]);
+  const [wishlist, setWishlist] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -27,38 +29,61 @@ const Items = () => {
     fetchItem();
   }, []);
 
+  const toggleWishlist = (id: string) => {
+    setWishlist((prev) =>
+      prev.includes(id)
+        ? prev.filter((item) => item !== id)
+        : [...prev, id]
+    );
+  };
+
   return (
-    <div className=" h-full rounded-2xl">
-      {/* <h1 className="text-2xl font-bold text-fuchsia-700">
-        Pick Your Dress
-      </h1> */}
+    <div className="h-full rounded-2xl p-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-2">
+        {items.map((item) => {
+          const isWishlisted = wishlist.includes(item.id);
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-2 ">
-        {items.map((item) => (
-          <div
-            key={item.id}
-            className="bg-white rounded-2xl shadow-2xl hover:shadow-xl  transition p-4"
-          >
-            {/* Image */}
-            <div className="w-full h-50  flex items-center justify-center rounded-xl overflow-hidden   p-5">
-              <img
-                src={item.image_url || "https://via.placeholder.com/150"}
-                alt={item.name}
-                className="object-cover h-44 w-full rounded-4xl"
-              />
+          return (
+            <div
+              key={item.id}
+              className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition p-4"
+            >
+              {/* Image + Heart */}
+              <div className="relative">
+                <div className="w-full h-52 flex items-center justify-center rounded-xl overflow-hidden">
+                  <img
+                    src={item.image_url || "https://via.placeholder.com/150"}
+                    alt={item.name}
+                    className="object-cover h-full w-full rounded-xl"
+                  />
+                </div>
+
+                {/* Heart Icon */}
+                <button
+                  onClick={() => toggleWishlist(item.id)}
+                  className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md hover:scale-110 transition"
+                >
+                  {isWishlisted ? (
+                    <FaHeart className="text-red-500" />
+                  ) : (
+                    <FaRegHeart className="text-gray-600" />
+                  )}
+                </button>
+              </div>
+
+              {/* Details */}
+              <div className="mt-6 flex justify-between ">
+                <p className="font-bold text-xl">{item.name}</p>
+                <p className="text-gray-900 text-lg">₹ {item.price}</p>
+              </div>
+
+              {/* Button */}
+              <button className="mt-4 w-full bg-fuchsia-600 text-white py-2 rounded-lg hover:bg-fuchsia-700 transition">
+                Add to Cart
+              </button>
             </div>
-
-            {/* Details */}
-            <div className="mt-4">
-              <p className="font-semibold">{item.name}</p>
-              <p className="text-gray-500 text-sm">₹ {item.price}</p>
-            </div>
-
-            <button className="mt-4 w-full bg-fuchsia-600 text-white py-2 rounded-lg hover:bg-fuchsia-700">
-              Add to Cart
-            </button>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
