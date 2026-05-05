@@ -1,8 +1,15 @@
+import Item from "@/app/component/gift/item"
+import Filter from "@/app/component/gift/filter"
+
 
 const GiftPage = () => {
   return (
-    <div className="">
-      <p className='text-center justify-center'>GiftPages</p>
+    <div className="flex">
+      <Filter/>
+      <Item/>
+      
+     
+    
     </div>
   )
 }
