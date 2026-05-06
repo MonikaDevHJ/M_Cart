@@ -1,3 +1,5 @@
+// This code is Brain 
+
 export const initialState = {
   client: {
     name: "",
@@ -9,7 +11,7 @@ export const initialState = {
     price: "",
     category: ""
   },
-  step: 1
+  step: 1   
 };
 
 export const formReducer = (state: any, action: any) => {
