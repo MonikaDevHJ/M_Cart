@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { FormProvider } from "../../context/FormContext";
 
 const AddAproduct = () => {
   const [form, setForm] = useState({
@@ -212,4 +212,10 @@ const AddAproduct = () => {
   );
 };
 
-export default AddAproduct;
+export default function Page() {
+  return (
+    <FormProvider>
+      <AddAproduct />
+    </FormProvider>
+  );
+}
