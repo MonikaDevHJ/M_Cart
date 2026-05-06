@@ -6,68 +6,68 @@ const StepProduct = () => {
   const { state, dispatch } = useForm();
 
   return (
-    <div className="p-6">
-      <h2 className="text-xl font-bold mb-4">Product Details</h2>
+    <div>
+      <h2 className="text-2xl font-semibold mb-6 text-center">
+        Product Details
+      </h2>
 
-      {/* Product Name */}
-      <input
-        type="text"
-        placeholder="Product Name"
-        value={state.product.name}
-        onChange={(e) =>
-          dispatch({
-            type: "SET_PRODUCT",
-            payload: { name: e.target.value }
-          })
-        }
-        className="border p-2 mb-3 w-full"
-      />
+      <div className="space-y-4">
+        <input
+          type="text"
+          placeholder="Product Name"
+          value={state.product.name}
+          onChange={(e) =>
+            dispatch({
+              type: "SET_PRODUCT",
+              payload: { name: e.target.value }
+            })
+          }
+          className="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+        />
 
-      {/* Price */}
-      <input
-        type="number"
-        placeholder="Price"
-        value={state.product.price}
-        onChange={(e) =>
-          dispatch({
-            type: "SET_PRODUCT",
-            payload: { price: e.target.value }
-          })
-        }
-        className="border p-2 mb-3 w-full"
-      />
+        <input
+          type="number"
+          placeholder="Price ₹"
+          value={state.product.price}
+          onChange={(e) =>
+            dispatch({
+              type: "SET_PRODUCT",
+              payload: { price: e.target.value }
+            })
+          }
+          className="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+        />
 
-      {/* Category */}
-      <select
-        value={state.product.category}
-        onChange={(e) =>
-          dispatch({
-            type: "SET_PRODUCT",
-            payload: { category: e.target.value }
-          })
-        }
-        className="border p-2 mb-4 w-full"
-      >
-        <option value="">Select Category</option>
-        <option value="Electronics">Electronics</option>
-        <option value="Clothing">Clothing</option>
-        <option value="Food">Food</option>
-      </select>
+        <select
+          value={state.product.category}
+          onChange={(e) =>
+            dispatch({
+              type: "SET_PRODUCT",
+              payload: { category: e.target.value }
+            })
+          }
+          className="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+        >
+          <option value="">Select Category</option>
+          <option>Electronics</option>
+          <option>Clothing</option>
+          <option>Food</option>
+        </select>
+      </div>
 
-      {/* Buttons */}
-      <div className="flex justify-between">
+      <div className="flex justify-between mt-6">
         <button
           onClick={() => dispatch({ type: "PREV_STEP" })}
-          className="bg-gray-500 text-white px-4 py-2 rounded"
+          className="bg-gray-400 text-white px-5 py-2 rounded-lg"
         >
-          Back
+          ← Back
         </button>
 
         <button
           onClick={() => dispatch({ type: "NEXT_STEP" })}
-          className="bg-blue-600 text-white px-4 py-2 rounded"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg"
         >
-          Next
+          Continue →
         </button>
       </div>
     </div>
