@@ -6,57 +6,57 @@ const StepClient = () => {
   const { state, dispatch } = useForm();
 
   return (
-    <div className="p-6">
-      <h2 className="text-xl font-bold mb-4">Client Details</h2>
+    <div>
+      <h2 className="text-2xl font-semibold mb-6 text-center">
+        Client Details
+      </h2>
 
-      {/* Name */}
-      <input
-        type="text"
-        placeholder="Client Name"
-        value={state.client.name}
-        onChange={(e) =>
-          dispatch({
-            type: "SET_CLIENT",
-            payload: { name: e.target.value }
-          })
-        }
-        className="border p-2 mb-3 w-full"
-      />
+      <div className="space-y-4">
+        <input
+          type="text"
+          placeholder="Full Name"
+          value={state.client.name}
+          onChange={(e) =>
+            dispatch({
+              type: "SET_CLIENT",
+              payload: { name: e.target.value }
+            })
+          }
+          className="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+        />
 
-      {/* Email */}
-      <input
-        type="email"
-        placeholder="Email"
-        value={state.client.email}
-        onChange={(e) =>
-          dispatch({
-            type: "SET_CLIENT",
-            payload: { email: e.target.value }
-          })
-        }
-        className="border p-2 mb-3 w-full"
-      />
+        <input
+          type="email"
+          placeholder="Email Address"
+          value={state.client.email}
+          onChange={(e) =>
+            dispatch({
+              type: "SET_CLIENT",
+              payload: { email: e.target.value }
+            })
+          }
+          className="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+        />
 
-      {/* Phone */}
-      <input
-        type="text"
-        placeholder="Phone"
-        value={state.client.phone}
-        onChange={(e) =>
-          dispatch({
-            type: "SET_CLIENT",
-            payload: { phone: e.target.value }
-          })
-        }
-        className="border p-2 mb-4 w-full"
-      />
+        <input
+          type="text"
+          placeholder="Phone Number"
+          value={state.client.phone}
+          onChange={(e) =>
+            dispatch({
+              type: "SET_CLIENT",
+              payload: { phone: e.target.value }
+            })
+          }
+          className="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+        />
+      </div>
 
-      {/* Next Button */}
       <button
         onClick={() => dispatch({ type: "NEXT_STEP" })}
-        className="bg-blue-600 text-white px-4 py-2 rounded"
+        className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg transition"
       >
-        Next
+        Continue →
       </button>
     </div>
   );
