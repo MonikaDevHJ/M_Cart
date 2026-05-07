@@ -6,12 +6,22 @@ const StepProduct = () => {
   const { state, dispatch } = useForm();
 
   return (
-    <div>
-      <h2 className="text-2xl font-semibold mb-6 text-center">
-        Product Details
-      </h2>
+    <div className="space-y-10">
 
-      <div className="space-y-4">
+      {/* HEADER */}
+      <div>
+        <h2 className="text-3xl font-bold text-gray-800">
+          Product Details
+        </h2>
+
+        <p className="text-gray-500 mt-2">
+          Add complete product information
+        </p>
+      </div>
+
+      {/* FORM */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
         <input
           type="text"
           placeholder="Product Name"
@@ -22,12 +32,12 @@ const StepProduct = () => {
               payload: { name: e.target.value }
             })
           }
-          className="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+          className="border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
         />
 
         <input
           type="number"
-          placeholder="Price ₹"
+          placeholder="Product Price ₹"
           value={state.product.price}
           onChange={(e) =>
             dispatch({
@@ -35,7 +45,7 @@ const StepProduct = () => {
               payload: { price: e.target.value }
             })
           }
-          className="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+          className="border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
         />
 
         <select
@@ -46,29 +56,57 @@ const StepProduct = () => {
               payload: { category: e.target.value }
             })
           }
-          className="w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+          className="border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
         >
           <option value="">Select Category</option>
           <option>Electronics</option>
-          <option>Clothing</option>
+          <option>Fashion</option>
           <option>Food</option>
+          <option>Furniture</option>
         </select>
+
+        <input
+          type="number"
+          placeholder="Stock Quantity"
+          className="border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
+        />
+
+        <input
+          type="text"
+          placeholder="Brand Name"
+          className="border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
+        />
+
+        <input
+          type="file"
+          className="border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
+        />
       </div>
 
-      <div className="flex justify-between mt-6">
+      {/* DESCRIPTION */}
+      <textarea
+        rows={6}
+        placeholder="Product Description..."
+        className="w-full border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
+      />
+
+      {/* BUTTONS */}
+      <div className="flex flex-col md:flex-row gap-5">
+
         <button
           onClick={() => dispatch({ type: "PREV_STEP" })}
-          className="bg-gray-400 text-white px-5 py-2 rounded-lg"
+          className="w-full md:w-1/2 bg-gray-300 hover:bg-gray-400 transition-all duration-300 py-5 rounded-2xl font-semibold"
         >
           ← Back
         </button>
 
         <button
           onClick={() => dispatch({ type: "NEXT_STEP" })}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg"
+          className="w-full md:w-1/2 bg-gradient-to-r from-indigo-600 to-blue-600 hover:scale-[1.01] transition-all duration-300 text-white py-5 rounded-2xl font-semibold shadow-lg"
         >
           Continue →
         </button>
+
       </div>
     </div>
   );
