@@ -5,23 +5,22 @@ import { useForm } from "@/app/context/FormContext";
 const StepProduct = () => {
   const { state, dispatch } = useForm();
 
+  const imagePreview =
+    state.product.image instanceof File
+      ? URL.createObjectURL(state.product.image)
+      : null;
+
   return (
     <div className="space-y-10">
-
       {/* HEADER */}
       <div>
-        <h2 className="text-3xl font-bold text-gray-800">
-          Product Details
-        </h2>
+        <h2 className="text-3xl font-bold text-gray-800">Product Details</h2>
 
-        <p className="text-gray-500 mt-2">
-          Add complete product information
-        </p>
+        <p className="text-gray-500 mt-2">Add complete product information</p>
       </div>
 
       {/* FORM */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
         <input
           type="text"
           placeholder="Product Name"
@@ -77,10 +76,36 @@ const StepProduct = () => {
           className="border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
         />
 
-        <input
-          type="file"
-          className="border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
-        />
+        {/* Product Image */}
+        <div className="md:col-span-2">
+          <label className="block text-gray-700 font-semibold mb-3">
+            Product Image
+          </label>
+
+          <div className="border-2 border-dashed border-indigo-300 rounded-3xl p-8 bg-indigo-50 hover:bg-indigo-100 transition-all duration-300">
+            <input
+              type="file"
+              accept="image/*"
+              id="productImage"
+              hidden
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+
+                if (file) {
+                  dispatch({
+                    type: "SET_PRODUCT",
+                    payload: { image: file }
+                  });
+                }
+              }}
+            />
+
+            {/* Preview */}
+            {
+              
+            }
+          </div>
+        </div>
       </div>
 
       {/* DESCRIPTION */}
@@ -92,7 +117,6 @@ const StepProduct = () => {
 
       {/* BUTTONS */}
       <div className="flex flex-col md:flex-row gap-5">
-
         <button
           onClick={() => dispatch({ type: "PREV_STEP" })}
           className="w-full md:w-1/2 bg-gray-500 hover:bg-gray-400 transition-all duration-300 py-5 rounded-2xl font-semibold"
@@ -106,7 +130,6 @@ const StepProduct = () => {
         >
           Continue →
         </button>
-
       </div>
     </div>
   );

@@ -9,7 +9,8 @@ export const initialState = {
   product: {
     name: "",
     price: "",
-    category: ""
+    category: "",
+    image:null
   },
   step: 1   
 };
