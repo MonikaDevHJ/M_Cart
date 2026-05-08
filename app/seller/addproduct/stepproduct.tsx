@@ -32,7 +32,7 @@ const StepProduct = () => {
               payload: { name: e.target.value }
             })
           }
-          className="border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
+          className="border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
         />
 
         <input
@@ -45,7 +45,7 @@ const StepProduct = () => {
               payload: { price: e.target.value }
             })
           }
-          className="border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
+          className="border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
         />
 
         <select
@@ -56,7 +56,7 @@ const StepProduct = () => {
               payload: { category: e.target.value }
             })
           }
-          className="border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
+          className="border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
         >
           <option value="">Select Category</option>
           <option>Electronics</option>
@@ -68,18 +68,18 @@ const StepProduct = () => {
         <input
           type="number"
           placeholder="Stock Quantity"
-          className="border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
+          className="border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
         />
 
         <input
           type="text"
           placeholder="Brand Name"
-          className="border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
+          className="border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
         />
 
         <input
           type="file"
-          className="border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
+          className="border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
         />
       </div>
 
@@ -87,7 +87,7 @@ const StepProduct = () => {
       <textarea
         rows={6}
         placeholder="Product Description..."
-        className="w-full border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
+        className="w-full border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
       />
 
       {/* BUTTONS */}
@@ -95,7 +95,7 @@ const StepProduct = () => {
 
         <button
           onClick={() => dispatch({ type: "PREV_STEP" })}
-          className="w-full md:w-1/2 bg-gray-300 hover:bg-gray-400 transition-all duration-300 py-5 rounded-2xl font-semibold"
+          className="w-full md:w-1/2 bg-gray-500 hover:bg-gray-400 transition-all duration-300 py-5 rounded-2xl font-semibold"
         >
           ← Back
         </button>
