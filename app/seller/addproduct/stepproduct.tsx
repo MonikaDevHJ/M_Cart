@@ -101,9 +101,50 @@ const StepProduct = () => {
             />
 
             {/* Preview */}
-            {
-              
-            }
+            {imagePreview ? (
+              <div className="flex flex-col items-center gap-5">
+                <img
+                  src={imagePreview}
+                  alt="Preview"
+                  className="w-48 h-48 object-cover rounded-2xl border-4 border-white"
+                />
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    dispatch({
+                      type: "SET_PRODUCT",
+                      payload: { image: null }
+                    })
+                  }
+                  className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-xl transition-all duration-300"
+                >
+                  Remove Image
+                </button>
+              </div>
+            ) : (
+              <label
+                htmlFor="productImage"
+                className="cursor-pointer flex flex-col items-center justify-center gap-4"
+              >
+                <div className="w-20 h-20 rounded-full bg-white shadow-md flex items-center justify-center text-4xl">
+                  📷
+                </div>
+                <div className="text-center">
+                  <p className="text-lg font-semibold text-gray-700">
+                    Upload Product Image
+                  </p>
+
+                  <p className="text-sm text-gray-500 mt-1">
+                    PNG, JPG, WEBP up to 5MB
+                  </p>
+                </div>
+
+                <span className="bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-6 py-3 rounded-xl shadow-md hover:scale-105 transition-all duration-300">
+                  Choose File
+                </span>
+              </label>
+            )}
           </div>
         </div>
       </div>
