@@ -46,11 +46,11 @@ const Items = () => {
           return (
             <div
               key={item.id}
-              className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition p-4"
+              className="bg-gray-400 rounded-2xl shadow-lg hover:shadow-xl transition p-4 "
             >
               {/* Image + Heart */}
-              <div className="relative">
-                <div className="w-full h-52 flex items-center justify-center rounded-xl overflow-hidden">
+              <div className="relative border border-r-fuchsia-600 ">
+                <div className="w-60 h-50 flex items-center justify-center rounded-xl overflow-hidden">
                   <img
                     src={item.image_url || "https://via.placeholder.com/150"}
                     alt={item.name}
