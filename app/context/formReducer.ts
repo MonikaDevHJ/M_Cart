@@ -16,6 +16,8 @@ export const initialState = {
     category: "",
     quantity: "",
     brand: "",
+    size : "",
+    Description : "",
     image: null
   },
   step: 1

@@ -22,7 +22,7 @@ const StepClient = () => {
      
         <input
           type="text"
-          placeholder="Full Name"
+          placeholder="ComPany Name"
           value={state.client.name}
           onChange={(e) =>
             dispatch({
