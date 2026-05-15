@@ -7,12 +7,9 @@ const StepClient = () => {
 
   return (
     <div className="space-y-10">
-
       {/* HEADER */}
       <div>
-        <h2 className="text-3xl font-bold text-gray-800">
-          Seller Information
-        </h2>
+        <h2 className="text-3xl font-bold text-gray-800">Seller Information</h2>
 
         <p className="text-gray-500 mt-2">
           Enter your seller and business details
@@ -21,7 +18,8 @@ const StepClient = () => {
 
       {/* FORM */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
+        
+     
         <input
           type="text"
           placeholder="Full Name"
@@ -64,6 +62,13 @@ const StepClient = () => {
         <input
           type="text"
           placeholder="Business Name"
+          value={state.client.BussinessName}
+          onChange={(e) =>
+            dispatch({
+              type: "SET_CLIENT",
+              payload: { BussinessName: e.target.value }
+            })
+          }
           className="border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
         />
 
@@ -71,14 +76,27 @@ const StepClient = () => {
           type="text"
           placeholder="GST Number"
           className="border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
+          value={state.client.gstNumber}
+          onChange={(e) =>
+            dispatch({
+              type: "SET_CLIENT",
+              payload: { gstNumber: e.target.value }
+            })
+          }
         />
 
         <input
           type="text"
           placeholder="Store Location"
           className="border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
+          value = {state.client.Location}
+          onChange={ (e)=>
+            dispatch({
+              type: "SET_CLIENT",
+              payload : {Location : e.target.value}
+            })
+           }
         />
-
       </div>
 
       {/* TEXTAREA */}
@@ -86,6 +104,13 @@ const StepClient = () => {
         rows={5}
         placeholder="Business Description..."
         className="w-full border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
+        value = {state.client.Description}
+        onChange={ (e)=> 
+          dispatch ({
+            type:"SET_CLIENT",
+            payload : {Description : e.target.value}
+          })
+         }
       />
 
       {/* BUTTON */}

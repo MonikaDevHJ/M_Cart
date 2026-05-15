@@ -1,18 +1,24 @@
-// This code is Brain 
+// This code is Brain
 
 export const initialState = {
   client: {
     name: "",
     email: "",
-    phone: ""
+    phone: "",
+    BussinessName: "",
+    gstNumber: "",
+    Location: "",
+    Description: ""
   },
   product: {
     name: "",
     price: "",
     category: "",
-    image:null
+    quantity: "",
+    brand: "",
+    image: null
   },
-  step: 1   
+  step: 1
 };
 
 export const formReducer = (state: any, action: any) => {
