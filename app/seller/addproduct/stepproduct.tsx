@@ -68,13 +68,44 @@ const StepProduct = () => {
           type="number"
           placeholder="Stock Quantity"
           className="border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
+          value={state.product.quantity}
+          onChange={(e) =>
+            dispatch({
+              type: "SET_PRODUCT",
+              payload: { quantity: e.target.value }
+            })
+          }
         />
 
         <input
           type="text"
           placeholder="Brand Name"
           className="border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
+          value={state.product.brand}
+          onChange={(e) =>
+            dispatch({
+              type: "SET_PRODUCT",
+              payload: { brand: e.target.value }
+            })
+          }
         />
+
+        <select
+          value={state.product.size }
+          onChange={(e) =>
+            dispatch({
+              type: "SET_PRODUCT",
+              payload: { size: e.target.value }
+            })
+          }
+          className="border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
+        >
+          <option value="">Select Size</option>
+          <option>S</option>
+          <option>L</option>
+          <option>Xl</option>
+          <option>XXL</option>
+        </select>
 
         {/* Product Image */}
         <div className="md:col-span-2">
