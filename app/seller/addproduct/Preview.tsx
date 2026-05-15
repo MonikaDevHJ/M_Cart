@@ -20,7 +20,7 @@ const Preview = () => {
       </div>
 
       {/* GRID */}
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className=" ">
 
         {/* SELLER */}
         <div className="bg-gradient-to-br from-indigo-50 to-blue-50 border border-indigo-100 rounded-3xl p-8 shadow-sm">
@@ -52,11 +52,37 @@ const Preview = () => {
               </p>
             </div>
 
+             <div>
+              <p className="text-sm text-gray-500">Business Name</p>
+              <p className="font-semibold text-lg">
+                {state.client.BussinessName}
+              </p>
+            </div>
+
+             <div>
+              <p className="text-sm text-gray-500">GST Number</p>
+              <p className="font-semibold text-lg">
+                {state.client.gstNumber}
+              </p>
+            </div>
+              <div>
+              <p className="text-sm text-gray-500">Company Location</p>
+              <p className="font-semibold text-lg">
+                {state.client.location}
+              </p>
+            </div>
+
+            <div>
+              <p className="text-sm text-gray-500">Description</p>
+              <p className="font-semibold text-lg">
+                {state.client.Description}
+              </p>
+            </div>
           </div>
         </div>
 
         {/* PRODUCT */}
-        <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-100 rounded-3xl p-8 shadow-sm">
+        <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-100 rounded-3xl p-8 shadow-sm mt-10">
 
           <h3 className="text-2xl font-bold text-green-700 mb-6">
             Product Details

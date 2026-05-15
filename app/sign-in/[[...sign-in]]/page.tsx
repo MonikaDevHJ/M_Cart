@@ -1,22 +1,26 @@
 "use client";
 
 import { SignIn, useUser } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function Page() {
-  const { isSignedIn } = useUser();
-  const router = useRouter();
+  const { isSignedIn, isLoaded } = useUser();
 
   useEffect(() => {
-    if (isSignedIn) {
-      router.push("/seller"); //Force to Redirect To Seller Dashboard UI
+    if (isLoaded && isSignedIn) {
+      window.location.href = "/seller";
     }
-  }, [isSignedIn]);
+  }, [isSignedIn, isLoaded]);
+
+  if (!isLoaded) return null;
+
+  if (isSignedIn) {
+    return <p>Redirecting...</p>;
+  }
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <SignIn />{" "}
+      <SignIn />
     </div>
   );
 }
