@@ -9,12 +9,25 @@ datasource db {
 }
 
 model Product {
-  id          String   @id @default(uuid())
-  name        String
-  description String
-  price       Float
-  category    String
-  stock       Int
-  image_url   String?
-  created_at  DateTime @default(now())
+  id String @id @default(uuid())
+
+  // Seller Details
+  companyName  String
+  email        String
+  phone        String
+  businessName String
+  gstNumber    String
+  location     String
+  sellerDesc   String
+
+  // Product Details
+  productName    String
+  productSize    String
+  selectCategory String
+  stockQuantity  Int
+  brandName      String
+  selectSize     String
+  productImage   String?
+
+  created_at DateTime @default(now())
 }
