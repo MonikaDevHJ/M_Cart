@@ -24,23 +24,35 @@ export async function POST(req: Request) {
   try {
     const data = await req.formData();
 
-    const name = data.get("name") as string;
-    const description = data.get("description") as string;
-    const price = data.get("price") as string;
-    const category = data.get("category") as string;
-    const stock = data.get("stock") as string;
+    // Seller Details
+    const companyName = data.get("companyName") as string;
+    const email = data.get("email") as string;
+    const phone = data.get("phone") as string;
+    const businessName = data.get("businessName") as string;
+    const gstNumber = data.get("gstNumber") as string;
+    const location = data.get("location") as string;
+    const sellerDesc = data.get("sellerDesc") as string;
 
-    const file = data.get("image") as File;
+    // Product Details
+    const productName = data.get("productName") as string;
+    const productSize = data.get("productSize") as string;
+    const selectCategory = data.get("selectCategory") as string;
+    const stockQuantity = data.get("stockQuantity") as string;
+    const brandName = data.get("brandName") as string;
+    const selectSize = data.get("selectSize") as string;
+
+    const file = data.get("productImage");
 
     let imageUrl = "";
 
-    if (file) {
-      const bytes = await file.arrayBuffer(); // ✅ fixed
+    // Upload Image to Cloudinary
+    if (file && file instanceof File) {
+      const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
 
       const upload = await new Promise((resolve, reject) => {
         cloudinary.uploader
-          .upload_stream({ folder: "products" }, (error, result) => {
+          .upload_stream({ folder: "m_cart_products" }, (error, result) => {
             if (error) reject(error);
             else resolve(result);
           })
@@ -50,20 +62,31 @@ export async function POST(req: Request) {
       imageUrl = (upload as any).secure_url;
     }
 
+    // Save to Database
     const product = await prisma.product.create({
       data: {
-        name,
-        description,
-        price: Number(price),
-        category,
-        stock: Number(stock),
-        image_url: imageUrl
+        companyName,
+        email,
+        phone,
+        businessName,
+        gstNumber,
+        location,
+        sellerDesc,
+
+        productName,
+        productSize,
+        selectCategory,
+        stockQuantity: Number(stockQuantity),
+        brandName,
+        selectSize,
+
+        productImage: imageUrl
       }
     });
 
     return NextResponse.json(product);
   } catch (error) {
-    console.log(error);
+    console.error("FULL ERROR => ", error);
     return NextResponse.json(
       { error: "Something went wrong" },
       { status: 500 }
