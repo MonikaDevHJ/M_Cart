@@ -59,7 +59,7 @@ const Preview = () => {
                 </div>
 
                 <div className="flex gap-2  ">
-                  <p className="text-md text-gray-800 mt-1">
+                  <p className="text-sm text-gray-500 mt-1">
                     Company Location:
                   </p>
                   <p className="font-semibold text-lg ">
@@ -92,8 +92,8 @@ const Preview = () => {
                   <p className="font-semibold text-lg">{state.product.name}</p>
                 </div>
 
-                <div>
-                  <p className="text-sm text-gray-500">Price</p>
+                <div className=" ">
+                  <p className="text-sm text-gray-500 ">Price</p>
                   <p className="font-semibold text-lg">
                     ₹ {state.product.price}
                   </p>
@@ -109,8 +109,17 @@ const Preview = () => {
 
               <div className="space-y-10">
                 <div>
-                  <p className="text-sm text-gray-500">Product Name</p>
-                  <p className="font-semibold text-lg">{state.product.name}</p>
+                  <p className="text-sm text-gray-500">Product Quantity</p>
+                  <p className="font-semibold text-lg">{state.product. quantity}</p>
+                </div>
+
+                <div>
+                  <p className="text-sm text-gray-500">Product Brand</p>
+                  <p className="font-semibold text-lg">{state.product.brand}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">Product Size</p>
+                  <p className="font-semibold text-lg">{state.product.size}</p>
                 </div>
               </div>
             </div>
