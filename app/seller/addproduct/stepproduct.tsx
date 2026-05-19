@@ -91,7 +91,7 @@ const StepProduct = () => {
         />
 
         <select
-          value={state.product.size }
+          value={state.product.size}
           onChange={(e) =>
             dispatch({
               type: "SET_PRODUCT",
