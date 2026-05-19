@@ -22,6 +22,7 @@ model Product {
 
   // Product Details
   productName    String
+  productPrice   String
   productSize    String
   selectCategory String
   stockQuantity  Int
