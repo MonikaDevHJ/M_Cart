@@ -120,21 +120,21 @@ const SellerProducts = () => {
                   {/* Image */}
                   <td className="px-4 py-3">
                     <img
-                      src={item.image_url}
+                      src={item.productImage}
                       className="w-12 h-12 rounded-lg object-cover"
                     />
                   </td>
 
                   {/* Name */}
-                  <td className="px-4 py-3 font-semibold">{item.name}</td>
+                  <td className="px-4 py-3 font-semibold">{item.productName}</td>
 
                   {/* Price */}
                   <td className="px-4 py-3 font-semibold">
-                    ₹ {item.price.toLocaleString()}
+                    ₹ {item.productPrice}
                   </td>
 
                   {/* Stock */}
-                  <td className="px-4 py-3 font-semibold">{item.stock}</td>
+                  <td className="px-4 py-3 font-semibold">{item.stockQuantity}</td>
 
                   {/* Status */}
                   <td className="px-4 py-3">

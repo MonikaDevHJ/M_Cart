@@ -35,6 +35,7 @@ export async function POST(req: Request) {
 
     // Product Details
     const productName = data.get("productName") as string;
+    const productPrice = data.get("productPrice")as string;
     const productSize = data.get("productSize") as string;
     const selectCategory = data.get("selectCategory") as string;
     const stockQuantity = data.get("stockQuantity") as string;
@@ -75,6 +76,7 @@ export async function POST(req: Request) {
 
         productName,
         productSize,
+        productPrice,
         selectCategory,
         stockQuantity: Number(stockQuantity),
         brandName,
