@@ -21,7 +21,7 @@
         // Product Details
         formData.append("productName", state.product.name);
         formData.append("productSize", state.product.size);
-        formData.append("productPrice", state.product.price)
+        formData.append("productPrice", state.product.price)  
         formData.append("selectCategory", state.product.category);
         formData.append("stockQuantity", String(state.product.quantity));
         formData.append("brandName", state.product.brand);
@@ -139,7 +139,7 @@
         <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-100 rounded-3xl p-5 md:p-8 shadow-sm">
           <h3 className="text-xl md:text-2xl font-bold text-green-700 mb-6">
             Product Details
-          </h3>
+          </h3> 
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-700">
             {/* LEFT */}

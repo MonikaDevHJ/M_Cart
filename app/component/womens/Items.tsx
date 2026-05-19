@@ -5,9 +5,12 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 type Product = {
   id: string;
-  name: string;
-  price: number;
-  stock: number;
+
+  productImage: string;
+  productName: string;
+  productPrice: number;
+  productSize: String;
+  stockQuantity: number;
   image_url: string;
 };
 
@@ -31,9 +34,7 @@ const Items = () => {
 
   const toggleWishlist = (id: string) => {
     setWishlist((prev) =>
-      prev.includes(id)
-        ? prev.filter((item) => item !== id)
-        : [...prev, id]
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
   };
 
@@ -52,8 +53,8 @@ const Items = () => {
               <div className="relative border border-r-fuchsia-600 ">
                 <div className="w-60 h-50 flex items-center justify-center rounded-xl overflow-hidden">
                   <img
-                    src={item.image_url || "https://via.placeholder.com/150"}
-                    alt={item.name}
+                    src={item.productImage || "https://via.placeholder.com/150"}
+                    alt={item.productName}
                     className="object-cover h-full w-full rounded-xl"
                   />
                 </div>
@@ -73,8 +74,24 @@ const Items = () => {
 
               {/* Details */}
               <div className="mt-6 flex justify-between ">
-                <p className="font-bold text-xl">{item.name}</p>
-                <p className="text-gray-900 text-lg">₹ {item.price}</p>
+                <p className="font-bold text-xl">{item.productName}</p>
+                <p className="text-gray-900 text-lg">₹ {item.productPrice}</p>
+              </div>
+              <div className="mt-1 flex items-center justify-between">
+                {/* Product Size */}
+                <p className="text-gray-900 text-lg font-medium">
+                  Size: {item.productSize}
+                </p>
+
+                {/* Ratings */}
+                <div className="flex items-center gap-1">
+                  <span className="text-yellow-400 text-lg">★</span>
+                  <span className="text-sm font-semibold text-gray-700">
+                    4.5
+                  </span>
+
+                  <span className="text-xs text-gray-500">(120 Reviews)</span>
+                </div>
               </div>
 
               {/* Button */}
