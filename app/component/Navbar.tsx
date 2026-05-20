@@ -59,10 +59,13 @@ const Navbar = () => {
               Buyer
             </Link>
 
-            <button className="flex items-center gap-2 bg-fuchsia-600 text-white px-4 py-2 rounded-full hover:bg-fuchsia-700 transition">
+            <Link
+              href="cart"
+              className="flex items-center gap-2 bg-fuchsia-600 text-white px-4 py-2 rounded-full hover:bg-fuchsia-700 transition"
+            >
               <ShoppingCart size={18} />
               Cart
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -96,7 +99,6 @@ const Navbar = () => {
             Buyer
           </button>
 
-         
           <button className="flex items-center gap-2 bg-fuchsia-600 text-white px-4 py-2 rounded-full w-fit">
             <ShoppingCart size={18} />
             Cart
