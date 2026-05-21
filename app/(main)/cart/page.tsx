@@ -1,4 +1,4 @@
-import Item from "../../component/cart/Item"
+import Item from "../../component/cart/CartItem"
 import Amount from "../../component/cart/Amount"
 
 

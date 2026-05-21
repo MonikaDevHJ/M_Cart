@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import Link from "next/link";
 
 type Product = {
   id: string;
@@ -17,6 +18,7 @@ type Product = {
 const Items = () => {
   const [items, setItems] = useState<Product[]>([]);
   const [wishlist, setWishlist] = useState<string[]>([]);
+  const [addCart, setAddedCart] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -36,6 +38,13 @@ const Items = () => {
     setWishlist((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
+  };
+
+  const itemAddedToCart = (id: string) => {
+    // Check if Already Added
+    if (!addCart.includes(id)) {
+      setAddedCart((prev) => [...prev, id]);
+    }
   };
 
   return (
@@ -95,8 +104,17 @@ const Items = () => {
               </div>
 
               {/* Button */}
-              <button className="mt-4 w-full bg-fuchsia-600 text-white py-2 rounded-lg hover:bg-fuchsia-700 transition">
-                Add to Cart
+              <button
+                onClick={() => itemAddedToCart(item.id)}
+                className={`mt-4 w-full p-2 rounded-lg transition text-white font-semibold ${
+                  addCart.includes(item.id)
+                    ? "bg-green-600"
+                    : "bg-fuchsia-600 hover:bg-fuchsia-700"
+                }`}
+              >
+                {addCart.includes(item.id)
+                  ? "Item Added In Cart ✅"
+                  : "Add To Cart"}
               </button>
             </div>
           );
