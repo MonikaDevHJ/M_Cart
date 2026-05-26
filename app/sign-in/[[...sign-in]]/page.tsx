@@ -17,7 +17,7 @@ export default function Page() {
   if (isSignedIn) {
     return <p>Redirecting...</p>;
   }
-
+  
   return (
     <div className="flex justify-center items-center min-h-screen">
       <SignIn />
