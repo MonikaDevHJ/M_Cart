@@ -1,9 +1,7 @@
 "use client";
 
 const Filter = () => {
-
-const Category = ["Ideal Items","Childresn Items", "Books", "Pens", ]
-
+  const Category = ["Ideal Items", "Childresn Items", "Books", "Pens"];
 
   return (
     <div className="w-full bg-white border border-gray-200 rounded-2xl shadow-sm p-4 sm:p-5 lg:p-6 sticky top-6">
@@ -17,16 +15,27 @@ const Category = ["Ideal Items","Childresn Items", "Books", "Pens", ]
 
       {/* Category */}
       <div className="bodrer-b  py-4">
-        <p className="font-semibold text-gray-800 text-sm tracking-wide">CATEGORY</p>
+        <p className="font-semibold text-gray-800 text-sm tracking-wide">
+          CATEGORY
+        </p>
 
-        <div>
-            {
-
-            }
+        <div className="flex flex-col gap-2 mt-3 text-gray-600 text-sm">
+          {Category.map((cat, index) => (
+            <label
+              key={index}
+              className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600 transition"
+            >
+              <input
+                type="checkbox"
+                name=""
+                id=""
+                className="accent-fuchsia-600"
+              />
+              {cat}
+            </label>
+          ))}
         </div>
-
       </div>
-
     </div>
   );
 };
