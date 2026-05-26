@@ -1,8 +1,14 @@
 "use client";
 
+import { useState } from "react";
+
 const Filter = () => {
   const Category = ["Ideal Items", "Childresn Items", "Books", "Pens"];
+    const occasions = ["Casual", "Party", "Formal", "Naming Cermony"];
 
+
+    const [openOccasion, setOpenOccasion] = useState(true);
+  
   return (
     <div className="w-full bg-white border border-gray-200 rounded-2xl shadow-sm p-4 sm:p-5 lg:p-6 sticky top-6">
       <div className="flex items-center justify-between border-b pb-4 mb-4">
@@ -35,6 +41,47 @@ const Filter = () => {
             </label>
           ))}
         </div>
+      </div>
+
+      {/* Occasion */}
+        <div className="border-b py-4">
+
+        <button
+          onClick={() => setOpenOccasion(!openOccasion)}
+          className="flex w-full items-center justify-between"
+        >
+          <p className="font-semibold text-gray-800 text-sm tracking-wide">
+            OCCASION
+          </p>
+
+          <span
+            className={`transition-transform duration-300 text-gray-500 ${
+              openOccasion ? "rotate-180" : ""
+            }`}
+          >
+            ▼
+          </span>
+        </button>
+
+        {openOccasion && (
+          <div className="flex flex-col gap-2 mt-3 text-gray-600 text-sm">
+
+            {occasions.map((item, index) => (
+              <label
+                key={index}
+                className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600 transition"
+              >
+                <input
+                  type="checkbox"
+                  className="accent-fuchsia-600"
+                />
+                {item}
+              </label>
+            ))}
+
+          </div>
+        )}
+
       </div>
     </div>
   );
