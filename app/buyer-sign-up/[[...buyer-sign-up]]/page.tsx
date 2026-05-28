@@ -5,9 +5,7 @@ import { SignUp } from "@clerk/nextjs";
 export default function Page() {
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <SignUp
-        forceRedirectUrl="/seller-save"
-      />
+      <SignUp forceRedirectUrl="/buyer-save" />
     </div>
   );
 }

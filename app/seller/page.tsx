@@ -1,17 +1,27 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { prisma } from "@/lib/prisma";
 
 import SellerGraph from "../component/seller/dashboard/SellerGraph";
 import SellerRecentOrder from "../component/seller/dashboard/SellerRecentOrder";
 import SellerCard from "../component/seller/dashboard/SellerCard";
 import SellerNavbar from "../component/seller/dashboard/SellerNavbar";
 export default async function Seller() {
-const { userId } = await auth();
+  const { userId } = await auth();
 
   if (!userId) {
     redirect("/sign-in");
   }
 
+  const user = await prisma.user.findUnique({
+    where: {
+      clerkId: userId
+    }
+  });
+
+  // if (user?.role !== "seller") {
+  //   redirect("/");
+  // }
   return (
     <div className="">
       <div className="">
