@@ -34,6 +34,18 @@ export async function POST() {
       });
     }
 
+
+    const existingEmail = await prisma.user.findUnique({
+      where : {
+        email : user.emailAddresses[0].emailAddress
+      }
+    });
+
+    if(existingEmail){
+      return NextResponse.json({
+        message:`You Already register as ${existingEmail.role}`
+      })
+    }
     // Create Seller
     await prisma.user.create({
       data: {

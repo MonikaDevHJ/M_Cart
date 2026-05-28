@@ -1,12 +1,15 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 
-export default function BuyerSavePage() {
+export default function SellerSavePage() {
+
+  const [error, setError] = useState("");
 
   useEffect(() => {
 
-    const saveBuyer = async () => {
+    const saveSeller = async () => {
 
       const response = await fetch("/api/create-buyer", {
         method: "POST",
@@ -16,16 +19,46 @@ export default function BuyerSavePage() {
 
       console.log(data);
 
+      // IF ERROR
+      if (
+        data.message.includes("already")
+      ) {
+        setError(data.message);
+        return;
+      }
+
+      // SUCCESS
       window.location.href = "/buyer";
     };
 
-    saveBuyer();
+    saveSeller();
 
   }, []);
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <h1>Creating Buyer Account...</h1>
+    <div className="flex flex-col justify-center items-center min-h-screen gap-4">
+
+      {error ? (
+        <>
+          <h1 className="text-red-500 text-xl font-bold">
+            {error}
+          </h1>
+
+          <p>
+            Please login with another email as buyer.
+          </p>
+
+          <Link
+            href="/seller"
+            className="bg-fuchsia-600 text-white px-4 py-2 rounded-lg"
+          >
+            Go Back to Seller
+          </Link>
+        </>
+      ) : (
+        <h1>Creating Seller Account...</h1>
+      )}
+
     </div>
   );
 }
