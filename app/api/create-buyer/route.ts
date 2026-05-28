@@ -9,7 +9,7 @@ export async function POST() {
 
     if (!userId) {
       return NextResponse.json({
-        message: "Unauthorized",
+        message: "Unauthorized"
       });
     }
 
@@ -17,40 +17,50 @@ export async function POST() {
 
     if (!user) {
       return NextResponse.json({
-        message: "User not found",
+        message: "User not found"
       });
     }
 
     // Check already exists
     const existingUser = await prisma.user.findUnique({
       where: {
-        clerkId: userId,
-      },
+        clerkId: userId
+      }
     });
 
     if (existingUser) {
       return NextResponse.json({
-        message: "Buyer already exists",
+        message: "Seller already exists"
       });
     }
 
+    const existingEmail = await prisma.user.findUnique({
+      where: {
+        email: user.emailAddresses[0].emailAddress
+      }
+    });
+    if (existingEmail) {
+      return NextResponse.json({
+        message: `You Already register as ${existingEmail.role}`
+      });
+    }
     // Create Seller
     await prisma.user.create({
       data: {
         clerkId: userId,
         email: user.emailAddresses[0].emailAddress,
-        role: "Buyer",
-      },
+        role: "buyer"
+      }
     });
 
     return NextResponse.json({
-      message: "Buyer  created successfully",
+      message: "Buyer  created successfully"
     });
   } catch (error) {
     console.log(error);
 
     return NextResponse.json({
-      message: "Something went wrong",
+      message: "Something went wrong"
     });
   }
 }
