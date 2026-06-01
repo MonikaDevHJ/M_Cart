@@ -53,7 +53,7 @@ const Navbar = () => {
               Seller
             </Link>
             <Link
-              href="/buyer-sign-up"
+              href="/buyer"
               className="hover:text-fuchsia-600 font-bold text-xl transition"
             >
               Buyer
