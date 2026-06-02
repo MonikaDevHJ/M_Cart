@@ -47,13 +47,13 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-20 font-medium text-gray-700">
             <Link
-              href="/seller"
+              href="/seller-signup"
               className="hover:text-fuchsia-600 font-bold text-xl transition"
             >
               Seller
             </Link>
             <Link
-              href="/buyer"
+              href="/buyer-signup"
               className="hover:text-fuchsia-600 font-bold text-xl transition"
             >
               Buyer
