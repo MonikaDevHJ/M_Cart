@@ -16,6 +16,10 @@ const SellerNavbar = () => {
 
         {/* Right Side */}
         <div className="flex items-center gap-3 sm:gap-5">
+           {/* Logout Button */}
+           <div className="">
+            <button className="bg-fuchsia-500 hover:bg-fuchsia-700 p-3  border-b-fuchsia-500 rounded-4xl">Logout</button>
+           </div>
           
           {/* Notification Icon */}
           <div className="cursor-pointer">
