@@ -15,9 +15,31 @@ const SellerNavbar = () => {
     });
   };
 
-  const deleteAccount = ()=>{
-    
+  const deleteAccount = async () => {
+
+  const confirmDelete = window.confirm(
+    "Are you sure you want to delete your account?"
+  );
+
+  if (!confirmDelete) return;
+
+  const response = await fetch(
+    "/api/delete-account",
+    {
+      method: "DELETE"
+    }
+  );
+
+  const data = await response.json();
+
+  if (data.success) {
+    alert("Account deleted successfully");
+
+    window.location.href = "/";
+  } else {
+    alert(data.message);
   }
+};
 
   return (
     <div className=" px-3 sm:px-5">
@@ -49,7 +71,7 @@ const SellerNavbar = () => {
             <button 
             onClick={deleteAccount}
             className="bg-red-600 hover:bg-red-500 p-3  border-red-600 border-2 rounded-4xl">
-              Delete
+              Delete Account
 
             </button>
 
@@ -78,6 +100,3 @@ const SellerNavbar = () => {
 
 export default SellerNavbar;
 
-function signOut(arg0: { redirect: string }) {
-  throw new Error("Function not implemented.");
-}
