@@ -3,8 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function DELETE() {
+  console.log("DELETE API HIT");
   try {
-
     const { userId } = await auth();
 
     if (!userId) {
@@ -28,11 +28,12 @@ export async function DELETE() {
     }
 
     // Delete Products
-    await prisma.product.deleteMany({
+    const deletedProduct = await prisma.product.deleteMany({
       where: {
         email: user.email
       }
     });
+    console.log(deletedProduct);
 
     // Delete User
     await prisma.user.delete({
@@ -43,22 +44,21 @@ export async function DELETE() {
 
     // Delete Clerk Account
     const clerk = await clerkClient();
+    console.log("Deleting Clerk User:", userId);
 
     await clerk.users.deleteUser(userId);
+    console.log("Clerk User Deleted");
 
     return NextResponse.json({
       success: true,
       message: "Account deleted successfully"
     });
-
   } catch (error) {
-
     console.log(error);
 
     return NextResponse.json({
       success: false,
       message: "Something went wrong"
     });
-
   }
 }
