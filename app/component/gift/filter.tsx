@@ -5,6 +5,7 @@ import { useState } from "react";
 const Filter = () => {
   const Category = ["Ideal Items", "Childresn Items", "Books", "Pens"];
     const occasions = ["Casual", "Party", "Formal", "Naming Cermony"];
+    const prices = ["0-500", "500-1000", "1000-2000", "2000-3000","3000-4000"]
 
 
     const [openOccasion, setOpenOccasion] = useState(true);
@@ -82,6 +83,27 @@ const Filter = () => {
           </div>
         )}
 
+      </div>
+
+      {/* Prices */}
+         <div className="border-b py-4">
+        <p className="font-semibold text-gray-800 text-sm tracking-wide">
+          PRICE
+        </p>
+
+        <div className="mt-2">
+          {
+            prices.map((price,index)=>(
+              <label  key ={index} className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
+                <input type="radio" className="accent-fuchsia-600"/>
+               ₹ {price}
+              </label>
+
+            ))}
+        </div>
+
+      
+     
       </div>
     </div>
   );
