@@ -4,12 +4,19 @@ import { useState } from "react";
 
 const Filter = () => {
   const Category = ["Ideal Items", "Childresn Items", "Books", "Pens"];
-    const occasions = ["Casual", "Party", "Formal", "Naming Cermony"];
-    const prices = ["0-500", "500-1000", "1000-2000", "2000-3000","3000-4000"]
+  const occasions = ["Casual", "Party", "Formal", "Naming Cermony"];
+  const prices = ["0-500", "500-1000", "1000-2000", "2000-3000", "3000-4000"];
+  const Brands = [
+    "ME & You",
+    "MDAKK",
+    " Regallo",
+    "Wagwan",
+    "AlwaysGift",
+    "Love and Joy"
+  ];
 
+  const [openOccasion, setOpenOccasion] = useState(true);
 
-    const [openOccasion, setOpenOccasion] = useState(true);
-  
   return (
     <div className="w-full bg-white border border-gray-200 rounded-2xl shadow-sm p-4 sm:p-5 lg:p-6 sticky top-6">
       <div className="flex items-center justify-between border-b pb-4 mb-4">
@@ -45,8 +52,7 @@ const Filter = () => {
       </div>
 
       {/* Occasion */}
-        <div className="border-b py-4">
-
+      <div className="border-b py-4">
         <button
           onClick={() => setOpenOccasion(!openOccasion)}
           className="flex w-full items-center justify-between"
@@ -66,44 +72,55 @@ const Filter = () => {
 
         {openOccasion && (
           <div className="flex flex-col gap-2 mt-3 text-gray-600 text-sm">
-
             {occasions.map((item, index) => (
               <label
                 key={index}
                 className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600 transition"
               >
-                <input
-                  type="checkbox"
-                  className="accent-fuchsia-600"
-                />
+                <input type="checkbox" className="accent-fuchsia-600" />
                 {item}
               </label>
             ))}
-
           </div>
         )}
-
       </div>
 
       {/* Prices */}
-         <div className="border-b py-4">
+      <div className="border-b py-4">
         <p className="font-semibold text-gray-800 text-sm tracking-wide">
           PRICE
         </p>
 
         <div className="mt-2">
-          {
-            prices.map((price,index)=>(
-              <label  key ={index} className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600">
-                <input type="radio" className="accent-fuchsia-600"/>
-               ₹ {price}
-              </label>
+          {prices.map((price, index) => (
+            <label
+              key={index}
+              className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600"
+            >
+              <input type="radio" className="accent-fuchsia-600" />₹ {price}
+            </label>
+          ))}
+        </div>
+      </div>
 
-            ))}
+      {/* Brand */}
+      <div className="mt-2">
+        <div>
+          <p className="font-semibold text-gray-800 text-sm tracking-wide">
+            SELECT BRAND
+          </p>
         </div>
 
-      
-     
+        <div className="mt-2">
+          {Brands.map((brand, index) => (
+            <label
+              key={index}
+              className="flex items-center gap-3 cursor-pointer hover:text-fuchsia-600"
+            >
+              <input type="checkbox" className="accent-fuchsia-600" />₹ {brand}
+            </label>
+          ))}
+        </div>
       </div>
     </div>
   );
