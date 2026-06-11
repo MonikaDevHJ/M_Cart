@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import Link from "next/link";
 
 type Product = {
   id: string;

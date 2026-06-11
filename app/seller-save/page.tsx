@@ -61,7 +61,7 @@ export default function SellerSavePage() {
           <div className="animate-spin rounded-full h-12 w-12 border-4 border-fuchsia-600 border-t-transparent mx-auto mb-4"></div>
 
           <h1 className="text-xl font-semibold text-gray-800">
-            Creating Buyer Account...
+            Creating Seller Account...
           </h1>
 
           <p className="text-gray-500 mt-2">
