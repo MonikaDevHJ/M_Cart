@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/cartSlice";
+import { it } from "node:test";
 
 type Product = {
   id: string;
@@ -11,7 +12,7 @@ type Product = {
   productImage: string;
   productName: string;
   productPrice: number;
-  productSize: String;
+  productSize: string;
   stockQuantity: number;
   image_url: string;
 };
@@ -43,10 +44,13 @@ const Items = () => {
   };
 
   const itemAddedToCart = (item: Product) => {
+    console.log("Button Clicked")
     // Check if Already Added
     if (!addCart.includes(item.id)) {
       setAddedCart((prev) => [...prev, item.id]);
+      // this line Will Sending the Wholde Product To Store
       dispatch(addToCart(item))
+      console.log("Disptahced Product", item)
     }
   };
 
