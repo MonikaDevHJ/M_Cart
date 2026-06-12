@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/redux/cartSlice";
 
 type Product = {
   id: string;
@@ -18,6 +20,7 @@ const Items = () => {
   const [items, setItems] = useState<Product[]>([]);
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [addCart, setAddedCart] = useState<string[]>([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -39,10 +42,11 @@ const Items = () => {
     );
   };
 
-  const itemAddedToCart = (id: string) => {
+  const itemAddedToCart = (item: Product) => {
     // Check if Already Added
-    if (!addCart.includes(id)) {
-      setAddedCart((prev) => [...prev, id]);
+    if (!addCart.includes(item.id)) {
+      setAddedCart((prev) => [...prev, item.id]);
+      dispatch(addToCart(item))
     }
   };
 
@@ -104,7 +108,7 @@ const Items = () => {
 
               {/* Button */}
               <button
-                onClick={() => itemAddedToCart(item.id)}
+                onClick={() => itemAddedToCart(item)}
                 className={`mt-4 w-full p-2 rounded-lg transition text-white font-semibold ${
                   addCart.includes(item.id)
                     ? "bg-green-600"
