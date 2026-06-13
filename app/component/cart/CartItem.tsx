@@ -144,7 +144,7 @@ const Item = () => {
                   </div>
 
                   <div>
-                    <p>Size: {item.product}</p>
+                    <p>Size: {item.productSize}</p>
                   </div>
 
                   {/* DELIVERY */}
