@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/cartSlice";
-import { it } from "node:test";
 
 type Product = {
   id: string;
