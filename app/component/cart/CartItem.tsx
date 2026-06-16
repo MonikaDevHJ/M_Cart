@@ -1,15 +1,33 @@
 "use client";
 
 import Image from "next/image";
-import mcartlogo4 from "../../../public/assets/mcartlogo4.png";
 
 import { Trash2, Heart, ShoppingBag, Plus, Minus, Star } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 
 const Item = () => {
   const [quantity, setQuantity] = useState(1);
+
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        const res = await fetch("/api/cart");
+        const data = await res.json();
+
+        console.log(data);
+
+        setCartItems(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchCartItems();
+  }, []);
 
   // Increase
   const increaseQuantity = () => {
@@ -23,7 +41,7 @@ const Item = () => {
       setQuantity(quantity - 1);
     }
   };
-  const cartItems = useSelector((state: RootState) => state.cart.items);
+  // const cartItems = useSelector((state: RootState) => state.cart.items);
 
   console.log(cartItems);
 
@@ -70,11 +88,10 @@ const Item = () => {
                 {/* IMAGE */}
                 <div className="bg-gray-100 rounded-3xl p-5 flex justify-center items-center">
                   <Image
-                    src={item.productImage}
-                    alt={item.productName}
-                    height={290}
+                    src={item.product.productImage}
+                    alt={item.product.productName}
                     width={290}
-                    className="object-contain hover:scale-105 transition duration-300"
+                    height={290}
                   />
                 </div>
 
@@ -110,7 +127,7 @@ const Item = () => {
                 <div className="ml-5">
                   {/* TITLE */}
                   <h1 className="text-xl lg:text-1xl md:text-3xl font-bold text-gray-800 leading-snug">
-                    {item.productName}
+                    {item.product.productName}
                   </h1>
 
                   {/* SUBTITLE */}
@@ -133,7 +150,7 @@ const Item = () => {
                   {/* PRICE */}
                   <div className="flex flex-wrap items-center gap-4 mt-3">
                     <h2 className="text-2xl lg:text-xl md:text-4xl font-bold text-gray-900">
-                      ₹ {item.productPrice}
+                      ₹ {item.product.productPrice}
                     </h2>
 
                     <p className="line-through text-gray-400 text-lg">
@@ -144,7 +161,7 @@ const Item = () => {
                   </div>
 
                   <div>
-                    <p>Size: {item.productSize}</p>
+                    <p>Size: {item.product.productSize}</p>{" "}
                   </div>
 
                   {/* DELIVERY */}
