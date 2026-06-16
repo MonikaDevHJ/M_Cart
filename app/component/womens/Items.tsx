@@ -36,40 +36,56 @@ const Items = () => {
     fetchItem();
   }, []);
 
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        const res = await fetch("/api/cart");
+        const data = await res.json();
+
+        const cartProductIds = data.map((item: any) => item.productId);
+
+        setAddedCart(cartProductIds);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchCartItems();
+  }, []);
+
   const toggleWishlist = (id: string) => {
     setWishlist((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
   };
 
-const itemAddedToCart = async (item: Product) => {
+  const itemAddedToCart = async (item: Product) => {
+    if (addCart.includes(item.id)) {
+      alert("Item already added to cart");
+      return;
+    }
 
-  if (addCart.includes(item.id)) {
-    return;
-  }
+    try {
+      const res = await fetch("/api/cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          userId: "TEMP_USER_ID",
+          productId: item.id
+        })
+      });
 
-  try {
-    const res = await fetch("/api/cart", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: "TEMP_USER_ID",
-        productId: item.id,
-      }),
-    });
+      const data = await res.json();
 
-    const data = await res.json();
+      console.log(data);
 
-    console.log(data);
-
-    setAddedCart((prev) => [...prev, item.id]);
-
-  } catch (error) {
-    console.log(error);
-  }
-};
+      setAddedCart((prev) => [...prev, item.id]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="h-full rounded-2xl p-2">
@@ -129,10 +145,11 @@ const itemAddedToCart = async (item: Product) => {
 
               {/* Button */}
               <button
+                disabled={addCart.includes(item.id)}
                 onClick={() => itemAddedToCart(item)}
                 className={`mt-4 w-full p-2 rounded-lg transition text-white font-semibold ${
                   addCart.includes(item.id)
-                    ? "bg-green-600"
+                    ? "bg-green-600 cursor-not-allowed"
                     : "bg-fuchsia-600 hover:bg-fuchsia-700"
                 }`}
               >
