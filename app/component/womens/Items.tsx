@@ -42,16 +42,34 @@ const Items = () => {
     );
   };
 
-  const itemAddedToCart = (item: Product) => {
-    console.log("Button Clicked")
-    // Check if Already Added
-    if (!addCart.includes(item.id)) {
-      setAddedCart((prev) => [...prev, item.id]);
-      // this line Will Sending the Wholde Product To Store
-      dispatch(addToCart(item))
-      console.log("Disptahced Product", item)
-    }
-  };
+const itemAddedToCart = async (item: Product) => {
+
+  if (addCart.includes(item.id)) {
+    return;
+  }
+
+  try {
+    const res = await fetch("/api/cart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: "TEMP_USER_ID",
+        productId: item.id,
+      }),
+    });
+
+    const data = await res.json();
+
+    console.log(data);
+
+    setAddedCart((prev) => [...prev, item.id]);
+
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   return (
     <div className="h-full rounded-2xl p-2">
