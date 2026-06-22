@@ -1,5 +1,8 @@
 import { redirect } from "next/navigation";
 import { getUserRole } from "@/lib/getUserRole";
+import BuyerNavbar from "../component/buyer/dashboard/BuyerNavbar";
+import BuyerCard from "../component/buyer/dashboard/BuyerCard";
+import RecentOrder from "../component/buyer/dashboard/RecentOrder";
 
 export default async function Buyer() {
   const user = await getUserRole();
@@ -13,7 +16,11 @@ export default async function Buyer() {
 
   return (
     <div>
+      <BuyerNavbar/>
       <p className="text-black text-2xl font-bold">Buyer Dashboard</p>
+      <BuyerCard/>
+      <RecentOrder/>
+
     </div>
   );
 }
