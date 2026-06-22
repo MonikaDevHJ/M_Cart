@@ -1,13 +1,35 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ShoppingCart, Menu, X, Search } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
 import mcartlogo4 from "../../public/assets/mcartlogo4.png";
+import { spawn } from "child_process";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(() => {
+    const fetchCartCount = async () => {
+      try {
+        const res = await fetch("/api/cart");
+
+        const data = await res.json();
+
+        setCartCount(data.length);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchCartCount();
+    window.addEventListener("cartUpdated", fetchCartCount);
+
+    return () => {
+      window.removeEventListener("cartUpdated", fetchCartCount);
+    };
+  }, []);
 
   return (
     <nav className="sticky top-0 z-50 bg-white shadow-md w-full border-2 rounded-4xl border-fuchsia-700">
@@ -60,10 +82,15 @@ const Navbar = () => {
             </Link>
 
             <Link
-              href="cart"
-              className="flex items-center gap-2 bg-fuchsia-600 text-white px-4 py-2 rounded-full hover:bg-fuchsia-700 transition"
+              href="/cart"
+              className="relative flex items-center gap-2 bg-fuchsia-600 text-white px-4 py-2 rounded-full hover:bg-fuchsia-700 transition"
             >
               <ShoppingCart size={18} />
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
               Cart
             </Link>
           </div>
@@ -95,9 +122,12 @@ const Navbar = () => {
             Seller
           </Link>
 
-          <button className="block w-full text-left hover:text-fuchsia-600">
+          <Link
+            href="/buyer-signup"
+            className="hover:text-fuchsia-600 font-bold text-xl transition"
+          >
             Buyer
-          </button>
+          </Link>
 
           <button className="flex items-center gap-2 bg-fuchsia-600 text-white px-4 py-2 rounded-full w-fit">
             <ShoppingCart size={18} />
