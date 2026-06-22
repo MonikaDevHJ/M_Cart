@@ -36,3 +36,9 @@ export default function RootLayout({
     </ClerkProvider>
   );
 }
+
+
+
+// Root layout (layout.tsx) in Next.js App Router is a persistent global wrapper that defines the overall structure of the application. 
+// It wraps all pages with shared elements like authentication providers, state management, fonts, metadata, and common UI such as navbar and footer,
+//  ensuring that only the page content changes while the layout and state remain consistent across navigation.

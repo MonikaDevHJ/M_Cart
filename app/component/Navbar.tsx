@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 
 import mcartlogo4 from "../../public/assets/mcartlogo4.png";
-import { spawn } from "child_process";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
