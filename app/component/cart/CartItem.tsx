@@ -4,8 +4,7 @@ import Image from "next/image";
 
 import { Trash2, Heart, ShoppingBag, Plus, Minus, Star } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+
 
 const Item = () => {
   const [quantity, setQuantity] = useState(1);
