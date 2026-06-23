@@ -20,7 +20,7 @@ const Items = () => {
   const [items, setItems] = useState<Product[]>([]);
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [addCart, setAddedCart] = useState<string[]>([]);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -80,8 +80,10 @@ const Items = () => {
       const data = await res.json();
 
       console.log(data);
-
+     
+       dispatch(addToCart(item))
       setAddedCart((prev) => [...prev, item.id]);
+      window.dispatchEvent(new Event("cartUpdated"))
     } catch (error) {
       console.log(error);
     }

@@ -3,33 +3,18 @@ import { useEffect, useState } from "react";
 import { ShoppingCart, Menu, X, Search } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 import mcartlogo4 from "../../public/assets/mcartlogo4.png";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+  console.log(cartItems);
 
-  useEffect(() => {
-    const fetchCartCount = async () => {
-      try {
-        const res = await fetch("/api/cart");
-
-        const data = await res.json();
-
-        setCartCount(data.length);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchCartCount();
-    window.addEventListener("cartUpdated", fetchCartCount);
-
-    return () => {
-      window.removeEventListener("cartUpdated", fetchCartCount);
-    };
-  }, []);
-
+  const cartCount = cartItems.length;
+  
   return (
     <nav className="sticky top-0 z-50 bg-white shadow-md w-full border-2 rounded-4xl border-fuchsia-700">
       {" "}
