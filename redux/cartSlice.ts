@@ -10,7 +10,6 @@ const initialState = {
 // Cart Slice
 // All cart-related logic lives here
 const cartSlice = createSlice({
-
   // Unique name for this slice
   name: "cart",
 
@@ -19,15 +18,16 @@ const cartSlice = createSlice({
 
   // Reducers = Actions + State Update Logic
   reducers: {
-
     // Add Product To Cart
     addToCart: (state, action) => {
-
       // action.payload contains product data
       // state.items is cart array
 
       // Add new product into cart array
       state.items.push(action.payload);
+    },
+    setCartItems: (state, action) => {
+      state.items = action.payload;
     }
   }
 });
@@ -35,7 +35,7 @@ const cartSlice = createSlice({
 // Export Action
 // Used like:
 // dispatch(addToCart(product))
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, setCartItems } = cartSlice.actions;
 
 // Export Reducer
 // Store needs this reducer
