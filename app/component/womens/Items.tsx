@@ -72,7 +72,6 @@ const Items = () => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          userId: "TEMP_USER_ID",
           productId: item.id
         })
       });

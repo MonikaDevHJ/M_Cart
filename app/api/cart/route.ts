@@ -1,7 +1,14 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { auth } from "@clerk/nextjs/server";
 
 export async function POST(req: Request) {
+  const { userId } = await auth();
+
+  if (!userId) {
+    return NextResponse.json({ message: "Please login" }, { status: 401 });
+  }
+
   try {
     const body = await req.json();
 
@@ -9,11 +16,10 @@ export async function POST(req: Request) {
 
     const cartItem = await prisma.cart.create({
       data: {
-        userId: body.userId,
+        userId,
         productId: body.productId,
-
-        quantity: 1,
-      },
+        quantity: 1
+      }
     });
 
     console.log("CART CREATED:", cartItem);
@@ -29,14 +35,22 @@ export async function POST(req: Request) {
   }
 }
 
-
-// Get items 
+// Get items
 export async function GET() {
   try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      return NextResponse.json([]);
+    }
+
     const cartItems = await prisma.cart.findMany({
-      include: {
-        product: true,
+      where: {
+        userId
       },
+      include: {
+        product: true
+      }
     });
 
     return NextResponse.json(cartItems);
