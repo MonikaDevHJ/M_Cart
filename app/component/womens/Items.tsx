@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/cartSlice";
+import { useUser } from "@clerk/nextjs";
+import Link from "next/link";
+import { Users } from "lucide-react";
 
 type Product = {
   id: string;
@@ -20,7 +23,8 @@ const Items = () => {
   const [items, setItems] = useState<Product[]>([]);
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [addCart, setAddedCart] = useState<string[]>([]);
-  const dispatch = useDispatch()
+  const [useRole, setUserRole] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -34,6 +38,23 @@ const Items = () => {
     };
 
     fetchItem();
+  }, []);
+
+  useEffect(() => {
+    const fetchUserRole = async () => {
+      try {
+        const res = await fetch("/api/user-role");
+        const data = await res.json();
+
+        if (data?.role) {
+          setUserRole(data.role);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchUserRole();
   }, []);
 
   useEffect(() => {
@@ -79,14 +100,17 @@ const Items = () => {
       const data = await res.json();
 
       console.log(data);
-     
-       dispatch(addToCart(item))
+
+      dispatch(addToCart(item));
       setAddedCart((prev) => [...prev, item.id]);
-      window.dispatchEvent(new Event("cartUpdated"))
+      window.dispatchEvent(new Event("cartUpdated"));
     } catch (error) {
       console.log(error);
     }
   };
+
+  const { isSignedIn } = useUser();
+  console.log("user Role", useRole);
 
   return (
     <div className="h-full rounded-2xl p-2">
@@ -145,19 +169,35 @@ const Items = () => {
               </div>
 
               {/* Button */}
-              <button
-                disabled={addCart.includes(item.id)}
-                onClick={() => itemAddedToCart(item)}
-                className={`mt-4 w-full p-2 rounded-lg transition text-white font-semibold ${
-                  addCart.includes(item.id)
-                    ? "bg-green-600 cursor-not-allowed"
-                    : "bg-fuchsia-600 hover:bg-fuchsia-700"
-                }`}
-              >
-                {addCart.includes(item.id)
-                  ? "Item Added In Cart ✅"
-                  : "Add To Cart"}
-              </button>
+
+              {!isSignedIn ? (
+                <Link href="/buyer-signup">
+                  <button className="mt-4 w-full p-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold">
+                    Login To Buy
+                  </button>
+                </Link>
+              ) : useRole === "seller" ? (
+                <button
+                  disabled
+                  className="mt-4 w-full p-2 rounded-lg bg-gray-500 cursor-not-allowed text-white font-semibold"
+                >
+                  Seller Cannot Buy
+                </button>
+              ) : (
+                <button
+                  disabled={addCart.includes(item.id)}
+                  onClick={() => itemAddedToCart(item)}
+                  className={`mt-4 w-full p-2 rounded-lg transition text-white font-semibold ${
+                    addCart.includes(item.id)
+                      ? "bg-green-600 cursor-not-allowed"
+                      : "bg-fuchsia-600 hover:bg-fuchsia-700"
+                  }`}
+                >
+                  {addCart.includes(item.id)
+                    ? "Item Added In Cart ✅"
+                    : "Add To Cart"}
+                </button>
+              )}
             </div>
           );
         })}
