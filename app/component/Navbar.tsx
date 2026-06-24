@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { UseDispatch } from "react-redux";
 import { setCartItems } from "@/redux/cartSlice";
 
 import mcartlogo4 from "../../public/assets/mcartlogo4.png";
@@ -23,7 +22,7 @@ const Navbar = () => {
       try {
         const res = await fetch("/api/cart");
         const data = await res.json();
-
+        //  Here redux also i have been used becauase of Instant UI i need in Butoo 
         dispatch(setCartItems(data));
       } catch (error) {
         console.log(error);
