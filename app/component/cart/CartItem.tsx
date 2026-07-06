@@ -45,19 +45,31 @@ const Item = () => {
       console.log(error);
     }
   };
-  
-  
+
   // Decrese
   const decreaseQuantity = async (id: string, currentQuantity: number) => {
     if (currentQuantity === 1) {
       return;
     }
+
     try {
-      body: JSON.stringify({
-        quantity: currentQuantity - 1
+      const res = await fetch(`/api/cart/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          quantity: currentQuantity - 1
+        })
       });
-    } catch(error) {
-      console.log(error)
+
+      const data = await res.json();
+
+      console.log(data);
+
+      await fetchCartItems();
+    } catch (error) {
+      console.log(error);
     }
   };
 
