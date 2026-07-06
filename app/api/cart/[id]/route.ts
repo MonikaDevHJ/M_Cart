@@ -20,3 +20,19 @@ export async function PATCH(
 
   return NextResponse.json(updatedCart);
 }
+
+
+export async function DELETE(
+  req: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params;
+
+  const deletedCart = await prisma.cart.delete({
+    where: {
+      id,
+    },
+  });
+
+  return NextResponse.json(deletedCart);
+}
