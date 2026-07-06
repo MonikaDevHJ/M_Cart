@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Trash2, Heart, ShoppingBag, Plus, Minus, Star } from "lucide-react";
 import { useEffect, useState } from "react";
 
-
 const Item = () => {
   const [quantity, setQuantity] = useState(1);
 
@@ -29,10 +28,25 @@ const Item = () => {
   }, []);
 
   // Increase
-  const increaseQuantity = () => {
-    setQuantity(quantity + 1);
-  };
+  const increaseQuantity = async (id: string, currentQuantity: number) => {
+    try {
+      const res = await fetch(`/api/cart/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          quantity: currentQuantity + 1
+        })
+      });
 
+      const data = await res.json();
+
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   // Decrese
   const decreaseQuantity = () => {
     // It will Prevent Negitive Value
@@ -107,11 +121,11 @@ const Item = () => {
                     </button>
 
                     <div className="border border-gray-300 px-6 py-2 rounded-xl font-semibold text-lg">
-                      {quantity}
+                      {item.quantity}
                     </div>
 
                     <button
-                      onClick={increaseQuantity}
+                      onClick={() => increaseQuantity(item.id, item.quantity)}
                       className="bg-gray-200 hover:bg-gray-300 p-3 rounded-xl transition"
                     >
                       <Plus size={18} />
