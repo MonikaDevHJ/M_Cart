@@ -6,24 +6,21 @@ import { Trash2, Heart, ShoppingBag, Plus, Minus, Star } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const Item = () => {
-  const [quantity, setQuantity] = useState(1);
-
   const [cartItems, setCartItems] = useState([]);
+  const fetchCartItems = async () => {
+    try {
+      const res = await fetch("/api/cart");
+      const data = await res.json();
+
+      console.log(data);
+
+      setCartItems(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const fetchCartItems = async () => {
-      try {
-        const res = await fetch("/api/cart");
-        const data = await res.json();
-
-        console.log(data);
-
-        setCartItems(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     fetchCartItems();
   }, []);
 
@@ -43,18 +40,26 @@ const Item = () => {
       const data = await res.json();
 
       console.log(data);
+      await fetchCartItems();
     } catch (error) {
       console.log(error);
     }
   };
+  
+  
   // Decrese
-  const decreaseQuantity = () => {
-    // It will Prevent Negitive Value
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
+  const decreaseQuantity = async (id: string, currentQuantity: number) => {
+    if (currentQuantity === 1) {
+      return;
+    }
+    try {
+      body: JSON.stringify({
+        quantity: currentQuantity - 1
+      });
+    } catch(error) {
+      console.log(error)
     }
   };
-  // const cartItems = useSelector((state: RootState) => state.cart.items);
 
   console.log(cartItems);
 
@@ -114,7 +119,7 @@ const Item = () => {
 
                   <div className="flex items-center gap-3">
                     <button
-                      onClick={decreaseQuantity}
+                      onClick={() => decreaseQuantity(item.id, item.quantity)}
                       className="bg-gray-200 hover:bg-gray-300 p-3 rounded-xl transition"
                     >
                       <Minus size={18} />
