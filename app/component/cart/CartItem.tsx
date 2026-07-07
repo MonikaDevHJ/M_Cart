@@ -7,6 +7,10 @@ import { useEffect, useState } from "react";
 
 const Item = () => {
   const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    fetchCartItems();
+  }, []);
   const fetchCartItems = async () => {
     try {
       const res = await fetch("/api/cart");
@@ -91,6 +95,16 @@ const Item = () => {
   };
 
   console.log(cartItems);
+
+  const totalMRP = cartItems.reduce((total: number, item: any) => {
+    return total + item.product.productPrice * item.quantity;
+  }, 0);
+
+  const deliveryFee = 0;
+  const platformFee = 50;
+  const discount = 2000; // Example
+
+  const totalAmount = totalMRP + platformFee + deliveryFee - discount;
 
   return (
     <div className="min-h-screen p-0.5 md:p-8">
