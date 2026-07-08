@@ -1,28 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 
-const Amount = () => {
-  const [cartItems, setCartItems] = useState<any[]>([]);
-
-  // Fetch Cart Items
-  const fetchCartItems = async () => {
-    try {
-      const res = await fetch("/api/cart");
-      const data = await res.json();
-
-      console.log(data);
-
-      setCartItems(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchCartItems();
-  }, []);
-
+const Amount = ({ cartItems }: any) => {
+  
   // Calculate Total MRP
   const totalMRP = cartItems.reduce((total: number, item: any) => {
     return total + item.product.productPrice * item.quantity;
@@ -32,17 +12,14 @@ const Amount = () => {
   const platformFee = 50;
   const discount = 2000; // Example
 
-  const totalAmount =
-    totalMRP + deliveryFee + platformFee - discount;
+  const totalAmount = totalMRP + deliveryFee + platformFee - discount;
 
   return (
     <div className="w-full">
       <div className="bg-white rounded-xl shadow-md p-5 sticky top-5">
         {/* Heading */}
         <div className="border-b pb-3 mb-4">
-          <h2 className="text-lg font-semibold text-gray-800">
-            Price Details
-          </h2>
+          <h2 className="text-lg font-semibold text-gray-800">Price Details</h2>
         </div>
 
         {/* Price Details */}
@@ -70,9 +47,7 @@ const Amount = () => {
           {/* Discount */}
           <div className="flex items-center justify-between text-sm sm:text-base">
             <p className="text-gray-600">Discount</p>
-            <p className="font-medium text-green-600">
-              - ₹{discount}
-            </p>
+            <p className="font-medium text-green-600">- ₹{discount}</p>
           </div>
         </div>
 
@@ -81,13 +56,9 @@ const Amount = () => {
 
         {/* Total */}
         <div className="flex items-center justify-between mb-5">
-          <p className="text-lg font-semibold text-gray-800">
-            Total Amount
-          </p>
+          <p className="text-lg font-semibold text-gray-800">Total Amount</p>
 
-          <p className="text-xl font-bold text-black">
-            ₹{totalAmount}
-          </p>
+          <p className="text-xl font-bold text-black">₹{totalAmount}</p>
         </div>
 
         {/* Savings */}
