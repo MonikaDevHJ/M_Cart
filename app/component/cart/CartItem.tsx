@@ -3,26 +3,13 @@
 import Image from "next/image";
 
 import { Trash2, Heart, ShoppingBag, Plus, Minus, Star } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-const Item = () => {
-  const [cartItems, setCartItems] = useState([]);
-
+const Item = ({ cartItems, fetchCartItems }: any) => {
   useEffect(() => {
     fetchCartItems();
   }, []);
-  const fetchCartItems = async () => {
-    try {
-      const res = await fetch("/api/cart");
-      const data = await res.json();
-
-      console.log(data);
-
-      setCartItems(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
 
   useEffect(() => {
     fetchCartItems();
