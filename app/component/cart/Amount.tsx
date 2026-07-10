@@ -1,8 +1,13 @@
 "use client";
 
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
-const Amount = ({ cartItems }: any) => {
-  
+const Amount = () => {
+  const cartItems = useSelector(
+    (state: RootState) => state.cart.items
+  );
+
   // Calculate Total MRP
   const totalMRP = cartItems.reduce((total: number, item: any) => {
     return total + item.product.productPrice * item.quantity;
@@ -10,10 +15,9 @@ const Amount = ({ cartItems }: any) => {
 
   const deliveryFee = 0;
   const platformFee = 50;
-  const discount = 2000; // Example
+  const discount = 2000;
 
   const totalAmount = totalMRP + deliveryFee + platformFee - discount;
-
   return (
     <div className="w-full">
       <div className="bg-white rounded-xl shadow-md p-5 sticky top-5">

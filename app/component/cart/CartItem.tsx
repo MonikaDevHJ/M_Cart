@@ -1,20 +1,16 @@
 "use client";
 
 import Image from "next/image";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 import { Trash2, Heart, ShoppingBag, Plus, Minus, Star } from "lucide-react";
-import { useEffect } from "react";
 
-const Item = ({ cartItems, fetchCartItems }: any) => {
-  useEffect(() => {
-    fetchCartItems();
-  }, []);
-  
+const Item = ({  fetchCartItems }: any) => {
 
-  useEffect(() => {
-    fetchCartItems();
-  }, []);
-
+  const cartItems = useSelector(
+  (state: RootState) => state.cart.items
+);
   // Increase
   const increaseQuantity = async (id: string, currentQuantity: number) => {
     try {
@@ -83,16 +79,7 @@ const Item = ({ cartItems, fetchCartItems }: any) => {
 
   console.log(cartItems);
 
-  const totalMRP = cartItems.reduce((total: number, item: any) => {
-    return total + item.product.productPrice * item.quantity;
-  }, 0);
-
-  const deliveryFee = 0;
-  const platformFee = 50;
-  const discount = 2000; // Example
-
-  const totalAmount = totalMRP + platformFee + deliveryFee - discount;
-
+ 
   return (
     <div className="min-h-screen p-0.5 md:p-8">
       {/* MAIN CONTAINER */}
