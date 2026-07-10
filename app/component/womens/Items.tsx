@@ -2,11 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { useDispatch } from "react-redux";
-import { addToCart } from "@/redux/cartSlice";
 import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
-import { Users } from "lucide-react";
 
 type Product = {
   id: string;
@@ -24,7 +21,6 @@ const Items = () => {
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [addCart, setAddedCart] = useState<string[]>([]);
   const [useRole, setUserRole] = useState("");
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -80,34 +76,37 @@ const Items = () => {
     );
   };
 
-  const itemAddedToCart = async (item: Product) => {
-    if (addCart.includes(item.id)) {
-      alert("Item already added to cart");
-      return;
-    }
+ const itemAddedToCart = async (item: Product) => {
+  if (addCart.includes(item.id)) {
+    alert("Item already added to cart");
+    return;
+  }
 
-    try {
-      const res = await fetch("/api/cart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          productId: item.id
-        })
-      });
+  try {
+    const res = await fetch("/api/cart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        productId: item.id,
+      }),
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      console.log(data);
+    console.log(data);
 
-      dispatch(addToCart(item));
-      setAddedCart((prev) => [...prev, item.id]);
-      window.dispatchEvent(new Event("cartUpdated"));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    // Just update button state
+    setAddedCart((prev) => [...prev, item.id]);
+
+    // Refresh navbar/cart page
+    window.dispatchEvent(new Event("cartUpdated"));
+
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   const { isSignedIn } = useUser();
   console.log("user Role", useRole);
