@@ -2,7 +2,12 @@
 
 import { useState } from "react";
 
-const AddressForm = () => {
+type AddressFormProps = {
+  fetchAddress: () => void;
+  closeForm: () => void;
+};
+
+const AddressForm = ({ fetchAddress, closeForm }: AddressFormProps) => {
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
@@ -22,6 +27,18 @@ const AddressForm = () => {
 
   const handleSubmit = async () => {
     try {
+      if (
+        !formData.fullName ||
+        !formData.phone ||
+        !formData.houseNo ||
+        !formData.area ||
+        !formData.city ||
+        !formData.state ||
+        !formData.pincode
+      ) {
+        alert("Please fill all fields.");
+        return;
+      }
       const res = await fetch("/api/buyeraddres", {
         method: "POST",
         headers: {
@@ -33,6 +50,14 @@ const AddressForm = () => {
       const data = await res.json();
 
       console.log(data);
+
+      if (res.ok) {
+        alert("Address saved successfully");
+        fetchAddress(); // Fetch latest address from DB
+        closeForm(); // Close the form
+      } else {
+        alert(data.message);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -108,7 +133,6 @@ const AddressForm = () => {
         </div>
 
         <div>
-
           <label className="block mb-2 font-medium">State</label>
 
           <input
@@ -136,8 +160,9 @@ const AddressForm = () => {
       </div>
 
       <div className="flex justify-end mt-8 gap-4">
-        <button className="px-6 py-3 rounded-xl border">Cancel</button>
-
+        <button onClick={closeForm} className="px-6 py-3 rounded-xl border">
+          Cancel
+        </button>
         <button
           onClick={handleSubmit}
           className="bg-fuchsia-600 hover:bg-fuchsia-700 text-white px-6 py-3 rounded-xl"
