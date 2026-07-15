@@ -31,7 +31,10 @@ const Address = () => {
     return (
       <>
         {showForm ? (
-          <AddressForm />
+          <AddressForm
+            fetchAddress={fetchAddress}
+            closeForm={() => setShowForm(false)}
+          />
         ) : (
           <div className="bg-white shadow-md border border-gray-200 rounded-3xl p-7">
             <div className="flex flex-col items-center justify-center gap-5">
