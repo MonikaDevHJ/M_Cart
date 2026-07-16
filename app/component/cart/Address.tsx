@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 const Address = () => {
   const [address, setAddress] = useState<any>(null);
   const [showForm, setShowForm] = useState(false);
+  const [edit, setEdit] = useState(false);
 
   const fetchAddress = async () => {
     try {
@@ -34,6 +35,7 @@ const Address = () => {
           <AddressForm
             fetchAddress={fetchAddress}
             closeForm={() => setShowForm(false)}
+            address={edit? address: undefined}
           />
         ) : (
           <div className="bg-white shadow-md border border-gray-200 rounded-3xl p-7">
@@ -45,7 +47,9 @@ const Address = () => {
               <p className="text-gray-500">Please add your delivery address.</p>
 
               <button
-                onClick={() => setShowForm(true)}
+                onClick={() => {
+                  setEdit(false);
+                  setShowForm(true)}}
                 className="bg-fuchsia-600 hover:bg-fuchsia-700 text-white px-6 py-3 rounded-2xl font-semibold transition"
               >
                 Add Address
@@ -80,7 +84,12 @@ const Address = () => {
         </div>
 
         <div>
-          <button className="bg-fuchsia-600 hover:bg-fuchsia-700 text-white px-6 py-3 rounded-2xl font-semibold shadow-md transition duration-300">
+          <button
+            onClick={() =>{ 
+              setEdit(true)
+              setShowForm(true)}}
+            className="bg-fuchsia-600 hover:bg-fuchsia-700 text-white px-6 py-3 rounded-2xl font-semibold shadow-md transition duration-300"
+          >
             Edit Address
           </button>
         </div>
