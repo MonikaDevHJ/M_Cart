@@ -35,7 +35,7 @@ const Address = () => {
           <AddressForm
             fetchAddress={fetchAddress}
             closeForm={() => setShowForm(false)}
-            address={edit? address: undefined}
+            address={edit ? address : undefined}
           />
         ) : (
           <div className="bg-white shadow-md border border-gray-200 rounded-3xl p-7">
@@ -49,7 +49,8 @@ const Address = () => {
               <button
                 onClick={() => {
                   setEdit(false);
-                  setShowForm(true)}}
+                  setShowForm(true);
+                }}
                 className="bg-fuchsia-600 hover:bg-fuchsia-700 text-white px-6 py-3 rounded-2xl font-semibold transition"
               >
                 Add Address
@@ -63,38 +64,49 @@ const Address = () => {
 
   // If address exists
   return (
-    <div className="bg-white shadow-md border border-gray-200 rounded-3xl p-5 md:p-7">
-      <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-5">
-        <div>
-          <p className="text-sm text-gray-500 mb-1">Delivery Address</p>
+    <>
+      {showForm ? (
+        <AddressForm
+          fetchAddress={fetchAddress}
+          closeForm={() => setShowForm(false)}
+          address={edit ? address : undefined}
+        />
+      ) : (
+        <div className="bg-white shadow-md border border-gray-200 rounded-3xl p-5 md:p-7">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-5">
+            <div>
+              <p className="text-sm text-gray-500 mb-1">Delivery Address</p>
 
-          <h2 className="text-xl font-bold text-gray-800">
-            {address.fullName}
-          </h2>
+              <h2 className="text-xl font-bold text-gray-800">
+                {address.fullName}
+              </h2>
 
-          <p className="text-gray-600 mt-2">
-            {address.houseNo}, {address.area}
-          </p>
+              <p className="text-gray-600 mt-2">
+                {address.houseNo}, {address.area}
+              </p>
 
-          <p className="text-gray-600">
-            {address.city}, {address.state} - {address.pincode}
-          </p>
+              <p className="text-gray-600">
+                {address.city}, {address.state} - {address.pincode}
+              </p>
 
-          <p className="text-gray-600 mt-2">Phone : {address.phone}</p>
+              <p className="text-gray-600 mt-2">Phone : {address.phone}</p>
+            </div>
+
+            <div>
+              <button
+                onClick={() => {
+                  setEdit(true);
+                  setShowForm(true);
+                }}
+                className="bg-fuchsia-600 hover:bg-fuchsia-700 text-white px-6 py-3 rounded-2xl font-semibold shadow-md transition"
+              >
+                Edit Address
+              </button>
+            </div>
+          </div>
         </div>
-
-        <div>
-          <button
-            onClick={() =>{ 
-              setEdit(true)
-              setShowForm(true)}}
-            className="bg-fuchsia-600 hover:bg-fuchsia-700 text-white px-6 py-3 rounded-2xl font-semibold shadow-md transition duration-300"
-          >
-            Edit Address
-          </button>
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
