@@ -98,3 +98,74 @@ export async function GET() {
     );
   }
 }
+
+
+export async function PUT(req: Request) {
+  try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      return NextResponse.json(
+        { message: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
+    const body = await req.json();
+
+    const {
+      fullName,
+      phone,
+      houseNo,
+      area,
+      city,
+      state,
+      pincode,
+    } = body;
+
+    if (
+      !fullName ||
+      !phone ||
+      !houseNo ||
+      !area ||
+      !city ||
+      !state ||
+      !pincode
+    ) {
+      return NextResponse.json(
+        { message: "All fields are required" },
+        { status: 400 }
+      );
+    }
+
+    const address = await prisma.address.updateMany({
+      where: {
+        userId,
+      },
+      data: {
+        fullName,
+        phone,
+        houseNo,
+        area,
+        city,
+        state,
+        pincode,
+      },
+    });
+
+    return NextResponse.json(
+      {
+        message: "Address Updated Successfully",
+        address,
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error(error);
+
+    return NextResponse.json(
+      { message: "Something went wrong" },
+      { status: 500 }
+    );
+  }
+}
