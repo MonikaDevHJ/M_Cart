@@ -15,11 +15,10 @@ export default async function Buyer() {
   }
 
   return (
-    <div className="">
+    <div className="bg-gray-300 p-5 border rounded-xl">
       <div className="">
         <BuyerNavbar />
       </div>
-      <p className="text-black text-2xl font-bold">Buyer Dashboard</p>
       <div className="">
         <BuyerCard />
         <RecentOrder />

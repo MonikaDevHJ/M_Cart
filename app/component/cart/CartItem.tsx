@@ -13,7 +13,7 @@ const Item = ({ fetchCartItems }: any) => {
   const increaseQuantity = async (id: string, currentQuantity: number) => {
     try {
       const res = await fetch(`/api/cart/${id}`, {
-        cache : "no-store",
+        cache: "no-store",
         method: "PATCH",
         headers: {
           "Content-Type": "application/json"
@@ -61,6 +61,15 @@ const Item = ({ fetchCartItems }: any) => {
 
   // Delete Cart Item
   const deleteCartItem = async (id: string) => {
+    const confirmDelete = window.confirm(
+      "Are you Sure , You wan to remove this item"
+    );
+
+    // if user will click cancel Stop the function 
+    if(!confirmDelete){
+      return;
+    }
+
     try {
       const res = await fetch(`/api/cart/${id}`, {
         method: "DELETE"
