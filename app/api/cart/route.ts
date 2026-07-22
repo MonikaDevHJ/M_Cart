@@ -50,6 +50,9 @@ export async function GET() {
       },
       include: {
         product: true
+      },
+      orderBy : {
+        createdAt : "asc"
       }
     });
 

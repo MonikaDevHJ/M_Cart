@@ -13,6 +13,7 @@ const Item = ({ fetchCartItems }: any) => {
   const increaseQuantity = async (id: string, currentQuantity: number) => {
     try {
       const res = await fetch(`/api/cart/${id}`, {
+        cache : "no-store",
         method: "PATCH",
         headers: {
           "Content-Type": "application/json"
