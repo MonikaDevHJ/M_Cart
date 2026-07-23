@@ -3,6 +3,10 @@ import { getUserRole } from "@/lib/getUserRole";
 import BuyerNavbar from "../component/buyer/dashboard/BuyerNavbar";
 import BuyerCard from "../component/buyer/dashboard/BuyerCard";
 import RecentOrder from "../component/buyer/dashboard/RecentOrder";
+import OrderStatus from "../component/buyer/dashboard/OrderStatus";
+import TopCategaries from "../component/buyer/dashboard/TopCategaries";
+import RecommendedProducts from "../component/buyer/dashboard/RecommendedProducts";
+import ExclusiveOffers from "../component/buyer/dashboard/ExclusiveOffers";
 
 export default async function Buyer() {
   const user = await getUserRole();
@@ -15,13 +19,32 @@ export default async function Buyer() {
   }
 
   return (
-    <div className="bg-gray-200 p-5 border rounded-xl">
-      <div className="">
-        <BuyerNavbar />
-      </div>
-      <div className="">
-        <BuyerCard />
-        <RecentOrder />
+    <div className="min-h-screen bg-gray-100 p-2 sm:p-4 lg:p-6">
+      {/* NAVBAR */}
+      <BuyerNavbar />
+
+      {/* TOP CARDS */}
+      <BuyerCard />
+
+      {/* MAIN DASHBOARD */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-6">
+        
+        {/* LEFT SIDE */}
+        <div className="lg:col-span-2 space-y-4">
+          <RecentOrder />
+
+          <RecommendedProducts />
+        </div>
+
+        {/* RIGHT SIDE */}
+        <div className="lg:col-span-1 space-y-4">
+          <OrderStatus />
+
+          <TopCategaries />
+
+          <ExclusiveOffers />
+        </div>
+
       </div>
     </div>
   );
