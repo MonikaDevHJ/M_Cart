@@ -15,7 +15,7 @@ export default async function Buyer() {
   }
 
   return (
-    <div className="bg-gray-300 p-5 border rounded-xl">
+    <div className="bg-gray-200 p-5 border rounded-xl">
       <div className="">
         <BuyerNavbar />
       </div>
