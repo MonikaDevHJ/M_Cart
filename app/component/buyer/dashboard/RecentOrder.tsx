@@ -19,7 +19,24 @@ const RecentOrder = () => {
       </div>
 
       {/* Table Header */}
-      
+      <div className="hidden md:grid grid-cols-12 gap-4 px-4 py-3 bg-gray-50 rounded-lg text-xs font-semibold text-gray-500 uppercase tracking-wide">
+        <div className="col-span-5">Product</div>
+
+        <div className="col-span-2">Price</div>
+
+        <div className="col-span-2">Status</div>
+
+        <div className="col-span-2">Date</div>
+
+        <div className="col-span-1 text-center">View</div>
+      </div>
+
+
+      {/* Orders */}
+      <div className="mt-2 divide-y divide-gray-100">
+        
+
+      </div>
     </div>
   );
 };
