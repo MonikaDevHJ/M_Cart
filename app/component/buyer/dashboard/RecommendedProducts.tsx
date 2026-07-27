@@ -9,7 +9,7 @@ const RecommendedProducts = () => {
       image: "/images/airpods.jpg",
       price: "₹1,299",
       mrp: "₹2,999",
-      off: "57% OFF",
+      off: "57% OFF", 
     },
     {
       id: 2,

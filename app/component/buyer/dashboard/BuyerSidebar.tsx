@@ -1,72 +1,66 @@
 "use client";
-
 import Image from "next/image";
-import mcartlogo4 from "../../../../public/assets/mcartlogo4.png";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import type { ReactNode } from "react";
+
+import mcartlogo4 from "../../../../public/assets/mcartlogo4.png";
 import {
   FaHome,
-  FaBox,
-  FaPlusCircle,
+  FaBoxOpen,
+  FaHeart,
   FaShoppingCart,
-  FaMoneyBill,
+  FaMapMarkerAlt,
+  FaUser,
+  FaTicketAlt,
+  FaStar,
+  FaHeadset,
   FaCog,
-  FaChevronRight
+  FaChevronRight,
+  FaShoppingBag,
+  FaBell
 } from "react-icons/fa";
-
-import { usePathname } from "next/navigation";
 
 type MenuItem = {
   name: string;
-  icon: React.ReactNode;
+  icon: ReactNode;
   link: string;
+  badge?: string;
 };
 
-const BuyerSideBar: React.FC = () => {
-  const menuItems: MenuItem[] = [
-    { name: "DashBoard", icon: <FaHome />, link: "/seller" },
-    { name: "Add Products", icon: <FaPlusCircle />, link: "/seller/addproduct" },
-    { name: "Products", icon: <FaBox />, link: "/seller/products" },
-    { name: "Orders", icon: <FaShoppingCart />, link: "/seller/orders" },
-    { name: "Earnings", icon: <FaMoneyBill />, link: "/seller/earnings" },
-    { name: "Settings", icon: <FaCog />, link: "/seller/settings" }
+const BuyerSidebar = () => {
+  const pathName = usePathname();
+
+  const menuItem: MenuItem[] = [
+    { name: "Dashboard", icon: <FaHome />, link: "/buyer" },
+    { name: "My Orders", icon: <FaBoxOpen />, link: "/buyer/orders" },
+    { name: "Wishlist", icon: <FaHeart />, link: "/buyer/wishlist" },
+    { name: "Cart", icon: <FaShoppingCart />, link: "/buyer/cart", badge: "3" },
+    { name: "Addresses", icon: <FaMapMarkerAlt />, link: "/buyer/addresses" },
+    { name: "Profile", icon: <FaUser />, link: "/buyer/profile" },
+    { name: "Coupons", icon: <FaTicketAlt />, link: "/buyer/coupons" },
+    { name: "Reviews", icon: <FaStar />, link: "/buyer/reviews" },
+    { name: "Support", icon: <FaHeadset />, link: "/buyer/support" },
+    { name: "Settings", icon: <FaCog />, link: "/buyer/settings" }
   ];
 
-  // ✅ ADDED: get current path
-  const pathname = usePathname();
-
   return (
-    <div className="bg-gray-700 text-white h-full md:h-screen lg:h-full w-full md:w-60 lg:w-80 rounded-2xl p-4 sm:p-5">
-      <Link href="/">
-        <div className="flex items-center gap-2 sm:gap-3">
-          <Image src={mcartlogo4} alt="M_Cart Logo" width={40} height={40} />
-          <p className="text-lg sm:text-xl lg:text-2xl font-semibold">Cart</p>
+
+  
+  <aside className="hidden md:flex w-[280px] min-h-screen flex-col rounded-[28px] bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white p-5 shadow-2xl">
+    {/* Brand */}
+     <Link href="/buyer" className="flex items-center gap-3">
+        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm">
+          <Image src={mcartlogo4} alt="M_Cart Logo" width={80} height={80} />
+        </div>
+        <div>
+          <p className="text-xl font-bold tracking-tight">ShopHub</p>
+          <p className="text-xs text-white/60">Buyer Panel</p>
         </div>
       </Link>
 
-      <div className="mt-5 space-y-2">
-        {menuItems.map((item) => {
-          
-          // ✅ ADDED: check active route
-          const isActive = pathname === item.link;
-
-          return (
-            <Link href={item.link} key={item.name}>
-              <div
-                className={`flex items-center gap-3 p-2 rounded-lg cursor-pointer
-                ${isActive ? "bg-fuchsia-700" : "hover:bg-fuchsia-700"}`}
-              >
-                <span className="text-lg">{item.icon}</span>
-                <span>{item.name}</span>
-
-                {/* ✅ ADDED: arrow icon for active */}
-                {isActive && <FaChevronRight className="ml-auto" />}
-              </div>
-            </Link>
-          );
-        })}
-      </div>
-    </div>
-  );
+  </aside>
+  )
 };
 
-export default BuyerSideBar;
+export default BuyerSidebar;
