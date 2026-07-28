@@ -48,7 +48,7 @@ const BuyerSideBar = () => {
   return (
     <aside className="hidden md:flex w-[280px] min-h-screen flex-col rounded-[28px] bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white p-5 shadow-2xl">
       {/* BRAND */}
-      <Link href="/buyer" className="flex items-center gap-3">
+      <Link href="./" className="flex items-center gap-3">
         <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm">
           <Image src={mcartlogo4} alt="M_Cart Logo" width={30} height={30} />
         </div>
