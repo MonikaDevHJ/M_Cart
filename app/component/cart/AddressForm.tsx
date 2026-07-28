@@ -11,7 +11,7 @@ type AddressFormProps = {
 const AddressForm = ({
   fetchAddress,
   closeForm,
-  address,
+  address
 }: AddressFormProps) => {
   const [formData, setFormData] = useState({
     fullName: address?.fullName || "",
@@ -20,13 +20,23 @@ const AddressForm = ({
     area: address?.area || "",
     city: address?.city || "",
     state: address?.state || "",
-    pincode: address?.pincode || "",
+    pincode: address?.pincode || ""
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const getCurrentLocation = async () => {
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      console.log(latitude);
+      console.log(longitude);
     });
   };
 
@@ -48,15 +58,19 @@ const AddressForm = ({
       const res = await fetch("/api/buyeraddres", {
         method: address ? "PUT" : "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData)
       });
 
       const data = await res.json();
 
       if (res.ok) {
-        alert(address ? "Address Updated Successfully!" : "Address Saved Successfully!");
+        alert(
+          address
+            ? "Address Updated Successfully!"
+            : "Address Saved Successfully!"
+        );
 
         fetchAddress();
         closeForm();
@@ -75,6 +89,12 @@ const AddressForm = ({
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <button
+          onClick={getCurrentLocation}
+          className="mb-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl"
+        >
+          📍 Use Current Location
+        </button>
 
         <div>
           <label className="block mb-2 font-medium">Full Name</label>
@@ -166,15 +186,10 @@ const AddressForm = ({
             className="w-full border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-fuchsia-500"
           />
         </div>
-
       </div>
 
       <div className="flex justify-end mt-8 gap-4">
-
-        <button
-          onClick={closeForm}
-          className="px-6 py-3 rounded-xl border"
-        >
+        <button onClick={closeForm} className="px-6 py-3 rounded-xl border">
           Cancel
         </button>
 
@@ -184,7 +199,6 @@ const AddressForm = ({
         >
           {address ? "Update Address" : "Save Address"}
         </button>
-
       </div>
     </div>
   );
