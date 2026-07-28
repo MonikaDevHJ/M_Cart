@@ -37,6 +37,22 @@ const AddressForm = ({
 
       console.log(latitude);
       console.log(longitude);
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+      );
+
+      const data = await res.json();
+
+      console.log(data.address);
+
+      setFormData((prev) => ({
+        ...prev,
+        area: data.address.suburb || data.address.road || "",
+        city:
+          data.address.city || data.address.town || data.address.village || "",
+        state: data.address.state || "",
+        pincode: data.address.postcode || ""
+      }));
     });
   };
 
