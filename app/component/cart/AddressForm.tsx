@@ -23,6 +23,8 @@ const AddressForm = ({
     pincode: address?.pincode || ""
   });
 
+  const [loadingLocation, setLoadingLocation] = useState(false);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -31,6 +33,7 @@ const AddressForm = ({
   };
 
   const getCurrentLocation = async () => {
+    setLoadingLocation(true);
     navigator.geolocation.getCurrentPosition(async (position) => {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
@@ -53,6 +56,8 @@ const AddressForm = ({
         state: data.address.state || "",
         pincode: data.address.postcode || ""
       }));
+
+      setLoadingLocation(false);
     });
   };
 
@@ -109,7 +114,7 @@ const AddressForm = ({
           onClick={getCurrentLocation}
           className="mb-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl"
         >
-          📍 Use Current Location
+          {loadingLocation ? "Getting Location" : "📍 Use Current Location"}
         </button>
 
         <div>
