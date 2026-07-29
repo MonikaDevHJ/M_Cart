@@ -1,5 +1,6 @@
 "use client";
 
+import { error } from "node:console";
 import { useState } from "react";
 
 type AddressFormProps = {
@@ -31,36 +32,52 @@ const AddressForm = ({
       [e.target.name]: e.target.value
     });
   };
+const getCurrentLocation = async () => {
+  setLoadingLocation(true);
 
-  const getCurrentLocation = async () => {
-    setLoadingLocation(true);
-    navigator.geolocation.getCurrentPosition(async (position) => {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
+  navigator.geolocation.getCurrentPosition(
+    async (position) => {
+      try {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
 
-      console.log(latitude);
-      console.log(longitude);
-      const res = await fetch(
-        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
-      );
+        console.log(latitude);
+        console.log(longitude);
 
-      const data = await res.json();
+        const res = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+        );
 
-      console.log(data.address);
+        const data = await res.json();
 
-      setFormData((prev) => ({
-        ...prev,
-        area: data.address.suburb || data.address.road || "",
-        city:
-          data.address.city || data.address.town || data.address.village || "",
-        state: data.address.state || "",
-        pincode: data.address.postcode || ""
-      }));
+        console.log(data.address);
 
+        setFormData((prev) => ({
+          ...prev,
+          area: data.address.suburb || data.address.road || "",
+          city:
+            data.address.city ||
+            data.address.town ||
+            data.address.village ||
+            "",
+          state: data.address.state || "",
+          pincode: data.address.postcode || ""
+        }));
+      } catch (error) {
+        console.error(error);
+        alert("Failed to fetch address.");
+      } finally {
+        setLoadingLocation(false);
+      }
+    },
+
+    (error) => {
+      console.error(error);
+      alert("Unable to get your location.");
       setLoadingLocation(false);
-    });
-  };
-
+    }
+  );
+};
   const handleSubmit = async () => {
     try {
       if (
@@ -112,7 +129,8 @@ const AddressForm = ({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <button
           onClick={getCurrentLocation}
-          className="mb-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl"
+          disabled={loadingLocation}
+          className="mb-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loadingLocation ? "Getting Location" : "📍 Use Current Location"}
         </button>
