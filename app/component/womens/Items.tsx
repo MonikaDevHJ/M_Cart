@@ -11,6 +11,7 @@ type Product = {
   productImage: string;
   productName: string;
   productPrice: number;
+  offerPercent: number;
   productSize: string;
   stockQuantity: number;
   image_url: string;
@@ -76,37 +77,36 @@ const Items = () => {
     );
   };
 
- const itemAddedToCart = async (item: Product) => {
-  if (addCart.includes(item.id)) {
-    alert("Item already added to cart");
-    return;
-  }
+  const itemAddedToCart = async (item: Product) => {
+    if (addCart.includes(item.id)) {
+      alert("Item already added to cart");
+      return;
+    }
 
-  try {
-    const res = await fetch("/api/cart", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        productId: item.id,
-      }),
-    });
+    try {
+      const res = await fetch("/api/cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          productId: item.id
+        })
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    console.log(data);
+      console.log(data);
 
-    // Just update button state
-    setAddedCart((prev) => [...prev, item.id]);
+      // Just update button state
+      setAddedCart((prev) => [...prev, item.id]);
 
-    // Refresh navbar/cart page
-    window.dispatchEvent(new Event("cartUpdated"));
-
-  } catch (error) {
-    console.log(error);
-  }
-};
+      // Refresh navbar/cart page
+      window.dispatchEvent(new Event("cartUpdated"));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const { isSignedIn } = useUser();
   console.log("user Role", useRole);
@@ -116,6 +116,8 @@ const Items = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-2">
         {items.map((item) => {
           const isWishlisted = wishlist.includes(item.id);
+          const discountAmout = (item.productPrice * item.offerPercent) / 100;
+          const finalPrice = item.productPrice - discountAmout;
 
           return (
             <div
@@ -148,7 +150,23 @@ const Items = () => {
               {/* Details */}
               <div className="mt-6 flex justify-between ">
                 <p className="font-bold text-xl">{item.productName}</p>
-                <p className="text-gray-900 text-lg">₹ {item.productPrice}</p>
+                <div className="text-right">
+                  <p className="font-bold text-lg text-green-600">
+                    ₹ {finalPrice}
+                  </p>
+
+                  {item.offerPercent > 0 && (
+                    <>
+                      <p className="line-through text-gray-500 text-sm">
+                        ₹ {item.productPrice}
+                      </p>
+
+                      <p className="text-red-500 text-sm font-semibold">
+                        {item.offerPercent}% OFF
+                      </p>
+                    </>
+                  )}
+                </div>
               </div>
               <div className="mt-1 flex items-center justify-between">
                 {/* Product Size */}

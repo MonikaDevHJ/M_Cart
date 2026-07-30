@@ -65,8 +65,8 @@ const Item = ({ fetchCartItems }: any) => {
       "Are you Sure , You wan to remove this item"
     );
 
-    // if user will click cancel Stop the function 
-    if(!confirmDelete){
+    // if user will click cancel Stop the function
+    if (!confirmDelete) {
       return;
     }
 
@@ -95,7 +95,14 @@ const Item = ({ fetchCartItems }: any) => {
         <Address />
         {/* CART ITEM */}
         {cartItems.map((item: any) => {
-          const totalPrice = item.product.productPrice * item.quantity;
+          const originalPrice = item.product.productPrice;
+
+          const discountAmount =
+            (originalPrice * item.product.offerPercent) / 100;
+
+          const discountedPrice = originalPrice - discountAmount;
+
+          const totalPrice = discountedPrice * item.quantity;
 
           return (
             <div
@@ -173,13 +180,17 @@ const Item = ({ fetchCartItems }: any) => {
                         ₹ {totalPrice}
                       </h2>
 
-                      <p className="line-through text-gray-400 text-lg">
-                        ₹1,39,999
-                      </p>
+                      {item.product.offerPercent > 0 && (
+                        <>
+                          <p className="line-through text-gray-400 text-lg">
+                            ₹ {originalPrice * item.quantity}
+                          </p>
 
-                      <p className="text-green-600 font-bold text-lg">
-                        10% OFF
-                      </p>
+                          <p className="text-green-600 font-bold text-lg">
+                            {item.product.offerPercent}% OFF
+                          </p>
+                        </>
+                      )}
                     </div>
 
                     <div>
