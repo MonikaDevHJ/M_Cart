@@ -30,7 +30,8 @@ model Product {
 
   // Product Details
   productName    String
-  productPrice   String
+  productPrice   Int
+  offerPercent   Int     @default(0)
   productSize    String
   selectCategory String
   stockQuantity  Int
@@ -39,7 +40,8 @@ model Product {
   productImage   String?
 
   created_at DateTime @default(now())
-  carts      Cart[]
+
+  carts Cart[]
 }
 
 model Cart {

@@ -13,6 +13,7 @@ export const initialState = {
   product: {
     name: "",
     price: "",
+    offerPercent : "",
     category: "",
     quantity: "",
     brand: "",

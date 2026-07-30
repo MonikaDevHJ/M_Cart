@@ -47,6 +47,20 @@ const StepProduct = () => {
           className="border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
         />
 
+        <input
+          type="number"
+          placeholder="Offers %"
+          value={state.product.offerPercent}
+          onChange={(e) =>
+            dispatch({
+              type: "SET_PRODUCT",
+              payload: {
+                offerPercent: e.target.value
+              }
+            })
+          }
+          className="border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
+        />
         <select
           value={state.product.category}
           onChange={(e) =>
