@@ -13,9 +13,17 @@ const Amount = () => {
     return total + item.product.productPrice * item.quantity;
   }, 0);
 
+  const discount = Math.round(
+  cartItems.reduce((total: number, item: any) => {
+    const discountPerItem =
+      (item.product.productPrice * item.product.offerPercent) / 100;
+
+    return total + discountPerItem * item.quantity;
+  }, 0)
+);
+
   const deliveryFee = 0;
   const platformFee = 50;
-  const discount = 2000;
 
   const totalAmount = totalMRP + deliveryFee + platformFee - discount;
   return (
