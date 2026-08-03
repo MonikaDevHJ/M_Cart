@@ -8,34 +8,32 @@ import Link from "next/link";
 type Product = {
   id: string;
 
-  productImage: string;
+  productImage: string | null;
   productName: string;
   productPrice: number;
   offerPercent: number;
   productSize: string;
   stockQuantity: number;
-  image_url: string;
 };
 
-const Items = () => {
-  const [items, setItems] = useState<Product[]>([]);
+const Items = ({items}:{items : Product[]} ) => {
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [addCart, setAddedCart] = useState<string[]>([]);
   const [useRole, setUserRole] = useState("");
 
-  useEffect(() => {
-    const fetchItem = async () => {
-      try {
-        const res = await fetch("/api/products");
-        const data = await res.json();
-        setItems(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchItem = async () => {
+  //     try {
+  //       const res = await fetch("/api/products");
+  //       const data = await res.json();
+  //       setItems(data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
 
-    fetchItem();
-  }, []);
+  //   fetchItem();
+  // }, []);
 
   useEffect(() => {
     const fetchUserRole = async () => {

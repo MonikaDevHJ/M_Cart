@@ -2,22 +2,19 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import cloudinary from "@/lib/cloudinary";
 
+// ================= DELETE PRODUCT =================
 export async function DELETE(
   req: Request,
   context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await context.params; // ✅ FIX HERE
+    const { id } = await context.params;
 
-    console.log("Deleting ID:", id);
-
-    const deletedProduct = await prisma.product.delete({
+    await prisma.product.delete({
       where: { id }
     });
 
-    console.log("Deleted:", deletedProduct);
-
-    return NextResponse.json({ message: "Product Deleted ✅" });
+    return NextResponse.json({ message: "Product Deleted Successfully ✅" });
   } catch (error) {
     console.log("DELETE ERROR:", error);
 
@@ -28,6 +25,7 @@ export async function DELETE(
   }
 }
 
+// ================= GET SINGLE PRODUCT =================
 export async function GET(
   req: Request,
   context: { params: Promise<{ id: string }> }
@@ -38,17 +36,19 @@ export async function GET(
     const product = await prisma.product.findUnique({
       where: { id }
     });
+
     return NextResponse.json(product);
   } catch (error) {
     console.log("GET ERROR:", error);
 
     return NextResponse.json(
-      { error: "Failed to Fetch  Product " },
+      { error: "Failed to fetch product" },
       { status: 500 }
     );
   }
 }
 
+// ================= UPDATE PRODUCT =================
 export async function PUT(
   req: Request,
   context: { params: Promise<{ id: string }> }
@@ -58,47 +58,77 @@ export async function PUT(
 
     const formData = await req.formData();
 
-    const name = formData.get("name") as string;
-    const description = formData.get("description") as string;
-    const price = Number(formData.get("price"));
-    const category = formData.get("category") as string;
-    const stock = Number(formData.get("stock"));
-    const file = formData.get("image") as File;
+    // Seller Details
+    const companyName = formData.get("companyName") as string;
+    const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
+    const businessName = formData.get("businessName") as string;
+    const gstNumber = formData.get("gstNumber") as string;
+    const location = formData.get("location") as string;
+    const sellerDesc = formData.get("sellerDesc") as string;
 
-    let image_url: string | undefined;
+    // Product Details
+    const productName = formData.get("productName") as string;
+    const productPrice = Number(formData.get("productPrice"));
+    const offerPercent = Number(formData.get("offerPercent"));
+    const productSize = formData.get("productSize") as string;
+    const selectCategory = formData.get("selectCategory") as string;
+    const stockQuantity = Number(formData.get("stockQuantity"));
+    const brandName = formData.get("brandName") as string;
+    const selectSize = formData.get("selectSize") as string;
 
-    // ✅ Upload image if new one selected
+    const file = formData.get("productImage") as File;
+
+    let productImage: string | undefined;
+
+    // Upload new image if selected
     if (file && file.size > 0) {
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
 
       const upload = await new Promise((resolve, reject) => {
         cloudinary.uploader
-          .upload_stream({ folder: "products" }, (error, result) => {
-            if (error) reject(error);
-            else resolve(result);
-          })
+          .upload_stream(
+            { folder: "m_cart_products" },
+            (error, result) => {
+              if (error) reject(error);
+              else resolve(result);
+            }
+          )
           .end(buffer);
       });
 
-      image_url = (upload as any).secure_url;
+      productImage = (upload as any).secure_url;
     }
 
     const updatedProduct = await prisma.product.update({
       where: { id },
       data: {
-        name,
-        description,
-        price,
-        category,
-        stock,
-        ...(image_url && { image_url })
+        companyName,
+        email,
+        phone,
+        businessName,
+        gstNumber,
+        location,
+        sellerDesc,
+
+        productName,
+        productPrice,
+        offerPercent,
+        productSize,
+        selectCategory,
+        stockQuantity,
+        brandName,
+        selectSize,
+
+        ...(productImage && { productImage })
       }
     });
 
     return NextResponse.json(updatedProduct);
   } catch (error) {
-    console.log(error);
+    console.log("UPDATE ERROR:", error);
+
     return NextResponse.json(
       { error: "Failed to update product" },
       { status: 500 }
