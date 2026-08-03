@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import cloudinary from "@/lib/cloudinary";
+import { revalidatePath } from "next/cache";
 
 // ✅ GET → Fetch products
 export async function GET() {
@@ -88,6 +89,9 @@ export async function POST(req: Request) {
         productImage: imageUrl
       }
     });
+
+    // ✅ Clear ISR cache
+    revalidatePath("/womens");
 
     return NextResponse.json(product);
   } catch (error) {

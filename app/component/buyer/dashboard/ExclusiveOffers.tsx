@@ -1,3 +1,7 @@
+import { prisma } from "@/lib/prisma";
+
+export const revalidate = 60;
+
 const ExclusiveOffers = () => {
   return (
     <div className="bg-gradient-to-r from-pink-50 via-purple-50 to-white rounded-2xl border border-purple-100 shadow-sm p-5 overflow-hidden">
