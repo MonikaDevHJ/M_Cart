@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import cloudinary from "@/lib/cloudinary";
-
+import { revalidatePath } from "next/cache";
 // ================= DELETE PRODUCT =================
 export async function DELETE(
   req: Request,
@@ -13,6 +13,8 @@ export async function DELETE(
     await prisma.product.delete({
       where: { id }
     });
+    // Clear /womens cache
+    revalidatePath("/womens");
 
     return NextResponse.json({ message: "Product Deleted Successfully ✅" });
   } catch (error) {
@@ -88,13 +90,10 @@ export async function PUT(
 
       const upload = await new Promise((resolve, reject) => {
         cloudinary.uploader
-          .upload_stream(
-            { folder: "m_cart_products" },
-            (error, result) => {
-              if (error) reject(error);
-              else resolve(result);
-            }
-          )
+          .upload_stream({ folder: "m_cart_products" }, (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          })
           .end(buffer);
       });
 
@@ -124,7 +123,8 @@ export async function PUT(
         ...(productImage && { productImage })
       }
     });
-
+    // Clear /womens cache
+    revalidatePath("/womens");
     return NextResponse.json(updatedProduct);
   } catch (error) {
     console.log("UPDATE ERROR:", error);
