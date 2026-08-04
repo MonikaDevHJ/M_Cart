@@ -2,7 +2,7 @@
 
 import { useForm } from "@/app/context/FormContext";
 
-const Preview = () => {
+const Preview = ({ productId }: { productId: string | null }) => {
   const { state, dispatch } = useForm();
 
   const handleSubmit = async () => {
@@ -34,15 +34,23 @@ const Preview = () => {
         formData.append("productImage", state.product.image);
       }
 
-      const response = await fetch("/api/products", {
-        method: "POST",
+      const url = productId ? `/api/products/${productId}` : "/api/products";
+
+      const method = productId ? "PUT" : "POST";
+
+      const response = await fetch(url, {
+        method,
         body: formData
       });
 
       const result = await response.json();
 
       if (response.ok) {
-        alert("Product Added Successfully 🚀");
+        alert(
+          productId
+            ? "Product Updated Successfully ✅"
+            : "Product Added Successfully 🚀"
+        );
         console.log(result);
       } else {
         alert(result.error);
@@ -56,8 +64,9 @@ const Preview = () => {
   const imagePreview =
     state.product.image instanceof File
       ? URL.createObjectURL(state.product.image)
-      : null;
-
+      : state.product.image;
+  console.log(imagePreview);
+  console.log("Preview Image:", state.product.image);
   return (
     <div className="space-y-8 md:space-y-10">
       {/* HEADER */}

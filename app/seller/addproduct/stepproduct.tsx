@@ -6,9 +6,9 @@ const StepProduct = () => {
   const { state, dispatch } = useForm();
 
   const imagePreview =
-    state.product.image instanceof File
-      ? URL.createObjectURL(state.product.image)
-      : null;
+  state.product.image instanceof File
+    ? URL.createObjectURL(state.product.image)
+    : state.product.image;
 
   return (
     <div className="space-y-10">
