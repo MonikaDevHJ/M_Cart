@@ -21,19 +21,6 @@ const Items = ({items}:{items : Product[]} ) => {
   const [addCart, setAddedCart] = useState<string[]>([]);
   const [useRole, setUserRole] = useState("");
 
-  // useEffect(() => {
-  //   const fetchItem = async () => {
-  //     try {
-  //       const res = await fetch("/api/products");
-  //       const data = await res.json();
-  //       setItems(data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   fetchItem();
-  // }, []);
 
   useEffect(() => {
     const fetchUserRole = async () => {
