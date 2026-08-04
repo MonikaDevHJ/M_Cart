@@ -5,9 +5,15 @@ import { useForm } from "@/app/context/FormContext";
 import StepClient from "./stepclient";
 import StepProduct from "./stepproduct";
 import Preview from "./Preview";
+import { useSearchParams } from "next/navigation";
 
 const FormSteps = () => {
   const { state } = useForm();
+
+  const searchParams = useSearchParams();
+
+  const productId = searchParams.get("id");
+  console.log(productId);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 via-blue-50 to-indigo-100 py-0.5 px-4">

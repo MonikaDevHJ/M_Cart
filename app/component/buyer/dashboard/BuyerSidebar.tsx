@@ -53,7 +53,7 @@ const BuyerSideBar = () => {
           <Image src={mcartlogo4} alt="M_Cart Logo" width={30} height={30} />
         </div>
         <div>
-          <p className="text-xl font-bold tracking-tight">ShopHub</p>
+          <p className="text-xl font-bold tracking-tight">M_Cart</p>
           <p className="text-xs text-white/60">Buyer Panel</p>
         </div>
       </Link>
