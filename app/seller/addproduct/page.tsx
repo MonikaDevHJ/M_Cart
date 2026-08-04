@@ -33,6 +33,20 @@ const FormSteps = () => {
           Description: data.sellerDesc
         }
       });
+
+      dispatch({
+        type: "SET_PRODUCT",
+        payload: {
+          name: data.productName,
+          price: data.productPrice,
+          offerPercent: data.offerPercent,
+          category: data.selectCategory,
+          quantity: data.stockQuantity,
+          brand: data.brandName,
+          size: data.selectSize,
+          image: data.productImage,
+        }
+      });
     } catch (error) {
       console.log(error);
     }
@@ -99,7 +113,7 @@ const FormSteps = () => {
         <div className="p-6 md:p-14">
           {state.step === 1 && <StepClient />}
           {state.step === 2 && <StepProduct />}
-          {state.step === 3 && <Preview />}
+          {state.step === 3 && <Preview  productId={productId}/>}
         </div>
       </div>
     </div>
