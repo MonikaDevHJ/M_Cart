@@ -6,14 +6,43 @@ import StepClient from "./stepclient";
 import StepProduct from "./stepproduct";
 import Preview from "./Preview";
 import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 const FormSteps = () => {
-  const { state } = useForm();
+  const { state, dispatch } = useForm();
 
   const searchParams = useSearchParams();
 
   const productId = searchParams.get("id");
   console.log(productId);
+
+  const fetchProduct = async () => {
+    try {
+      const res = await fetch(`/api/products/${productId}`);
+      const data = await res.json();
+
+      dispatch({
+        type: "SET_CLIENT",
+        payload: {
+          name: data.companyName,
+          email: data.email,
+          phone: data.phone,
+          BussinessName: data.businessName,
+          gstNumber: data.gstNumber,
+          Location: data.location,
+          Description: data.sellerDesc
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (!productId) return;
+
+    fetchProduct();
+  }, [productId]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 via-blue-50 to-indigo-100 py-0.5 px-4">
