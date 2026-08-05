@@ -6,6 +6,9 @@ export const revalidate = 60;
 
 const WomensPage = async () => {
   const products = await prisma.product.findMany({
+    where: {
+      selectCategory: "womens"
+    },
     orderBy: {
       created_at: "desc"
     }
@@ -18,7 +21,7 @@ const WomensPage = async () => {
       </div>
 
       <div className="col-span-4">
-        <Items items={products}/>
+        <Items items={products} />
       </div>
     </div>
   );
