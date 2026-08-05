@@ -1,5 +1,5 @@
-import Filter from "../../component/womens/Filter";
-import Items from "../../component/womens/Items";
+import Filter from "../../component/buyer/products/Filter";
+import Items from "../../component/buyer/products/Items"
 import { prisma } from "@/lib/prisma";
 
 export const revalidate = 60;

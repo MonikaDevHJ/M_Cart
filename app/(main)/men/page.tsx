@@ -1,7 +1,6 @@
-import Filter from "../../component/men/Filter";
-// import Items from "../../component/men/Items";
 import { prisma } from "@/lib/prisma";
-import Items from "../../component/womens/Items";
+import Items from "../../component/buyer/products/Items";
+import Filter from "../../component/buyer/products/Filter";
 
 const MenPage = async () => {
   const products = await prisma.product.findMany({
