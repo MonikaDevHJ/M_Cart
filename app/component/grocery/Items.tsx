@@ -3,7 +3,7 @@
 const Items = () => {
   return (
     <div className="">
-      <p>Items</p>{" "}
+      <p> Groceery sItems</p>{" "}
     </div>
   );
 };

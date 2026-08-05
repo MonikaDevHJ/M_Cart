@@ -6,9 +6,9 @@ const StepProduct = () => {
   const { state, dispatch } = useForm();
 
   const imagePreview =
-  state.product.image instanceof File
-    ? URL.createObjectURL(state.product.image)
-    : state.product.image;
+    state.product.image instanceof File
+      ? URL.createObjectURL(state.product.image)
+      : state.product.image;
 
   return (
     <div className="space-y-10">
@@ -72,10 +72,13 @@ const StepProduct = () => {
           className="border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
         >
           <option value="">Select Category</option>
-          <option>Electronics</option>
-          <option>Fashion</option>
-          <option>Food</option>
-          <option>Furniture</option>
+          <option value="womens">Womens</option>
+          <option value="men">Men</option>
+          <option value="grocery">Grocery</option>
+          <option value="makeup">MakeUp</option>
+          <option value="electronics">Electronics</option>
+          <option value="furniture">Furnitures</option>
+          <option value="mobiles">Mobile</option>
         </select>
 
         <input

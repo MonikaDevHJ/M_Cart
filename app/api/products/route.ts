@@ -4,9 +4,21 @@ import cloudinary from "@/lib/cloudinary";
 import { revalidatePath } from "next/cache";
 
 // ✅ GET → Fetch products
-export async function GET() {
+export async function GET(req: Request) {
   try {
+    console.log(req.url);
+    const { searchParams } = new URL(req.url);
+
+    const category = searchParams.get("category");
+
+    console.log(category);
     const products = await prisma.product.findMany({
+      where: category
+        ? {
+            selectCategory: category
+          }
+        : {},
+
       orderBy: { created_at: "desc" }
     });
 
