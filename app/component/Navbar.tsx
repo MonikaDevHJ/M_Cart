@@ -22,30 +22,14 @@ const Navbar = () => {
   const cartCount = cartItems.length;
   const dispatch = useDispatch();
 
-  // Hanlde Search
-  const handleSearch = () => {
-    const value = search.toLowerCase().trim();
+ 
 
-    if (value === "womens" || value === "women") {
-      router.push("/womens");
-    } else if (value === "men") {
-      router.push("/men");
-    } else if (value === "mobiles" || value === "mobile") {
-      router.push("/mobiles");
-    } else if (value === "grocery") {
-      router.push("/grocery");
-    } else if (value === "electronics") {
-      router.push("/electronics");
-    } else if (value === "makeup") {
-      router.push("/makeup");
-    } else if (value === "gifts") {
-      router.push("/gifts");
-    } else if (value === "furniture") {
-      router.push("/furniture");
-    } else {
-      alert("Category not found");
-    }
-  };
+  // Hanlde Search
+const handleSearch = () => {
+  if (!search.trim()) return;
+
+  router.push(`/search?search=${search}`);
+};
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -95,6 +79,11 @@ const Navbar = () => {
                 className="bg-fuchsia-50 outline-none px-2 w-full text-sm"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleSearch();
+                  }
+                }}
               />
             </div>
           </div>
