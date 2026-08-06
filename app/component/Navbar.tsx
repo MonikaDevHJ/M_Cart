@@ -25,10 +25,23 @@ const Navbar = () => {
  
 
   // Hanlde Search
-const handleSearch = () => {
+const handleSearch = async () => {
   if (!search.trim()) return;
 
-  router.push(`/search?search=${search}`);
+  const res = await fetch(
+    `/api/search-category?search=${encodeURIComponent(search)}`
+  );
+
+  const product = await res.json();
+
+  if (!product) {
+    alert("Product not found");
+    return;
+  }
+
+  router.push(
+    `/${product.selectCategory}?search=${encodeURIComponent(search)}`
+  );
 };
 
   useEffect(() => {
