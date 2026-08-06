@@ -6,12 +6,15 @@ import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { setCartItems } from "@/redux/cartSlice";
+import { useRouter } from "next/navigation";
 
 import mcartlogo4 from "../../public/assets/mcartlogo4.png";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
+
+  const router = useRouter();
   console.log(search);
   const cartItems = useSelector((state: RootState) => state.cart.items);
   console.log(cartItems);
@@ -19,12 +22,37 @@ const Navbar = () => {
   const cartCount = cartItems.length;
   const dispatch = useDispatch();
 
+  // Hanlde Search
+  const handleSearch = () => {
+    const value = search.toLowerCase().trim();
+
+    if (value === "womens" || value === "women") {
+      router.push("/womens");
+    } else if (value === "men") {
+      router.push("/men");
+    } else if (value === "mobiles" || value === "mobile") {
+      router.push("/mobiles");
+    } else if (value === "grocery") {
+      router.push("/grocery");
+    } else if (value === "electronics") {
+      router.push("/electronics");
+    } else if (value === "makeup") {
+      router.push("/makeup");
+    } else if (value === "gifts") {
+      router.push("/gifts");
+    } else if (value === "furniture") {
+      router.push("/furniture");
+    } else {
+      alert("Category not found");
+    }
+  };
+
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
         const res = await fetch("/api/cart");
         const data = await res.json();
-        //  Here redux also i have been used becauase of Instant UI i need in Butoo 
+        //  Here redux also i have been used becauase of Instant UI i need in Butoo
         dispatch(setCartItems(data));
       } catch (error) {
         console.log(error);
@@ -66,7 +94,7 @@ const Navbar = () => {
                 placeholder="Search for products..."
                 className="bg-fuchsia-50 outline-none px-2 w-full text-sm"
                 value={search}
-                onChange={(e) =>setSearch(e.target.value) }
+                onChange={(e) => setSearch(e.target.value)}
               />
             </div>
           </div>
