@@ -1,10 +1,28 @@
+import Filter from "../../component/buyer/products/Filter";
+import Items from "../../component/buyer/products/Items";
+import { prisma } from "@/lib/prisma";
 
-const MakeupPage = () => {
+const MakeupPage = async () => {
+  const products = await prisma.product.findMany({
+    where: {
+      selectCategory: "makeup"
+    },
+    orderBy: {
+      created_at: "desc"
+    }
+  });
+
   return (
-    <div className="">
-      <p className='text-center justify-center'>MakeUp Page</p>
-    </div>
-  )
-}
+    <div className="w-full grid grid-cols-5 gap-4 p-5 bg-gray-100">
+      <div className="col-span-1">
+        <Filter />
+      </div>
 
-export default MakeupPage
+      <div className="col-span-4">
+        <Items items={products} />
+      </div>
+    </div>
+  );
+};
+
+export default MakeupPage;

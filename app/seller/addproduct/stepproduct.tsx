@@ -75,6 +75,7 @@ const StepProduct = () => {
           <option value="womens">Womens</option>
           <option value="men">Men</option>
           <option value="grocery">Grocery</option>
+          <option value ="gifts">Gifts</option>
           <option value="makeup">MakeUp</option>
           <option value="electronics">Electronics</option>
           <option value="furniture">Furnitures</option>
