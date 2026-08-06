@@ -5,6 +5,7 @@ import Link from "next/link";
 
 const Main = () => {
   const cards = [
+
     { image: "/assets/Womens_image.jpg", label: "Womens" },
     { image: "/assets/Men_image.jpg", label: "Men" },
     { image: "/assets/Grocery_image.jpg", label: "Grocery" },

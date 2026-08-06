@@ -11,6 +11,8 @@ import mcartlogo4 from "../../public/assets/mcartlogo4.png";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState("");
+  console.log(search);
   const cartItems = useSelector((state: RootState) => state.cart.items);
   console.log(cartItems);
 
@@ -63,6 +65,8 @@ const Navbar = () => {
                 type="text"
                 placeholder="Search for products..."
                 className="bg-fuchsia-50 outline-none px-2 w-full text-sm"
+                value={search}
+                onChange={(e) =>setSearch(e.target.value) }
               />
             </div>
           </div>
