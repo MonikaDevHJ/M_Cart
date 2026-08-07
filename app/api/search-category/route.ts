@@ -12,7 +12,7 @@ export async function GET(req: Request) {
         { error: "Search is required" },
         { status: 400 }
       );
-    }
+    }   
 const product = await prisma.product.findFirst({
   where: {
     OR: [
