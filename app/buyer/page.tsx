@@ -5,8 +5,8 @@ import BuyerCard from "../component/buyer/dashboard/BuyerCard";
 import RecentOrder from "../component/buyer/dashboard/RecentOrder";
 import OrderStatus from "../component/buyer/dashboard/OrderStatus";
 import TopCategaries from "../component/buyer/dashboard/TopCategaries";
-import RecommendedProducts from "../component/buyer/dashboard/RecommendedProducts";
-import ExclusiveOffers from "../component/buyer/dashboard/ExclusiveOffers";
+// import RecommendedProducts from "../component/buyer/dashboard/RecommendedProducts";
+// import ExclusiveOffers from "../component/buyer/dashboard/ExclusiveOffers";
 
 export default async function Buyer() {
   const user = await getUserRole();
@@ -33,7 +33,7 @@ export default async function Buyer() {
         <div className="lg:col-span-2 space-y-4">
           <RecentOrder />
 
-          <RecommendedProducts />
+          {/* <RecommendedProducts /> */}
         </div>
 
         {/* RIGHT SIDE */}
@@ -42,7 +42,7 @@ export default async function Buyer() {
 
           <TopCategaries />
 
-          <ExclusiveOffers />
+          {/* <ExclusiveOffers /> */}
         </div>
 
       </div>

@@ -30,10 +30,11 @@ const TopCategories = () => {
       iconBg: "bg-orange-50",
       iconColor: "text-orange-500",
     },
+    
   ];
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5">
+    <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5 ">
       <h2 className="text-lg font-bold text-gray-800 mb-5">
         Top Categories
       </h2>
