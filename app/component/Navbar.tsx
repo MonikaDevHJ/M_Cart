@@ -22,27 +22,25 @@ const Navbar = () => {
   const cartCount = cartItems.length;
   const dispatch = useDispatch();
 
- 
-
   // Hanlde Search
-const handleSearch = async () => {
-  if (!search.trim()) return;
+  const handleSearch = async () => {
+    if (!search.trim()) return;
 
-  const res = await fetch(
-    `/api/search-category?search=${encodeURIComponent(search)}`
-  );
+    const res = await fetch(
+      `/api/search-category?search=${encodeURIComponent(search)}`
+    );
 
-  const product = await res.json();
+    const product = await res.json();
 
-  if (!product) {
-    alert("Product not found");
-    return;
-  }
+    if (!product) {
+      alert("Product not found");
+      return;
+    }
 
-  router.push(
-    `/${product.selectCategory}?search=${encodeURIComponent(search)}`
-  );
-};
+    router.push(
+      `/${product.selectCategory}?search=${encodeURIComponent(search)}`
+    );
+  };
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -52,7 +50,7 @@ const handleSearch = async () => {
         //  Here redux also i have been used becauase of Instant UI i need in Butoo
         dispatch(setCartItems(data));
       } catch (error) {
-        console.log(error);
+        console.log(error); 
       }
     };
 

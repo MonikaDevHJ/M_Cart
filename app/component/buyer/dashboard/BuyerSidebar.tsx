@@ -3,9 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { RootState } from "@/redux/store";
+import { setCartItems } from "@/redux/cartSlice";
 
 import mcartlogo4 from "../../../../public/assets/mcartlogo4.png";
+
 import {
   FaHome,
   FaBoxOpen,
@@ -18,8 +23,6 @@ import {
   FaHeadset,
   FaCog,
   FaChevronRight,
-  FaShoppingBag,
-  FaBell,
 } from "react-icons/fa";
 
 type MenuItem = {
@@ -32,29 +35,110 @@ type MenuItem = {
 const BuyerSideBar = () => {
   const pathname = usePathname();
 
+  // Get cart items from Redux
+  const cartItems = useSelector(
+    (state: RootState) => state.cart.items
+  );
+
+  // Get cart count
+  const cartCount = cartItems.length;
+
+  const dispatch = useDispatch();
+
+  // Fetch cart items from API
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        const res = await fetch("/api/cart");
+
+        const data = await res.json();
+
+        // Store cart items in Redux
+        dispatch(setCartItems(data));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchCartItems();
+  }, [dispatch]);
+
   const menuItems: MenuItem[] = [
-    { name: "Dashboard", icon: <FaHome />, link: "/buyer" },
-    { name: "My Orders", icon: <FaBoxOpen />, link: "/buyer/orders" },
-    { name: "Wishlist", icon: <FaHeart />, link: "/buyer/wishlist" },
-    { name: "Cart", icon: <FaShoppingCart />, link: "/buyer/cart", badge: "3" },
-    { name: "Addresses", icon: <FaMapMarkerAlt />, link: "/buyer/addresses" },
-    { name: "Profile", icon: <FaUser />, link: "/buyer/profile" },
-    { name: "Coupons", icon: <FaTicketAlt />, link: "/buyer/coupons" },
-    { name: "Reviews", icon: <FaStar />, link: "/buyer/reviews" },
-    { name: "Support", icon: <FaHeadset />, link: "/buyer/support" },
-    { name: "Settings", icon: <FaCog />, link: "/buyer/settings" },
+    {
+      name: "Dashboard",
+      icon: <FaHome />,
+      link: "/buyer",
+    },
+    {
+      name: "My Orders",
+      icon: <FaBoxOpen />,
+      link: "/buyer/orders",
+    },
+    {
+      name: "Wishlist",
+      icon: <FaHeart />,
+      link: "/buyer/wishlist",
+    },
+    {
+      name: "Cart",
+      icon: <FaShoppingCart />,
+      link: "/cart",
+      badge: cartCount > 0 ? cartCount.toString() : undefined,
+    },
+    {
+      name: "Addresses",
+      icon: <FaMapMarkerAlt />,
+      link: "/buyer/addresses",
+    },
+    {
+      name: "Profile",
+      icon: <FaUser />,
+      link: "/buyer/profile",
+    },
+    {
+      name: "Coupons",
+      icon: <FaTicketAlt />,
+      link: "/buyer/coupons",
+    },
+    {
+      name: "Reviews",
+      icon: <FaStar />,
+      link: "/buyer/reviews",
+    },
+    {
+      name: "Support",
+      icon: <FaHeadset />,
+      link: "/buyer/support",
+    },
+    {
+      name: "Settings",
+      icon: <FaCog />,
+      link: "/buyer/settings",
+    },
   ];
 
   return (
     <aside className="hidden md:flex w-[280px] min-h-screen flex-col rounded-[28px] bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white p-5 shadow-2xl h-full">
+
       {/* BRAND */}
       <Link href="./" className="flex items-center gap-3">
         <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm">
-          <Image src={mcartlogo4} alt="M_Cart Logo" width={30} height={30} />
+          <Image
+            src={mcartlogo4}
+            alt="M_Cart Logo"
+            width={30}
+            height={30}
+          />
         </div>
+
         <div>
-          <p className="text-xl font-bold tracking-tight">M_Cart</p>
-          <p className="text-xs text-white/60">Buyer Panel</p>
+          <p className="text-xl font-bold tracking-tight">
+            M_Cart
+          </p>
+
+          <p className="text-xs text-white/60">
+            Buyer Panel
+          </p>
         </div>
       </Link>
 
@@ -62,7 +146,8 @@ const BuyerSideBar = () => {
       <nav className="mt-8 space-y-2">
         {menuItems.map((item) => {
           const isActive =
-            pathname === item.link || pathname.startsWith(item.link + "/");
+            pathname === item.link ||
+            pathname.startsWith(item.link + "/");
 
           return (
             <Link
@@ -74,10 +159,15 @@ const BuyerSideBar = () => {
                   : "hover:bg-white/8 text-white/85 hover:text-white"
               }`}
             >
-              <span className="text-lg opacity-95">{item.icon}</span>
+              <span className="text-lg opacity-95">
+                {item.icon}
+              </span>
 
-              <span className="text-sm font-medium flex-1">{item.name}</span>
+              <span className="text-sm font-medium flex-1">
+                {item.name}
+              </span>
 
+              {/* CART BADGE */}
               {item.badge ? (
                 <span className="min-w-6 h-6 px-2 rounded-full bg-violet-500 text-[11px] font-bold flex items-center justify-center">
                   {item.badge}
@@ -93,12 +183,17 @@ const BuyerSideBar = () => {
       {/* BOTTOM CARD */}
       <div className="mt-auto pt-6">
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-violet-500 via-purple-500 to-fuchsia-500 p-5 shadow-lg">
+
           <div className="absolute -right-5 -top-5 h-20 w-20 rounded-full bg-white/10 blur-xl" />
+
           <div className="absolute right-5 top-5 text-yellow-300 text-xl">
             ☀️
           </div>
 
-          <p className="text-lg font-bold">Big Summer Sale</p>
+          <p className="text-lg font-bold">
+            Big Summer Sale
+          </p>
+
           <p className="mt-2 text-sm text-white/85 leading-6">
             Up to 50% off on top brands
           </p>
