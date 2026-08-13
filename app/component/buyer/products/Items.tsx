@@ -16,11 +16,10 @@ type Product = {
   stockQuantity: number;
 };
 
-const Items = ({items}:{items : Product[]} ) => {
+const Items = ({ items }: { items: Product[] }) => {
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [addCart, setAddedCart] = useState<string[]>([]);
   const [useRole, setUserRole] = useState("");
-
 
   useEffect(() => {
     const fetchUserRole = async () => {
@@ -56,10 +55,42 @@ const Items = ({items}:{items : Product[]} ) => {
     fetchCartItems();
   }, []);
 
-  const toggleWishlist = (id: string) => {
-    setWishlist((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
-    );
+  const toggleWishlist = async (id: string) => {
+    const isWishlisted = wishlist.includes(id);
+
+    try {
+      if (isWishlisted) {
+        // REMOVE FROM WISHLIST
+        const res = await fetch(`/api/wishlist/${id}`, {
+          method: "DELETE"
+        });
+
+        if (!res.ok) {
+          throw new Error("Failed to remove wishlist");
+        }
+
+        setWishlist((prev) => prev.filter((item) => item !== id));
+      } else {
+        // ADD TO WISHLIST
+        const res = await fetch("/api/wishlist", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            productId: id
+          })
+        });
+
+        if (!res.ok) {
+          throw new Error("Failed to add wishlist");
+        }
+
+        setWishlist((prev) => [...prev, id]);
+      }
+    } catch (error) {
+      console.log("Wishlist error:", error);
+    }
   };
 
   const itemAddedToCart = async (item: Product) => {
@@ -92,6 +123,24 @@ const Items = ({items}:{items : Product[]} ) => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    const fetchWishlistItems = async () => {
+      try {
+        const res = await fetch("/api/wishlist");
+
+        const data = await res.json();
+
+        const wishlistProductIds = data.map((item: any) => item.productId);
+
+        setWishlist(wishlistProductIds);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchWishlistItems();
+  }, []);
 
   const { isSignedIn } = useUser();
   console.log("user Role", useRole);
