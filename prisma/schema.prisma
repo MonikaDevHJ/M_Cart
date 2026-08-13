@@ -41,7 +41,23 @@ model Product {
 
   created_at DateTime @default(now())
 
-  carts Cart[]
+  carts     Cart[]
+  wishlists Wishlist[]
+}
+
+model Wishlist {
+  id String @id @default(uuid())
+
+  userId    String
+  productId String
+
+  createdAt DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id])
+
+  @@unique([userId, productId])
+  @@index([userId])
+  @@index([productId])
 }
 
 model Cart {
