@@ -170,7 +170,14 @@ const Items = ({ items }: { items: Product[] }) => {
 
                 {/* Heart Icon */}
                 <button
-                  onClick={() => toggleWishlist(item.id)}
+                  onClick= { ()=> {
+                    if(!isSignedIn){
+                      alert("Please Login to add items to wishList");
+                      return;
+
+                    }
+                    toggleWishlist(item.id)
+                  } }
                   className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md hover:scale-110 transition"
                 >
                   {isWishlisted ? (
