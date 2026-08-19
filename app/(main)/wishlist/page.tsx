@@ -44,25 +44,28 @@ const Wishlist = () => {
   }, []);
 
   // Remove from Wishlist
-  const removeFromWishlist = async (productId: string) => {
-    try {
-      const res = await fetch(`/api/wishlist/${productId}`, {
-        method: "DELETE",
-      });
+const removeFromWishlist = async (productId: string) => {
+  try {
+    const res = await fetch(`/api/wishlist/${productId}`, {
+      method: "DELETE",
+    });
 
-      if (!res.ok) {
-        throw new Error("Failed to remove wishlist item");
-      }
+    const data = await res.json();
 
-      // Remove item from UI immediately
-      setWishlistItems((prev) =>
-        prev.filter((item) => item.productId !== productId)
-      );
-    } catch (error) {
-      console.log("Remove wishlist error:", error);
+    console.log("DELETE STATUS:", res.status);
+    console.log("DELETE RESPONSE:", data);
+
+    if (!res.ok) {
+      throw new Error(data?.message || "Failed to remove wishlist item");
     }
-  };
 
+    setWishlistItems((prev) =>
+      prev.filter((item) => item.productId !== productId)
+    );
+  } catch (error) {
+    console.log("Remove wishlist error:", error);
+  }
+};
   return (
     <div className="h-full w-full rounded-2xl p-8">
       {wishlistItems.length === 0 ? (

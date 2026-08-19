@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { productId: string } }
+  { params }: { params: Promise<{ productId: string }> }
 ) {
   const { userId } = await auth();
 
@@ -16,23 +16,41 @@ export async function DELETE(
   }
 
   try {
-    await prisma.wishlist.delete({
+    const { productId } = await params;
+
+    console.log("USER ID:", userId);
+    console.log("PRODUCT ID:", productId);
+
+    if (!productId) {
+      return NextResponse.json(
+        { message: "Product ID is missing" },
+        { status: 400 }
+      );
+    }
+
+    const deletedWishlist = await prisma.wishlist.delete({
       where: {
         userId_productId: {
-          userId,
-          productId: params.productId,
+          userId: userId,
+          productId: productId,
         },
       },
     });
 
+    console.log("DELETED WISHLIST:", deletedWishlist);
+
     return NextResponse.json({
       message: "Removed from wishlist",
+      wishlist: deletedWishlist,
     });
   } catch (error) {
     console.log("WISHLIST DELETE ERROR:", error);
 
     return NextResponse.json(
-      { message: "Something went wrong" },
+      {
+        message: "Something went wrong",
+        error: String(error),
+      },
       { status: 500 }
     );
   }
