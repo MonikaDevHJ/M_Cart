@@ -88,7 +88,7 @@ const BuyerSideBar = () => {
     {
       name: "Addresses",
       icon: <FaMapMarkerAlt />,
-      link: "/buyer/addresses",
+      link: "/cart",
     },
     {
       name: "Profile",
