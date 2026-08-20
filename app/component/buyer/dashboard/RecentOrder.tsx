@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 const RecentOrder = () => {
@@ -83,10 +84,12 @@ const RecentOrder = () => {
             Track your recent purchases
           </p>
         </div>
-
+  
+       <Link href= "myorder">
         <button className="text-sm font-semibold text-purple-600 hover:text-purple-700 hover:underline transition">
           View All
         </button>
+        </Link>
       </div>
 
       {/* TABLE HEADER */}
@@ -177,42 +180,42 @@ const RecentOrder = () => {
           </div>
         ))}
 
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 border-t border-gray-200 pt-6">
-  {/* Previous Button */}
-  <button
-    onClick={() => setCurrentPage((prev) => prev - 1)}
-    disabled={currentPage === 1}
-    className="flex items-center gap-2 px-5 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-purple-50 hover:border-purple-500 hover:text-purple-600 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-gray-300 disabled:hover:text-gray-700"
-  >
-    ← Previous
-  </button>
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 border-t border-gray-200 pt-6">
+          {/* Previous Button */}
+          <button
+            onClick={() => setCurrentPage((prev) => prev - 1)}
+            disabled={currentPage === 1}
+            className="flex items-center gap-2 px-5 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-purple-50 hover:border-purple-500 hover:text-purple-600 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-gray-300 disabled:hover:text-gray-700"
+          >
+            ← Previous
+          </button>
 
-  {/* Page Numbers */}
-  <div className="flex items-center gap-2">
-    {Array.from({ length: totalPages }, (_, index) => (
-      <button
-        key={index}
-        onClick={() => setCurrentPage(index + 1)}
-        className={`w-10 h-10 rounded-lg font-medium transition-all duration-300 ${
-          currentPage === index + 1
-            ? "bg-purple-600 text-white shadow-lg scale-105"
-            : "bg-gray-100 text-gray-700 hover:bg-purple-100 hover:text-purple-600"
-        }`}
-      >
-        {index + 1}
-      </button>
-    ))}
-  </div>
+          {/* Page Numbers */}
+          <div className="flex items-center gap-2">
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentPage(index + 1)}
+                className={`w-10 h-10 rounded-lg font-medium transition-all duration-300 ${
+                  currentPage === index + 1
+                    ? "bg-purple-600 text-white shadow-lg scale-105"
+                    : "bg-gray-100 text-gray-700 hover:bg-purple-100 hover:text-purple-600"
+                }`}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
 
-  {/* Next Button */}
-  <button
-    onClick={() => setCurrentPage((prev) => prev + 1)}
-    disabled={currentPage === totalPages}
-    className="flex items-center gap-2 px-5 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-purple-50 hover:border-purple-500 hover:text-purple-600 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-gray-300 disabled:hover:text-gray-700"
-  >
-    Next →
-  </button>
-</div>
+          {/* Next Button */}
+          <button
+            onClick={() => setCurrentPage((prev) => prev + 1)}
+            disabled={currentPage === totalPages}
+            className="flex items-center gap-2 px-5 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-purple-50 hover:border-purple-500 hover:text-purple-600 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-gray-300 disabled:hover:text-gray-700"
+          >
+            Next →
+          </button>
+        </div>
       </div>
     </div>
   );
