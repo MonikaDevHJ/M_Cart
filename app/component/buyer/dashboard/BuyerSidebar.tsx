@@ -72,7 +72,7 @@ const BuyerSideBar = () => {
     {
       name: "My Orders",
       icon: <FaBoxOpen />,
-      link: "/buyer/orders",
+      link: "/myorder",
     },
     {
       name: "Wishlist",
