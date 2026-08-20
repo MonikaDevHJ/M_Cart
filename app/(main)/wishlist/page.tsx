@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
+import { useUser } from "@clerk/nextjs";
+import Link from "next/link";
 
 type Product = {
   id: string;
@@ -21,6 +23,7 @@ type WishlistItem = {
 
 const Wishlist = () => {
   const [wishlistItems, setWishlistItems] = useState<WishlistItem[]>([]);
+  const [useRole, setUserRole] = useState("");
 
   // Fetch Wishlist
   useEffect(() => {
@@ -44,28 +47,32 @@ const Wishlist = () => {
   }, []);
 
   // Remove from Wishlist
-const removeFromWishlist = async (productId: string) => {
-  try {
-    const res = await fetch(`/api/wishlist/${productId}`, {
-      method: "DELETE",
-    });
+  const removeFromWishlist = async (productId: string) => {
+    try {
+      const res = await fetch(`/api/wishlist/${productId}`, {
+        method: "DELETE"
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    console.log("DELETE STATUS:", res.status);
-    console.log("DELETE RESPONSE:", data);
+      console.log("DELETE STATUS:", res.status);
+      console.log("DELETE RESPONSE:", data);
 
-    if (!res.ok) {
-      throw new Error(data?.message || "Failed to remove wishlist item");
+      if (!res.ok) {
+        throw new Error(data?.message || "Failed to remove wishlist item");
+      }
+
+      setWishlistItems((prev) =>
+        prev.filter((item) => item.productId !== productId)
+      );
+    } catch (error) {
+      console.log("Remove wishlist error:", error);
     }
+  };
 
-    setWishlistItems((prev) =>
-      prev.filter((item) => item.productId !== productId)
-    );
-  } catch (error) {
-    console.log("Remove wishlist error:", error);
-  }
-};
+  const { isSignedIn } = useUser();
+  console.log("User Role", useRole);
+
   return (
     <div className="h-full w-full rounded-2xl p-8">
       {wishlistItems.length === 0 ? (
@@ -82,8 +89,7 @@ const removeFromWishlist = async (productId: string) => {
             const discountAmount =
               (product.productPrice * product.offerPercent) / 100;
 
-            const finalPrice =
-              product.productPrice - discountAmount;
+            const finalPrice = product.productPrice - discountAmount;
 
             return (
               <div
@@ -95,10 +101,7 @@ const removeFromWishlist = async (productId: string) => {
                   {/* Image */}
                   <div className="w-full h-50 flex items-center justify-center rounded-xl overflow-hidden">
                     <Image
-                      src={
-                        product.productImage ||
-                        "/placeholder-product.png"
-                      }
+                      src={product.productImage || "/placeholder-product.png"}
                       alt={product.productName}
                       width={300}
                       height={200}
@@ -108,9 +111,7 @@ const removeFromWishlist = async (productId: string) => {
 
                   {/* Heart Icon */}
                   <button
-                    onClick={() =>
-                      removeFromWishlist(product.id)
-                    }
+                    onClick={() => removeFromWishlist(product.id)}
                     className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md hover:scale-110 transition"
                   >
                     <FaHeart className="text-red-500" />
@@ -123,9 +124,7 @@ const removeFromWishlist = async (productId: string) => {
                   <div className="flex justify-between">
                     {/* Product Name */}
                     <div>
-                      <p className="font-bold text-xl">
-                        {product.productName}
-                      </p>
+                      <p className="font-bold text-xl">{product.productName}</p>
                     </div>
 
                     {/* Product Price */}
@@ -159,9 +158,7 @@ const removeFromWishlist = async (productId: string) => {
 
                     {/* Ratings */}
                     <div className="flex items-center gap-1">
-                      <span className="text-yellow-400 text-lg">
-                        ★
-                      </span>
+                      <span className="text-yellow-400 text-lg">★</span>
 
                       <span className="text-sm font-semibold text-gray-700">
                         4.5
@@ -174,10 +171,26 @@ const removeFromWishlist = async (productId: string) => {
                   </div>
 
                   {/* Add To Cart Button */}
-                  <div className="mt-4">
+                  {!isSignedIn ? (
+                    <Link href="/buyer-signup">
+                      <button className="mt-4 w-full p-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold">
+                        Login To Buy
+                      </button>
+                    </Link>
+                  ) : useRole === "seller" ? (
                     <button
-                      className="w-full p-2 rounded-lg bg-fuchsia-600 hover:bg-fuchsia-700 text-white font-semibold transition"
+                      disabled
+                      className="mt-4 w-full p-2 rounded-lg bg-gray-500 cursor-not-allowed text-white font-semibold"
                     >
+                      {" "}
+                      Seller Cannot Buy{" "}
+                    </button>
+                  ) : (
+                    <button> </button>
+                  )}
+
+                  <div className="mt-4">
+                    <button className="w-full p-2 rounded-lg bg-fuchsia-600 hover:bg-fuchsia-700 text-white font-semibold transition">
                       Add To Cart
                     </button>
                   </div>
