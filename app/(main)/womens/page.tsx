@@ -1,10 +1,14 @@
 import Filter from "../../component/buyer/products/Filter";
-import Items from "../../component/buyer/products/Items"
+import Items from "../../component/buyer/products/Items";
 import { prisma } from "@/lib/prisma";
 
 export const revalidate = 60;
 
-const WomensPage = async () => {
+const WomensPage = async ({
+  searchParams
+}: {
+  searchParams: Promise<{ search?: string }>;
+}) => {
   const products = await prisma.product.findMany({
     where: {
       selectCategory: "womens"
