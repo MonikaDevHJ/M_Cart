@@ -4,24 +4,26 @@ import { NextResponse } from "next/server";
 
 export async function DELETE(
   req: Request,
-  { params }: { params: Promise<{ productId: string }> }
+  context: { params: Promise<{ productId: string }> }
 ) {
-  const { userId } = await auth();
-
-  if (!userId) {
-    return NextResponse.json(
-      { message: "Please login" },
-      { status: 401 }
-    );
-  }
-
   try {
-    const { productId } = await params;
+    const { userId } = await auth();
 
-    console.log("USER ID:", userId);
-    console.log("PRODUCT ID:", productId);
+    if (!userId) {
+      return NextResponse.json(
+        { message: "Please login" },
+        { status: 401 }
+      );
+    }
 
-    if (!productId) {
+    console.log("CONTEXT:", context);
+
+    const params = await context.params;
+
+    console.log("PARAMS:", params);
+    console.log("PRODUCT ID:", params.productId);
+
+    if (!params.productId) {
       return NextResponse.json(
         { message: "Product ID is missing" },
         { status: 400 }
@@ -31,8 +33,8 @@ export async function DELETE(
     const deletedWishlist = await prisma.wishlist.delete({
       where: {
         userId_productId: {
-          userId: userId,
-          productId: productId,
+          userId,
+          productId: params.productId,
         },
       },
     });

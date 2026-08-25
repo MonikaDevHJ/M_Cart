@@ -77,7 +77,8 @@ const BuyerSideBar = () => {
     {
       name: "Wishlist",
       icon: <FaHeart />,
-      link: "wishlist",
+      link: "/wishlist",
+      
     },
     {
       name: "Cart",
