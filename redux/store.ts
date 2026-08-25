@@ -1,15 +1,20 @@
-// it will Create Redux Store means it is the brain of Redux Store
+// Redux Store
+// This is the central place where all Redux states are registered.
+
 import { configureStore } from "@reduxjs/toolkit";
+
 import cartReducer from "./cartSlice";
+import wishlistReducer from "./wishlistSlice";
 
 export const store = configureStore({
   reducer: {
-    cart: cartReducer
-  }
+    cart: cartReducer,
+    wishlist: wishlistReducer,
+  },
 });
 
 // Root State Type
-export type RootState = ReturnType <typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
 
-// dispatch type
-export type AppDispatch = typeof store.dispatch
+// Dispatch Type
+export type AppDispatch = typeof store.dispatch;
