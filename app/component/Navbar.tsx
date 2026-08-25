@@ -31,6 +31,7 @@ const Navbar = () => {
     );
 
     const product = await res.json();
+    console.log("SEARCH RESULT", product);
 
     if (!product) {
       alert("Product not found");
@@ -50,7 +51,7 @@ const Navbar = () => {
         //  Here redux also i have been used becauase of Instant UI i need in Butoo
         dispatch(setCartItems(data));
       } catch (error) {
-        console.log(error); 
+        console.log(error);
       }
     };
 

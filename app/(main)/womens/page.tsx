@@ -9,6 +9,11 @@ const WomensPage = async ({
 }: {
   searchParams: Promise<{ search?: string }>;
 }) => {
+
+  const params = await searchParams;
+
+  console.log("WOMENS SEARCH:", params.search);
+
   const products = await prisma.product.findMany({
     where: {
       selectCategory: "womens"
