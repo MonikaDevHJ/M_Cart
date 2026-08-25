@@ -37,6 +37,8 @@ const product = await prisma.product.findFirst({
     ],
   },
 });
+console.log("SEARCH", search);
+console.log("PRODUCT FROM PRISMA", product)
 
     return NextResponse.json(product);
   } catch (error) {
