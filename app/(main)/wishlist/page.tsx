@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
-import { useDispatch, UseDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { setWishlistItems } from "@/redux/wishlistSlice";
 
@@ -176,7 +176,7 @@ const Wishlist = () => {
       // Remove from UI immediately
       dispatch(
         setWishlistItems(
-          wishlistItems.filter((item) => item.productId! == productId)
+          wishlistItems.filter((item) => item.productId !== productId)
         )
       );
     } catch (error) {
