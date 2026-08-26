@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
+import { useDispatch, UseDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { setWishlistItems } from "@/redux/wishlistSlice";
 
 type Product = {
   id: string;
@@ -22,9 +25,12 @@ type WishlistItem = {
 };
 
 const Wishlist = () => {
-  const [wishlistItems, setWishlistItems] = useState<WishlistItem[]>([]);
   const [addCart, setAddedCart] = useState<string[]>([]);
   const [useRole, setUserRole] = useState("");
+
+  const dispatch = useDispatch();
+
+  const wishlistItems = useSelector((state: RootState) => state.wishlist.items);
 
   const { isSignedIn } = useUser();
 
@@ -68,8 +74,9 @@ const Wishlist = () => {
         }
 
         const data = await res.json();
+        console.log("WishList API:", data);
 
-        setWishlistItems(data);
+        dispatch(setWishlistItems(data));
       } catch (error) {
         console.log("Wishlist fetch error:", error);
       }
@@ -78,7 +85,7 @@ const Wishlist = () => {
     if (isSignedIn) {
       fetchWishlist();
     }
-  }, [isSignedIn]);
+  }, [isSignedIn, dispatch]);
 
   // =========================
   // Fetch Existing Cart Items
@@ -123,11 +130,11 @@ const Wishlist = () => {
       const res = await fetch("/api/cart", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          productId: item.id,
-        }),
+          productId: item.id
+        })
       });
 
       const data = await res.json();
@@ -154,7 +161,7 @@ const Wishlist = () => {
   const removeFromWishlist = async (productId: string) => {
     try {
       const res = await fetch(`/api/wishlist/${productId}`, {
-        method: "DELETE",
+        method: "DELETE"
       });
 
       const data = await res.json();
@@ -163,14 +170,14 @@ const Wishlist = () => {
       console.log("DELETE RESPONSE:", data);
 
       if (!res.ok) {
-        throw new Error(
-          data?.message || "Failed to remove wishlist item"
-        );
+        throw new Error(data?.message || "Failed to remove wishlist item");
       }
 
       // Remove from UI immediately
-      setWishlistItems((prev) =>
-        prev.filter((item) => item.productId !== productId)
+      dispatch(
+        setWishlistItems(
+          wishlistItems.filter((item) => item.productId! == productId)
+        )
       );
     } catch (error) {
       console.log("Remove wishlist error:", error);
@@ -199,8 +206,7 @@ const Wishlist = () => {
             const discountAmount =
               (product.productPrice * product.offerPercent) / 100;
 
-            const finalPrice =
-              product.productPrice - discountAmount;
+            const finalPrice = product.productPrice - discountAmount;
 
             const isAddedToCart = addCart.includes(product.id);
 
@@ -213,10 +219,7 @@ const Wishlist = () => {
                 <div className="relative border border-r-fuchsia-600">
                   <div className="w-full h-50 flex items-center justify-center rounded-xl overflow-hidden">
                     <Image
-                      src={
-                        product.productImage ||
-                        "/placeholder-product.png"
-                      }
+                      src={product.productImage || "/placeholder-product.png"}
                       alt={product.productName}
                       width={300}
                       height={200}
@@ -226,9 +229,7 @@ const Wishlist = () => {
 
                   {/* Remove Wishlist */}
                   <button
-                    onClick={() =>
-                      removeFromWishlist(product.id)
-                    }
+                    onClick={() => removeFromWishlist(product.id)}
                     className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md hover:scale-110 transition"
                   >
                     <FaHeart className="text-red-500" />
@@ -240,9 +241,7 @@ const Wishlist = () => {
                   {/* Product Name + Price */}
                   <div className="flex justify-between">
                     <div>
-                      <p className="font-bold text-xl">
-                        {product.productName}
-                      </p>
+                      <p className="font-bold text-xl">{product.productName}</p>
                     </div>
 
                     <div className="text-right">
@@ -274,9 +273,7 @@ const Wishlist = () => {
                     </p>
 
                     <div className="flex items-center gap-1">
-                      <span className="text-yellow-400 text-lg">
-                        ★
-                      </span>
+                      <span className="text-yellow-400 text-lg">★</span>
 
                       <span className="text-sm font-semibold text-gray-700">
                         4.5
@@ -313,9 +310,7 @@ const Wishlist = () => {
                           : "bg-fuchsia-600 hover:bg-fuchsia-700"
                       }`}
                     >
-                      {isAddedToCart
-                        ? "Item Added In Cart ✅"
-                        : "Add To Cart"}
+                      {isAddedToCart ? "Item Added In Cart ✅" : "Add To Cart"}
                     </button>
                   )}
                 </div>
