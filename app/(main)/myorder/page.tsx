@@ -72,29 +72,29 @@ const RecentOrder = () => {
   const currentOrders = orders.slice(startIndex, startIndex + itemsPerPage);
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-4 sm:p-5">
+    <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-4 sm:p-5  ">
       {/* HEADER */}
-      <div className="flex items-center justify-between mb-5">
+      <div className="flex items-center  justify-between mb-5">
         <div>
-          <h2 className="text-lg sm:text-xl font-bold text-gray-800">
+          <h2 className="text-lg sm:text-3xl font-extrabold text-gray-800">
             Recent Orders
           </h2>
 
-          <p className="text-xs sm:text-sm text-gray-500 mt-1">
+          <p className="text-xl lg:text-xl font-medium sm:text-sm text-gray-500 mt-1">
             Track your recent purchases
           </p>
         </div>
-  
-       <Link href= "myorder">
-        <button className="text-sm font-semibold text-purple-600 hover:text-purple-700 hover:underline transition">
-          View All
-        </button>
+
+        <Link href="myorder">
+          <button className="text-sm font-semibold text-purple-600 hover:text-purple-700 hover:underline transition">
+            View All
+          </button>
         </Link>
       </div>
 
       {/* TABLE HEADER */}
-      <div className="hidden md:grid grid-cols-12 gap-4 px-4 py-3 bg-gray-50 rounded-lg text-xs font-semibold text-gray-500 uppercase tracking-wide">
-        <div className="col-span-5">Product</div>
+      <div className="hidden border md:grid grid-cols-12 gap-4 px-4 py-3 bg-gray-50 rounded-lg text-xs font-semibold text-gray-500 uppercase tracking-wide">
+        <div className="col-span-5">Product detail</div>
 
         <div className="col-span-2">Price</div>
 
@@ -106,14 +106,14 @@ const RecentOrder = () => {
       </div>
 
       {/* ORDERS */}
-      <div className="mt-2 divide-y divide-gray-100">
+      <div className="mt-2 divide-y divide-gray-100 bodrer border-b-gray-600">
         {currentOrders.map((order) => (
           <div
             key={order.id}
-            className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-4 items-center px-2 md:px-4 py-4 hover:bg-gray-50 rounded-lg transition"
+            className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-4 items-center px-2 md:px-4 py-4 hover:bg-gray-200 rounded-lg transition"
           >
             {/* PRODUCT */}
-            <div className="md:col-span-5 flex items-center gap-3 min-w-0">
+            <div className="md:col-span-5 flex items-center gap-6 min-w-0">
               {/* IMAGE */}
               <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gray-100 rounded-xl flex items-center justify-center overflow-hidden shrink-0">
                 <Image
