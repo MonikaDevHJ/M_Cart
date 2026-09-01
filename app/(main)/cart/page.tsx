@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import Item from "../../component/cart/CartItem";
 import Amount from "../../component/cart/Amount";
 import { useDispatch } from "react-redux";
