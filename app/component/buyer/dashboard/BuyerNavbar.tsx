@@ -1,4 +1,6 @@
 "use client";
+import Link from "next/link";
+
 
 import { Bell, LogOut, Trash2, UserCircle2 } from "lucide-react";
 
@@ -28,7 +30,7 @@ const BuyerNavbar = () => {
             </button>
 
             {/* Profile */}
-            <button className="flex items-center gap-2 sm:gap-3 px-3 py-2 rounded-full bg-gray-100 hover:bg-gray-200 transition">
+            <Link href="buyerprofile" className="flex items-center gap-2 sm:gap-3 px-3 py-2 rounded-full bg-gray-100 hover:bg-gray-200 transition">
               <div className="w-9 h-9 rounded-full bg-purple-100 flex items-center justify-center">
                 <UserCircle2 className="w-5 h-5 text-purple-600" />
               </div>
@@ -38,7 +40,7 @@ const BuyerNavbar = () => {
                 </p>
                 <p className="text-xs text-gray-500">Buyer</p>
               </div>
-            </button>
+            </Link>
 
             {/* Logout */}
             <button className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-fuchsia-600 hover:bg-fuchsia-700 text-white transition">

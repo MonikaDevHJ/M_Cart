@@ -10,6 +10,7 @@ import { RootState } from "@/redux/store";
 import { setCartItems } from "@/redux/cartSlice";
 import { setWishlistItems } from "@/redux/wishlistSlice";
 
+
 import mcartlogo4 from "../../../../public/assets/mcartlogo4.png";
 
 import {
@@ -119,7 +120,7 @@ const BuyerSideBar = () => {
     {
       name: "Profile",
       icon: <FaUser />,
-      link: "/buyer/profile"
+      link: "/buyerprofile"
     },
     {
       name: "Coupons",
