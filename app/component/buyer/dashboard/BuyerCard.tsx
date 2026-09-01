@@ -1,4 +1,6 @@
 "use client";
+import Link from "next/link";
+
 
 import {
   ShoppingBag,
@@ -17,6 +19,7 @@ const BuyerCard = () => {
       iconBg: "bg-purple-100",
       iconColor: "text-purple-600",
       linkColor: "text-purple-600",
+      Link : "/myorder"
     },
     {
       title: "Delivered Orders",
@@ -26,6 +29,7 @@ const BuyerCard = () => {
       iconBg: "bg-green-100",
       iconColor: "text-green-600",
       linkColor: "text-green-600",
+      Link : "/delivered"
     },
     {
       title: "In Transit",
@@ -35,6 +39,7 @@ const BuyerCard = () => {
       iconBg: "bg-orange-100",
       iconColor: "text-orange-500",
       linkColor: "text-orange-500",
+      Link : "/trnasit"
     },
     {
       title: "Wishlist Items",
@@ -44,6 +49,7 @@ const BuyerCard = () => {
       iconBg: "bg-blue-100",
       iconColor: "text-blue-600",
       linkColor: "text-blue-600",
+      Link : "/wishlist"
     },
   ];
 
@@ -78,11 +84,11 @@ const BuyerCard = () => {
                   {card.count}
                 </h2>
 
-                <button
+                <Link href={card.Link}
                   className={`text-sm font-medium mt-1 text-left hover:underline ${card.linkColor}`}
                 >
                   {card.linkText}
-                </button>
+                </Link>
               </div>
             </div>
           );

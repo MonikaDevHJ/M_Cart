@@ -25,7 +25,6 @@ import {
   FaCog,
   FaChevronRight
 } from "react-icons/fa";
-import { error } from "console";
 
 type MenuItem = {
   name: string;
