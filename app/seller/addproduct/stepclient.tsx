@@ -1,9 +1,23 @@
 "use client";
 
 import { useForm } from "@/app/context/FormContext";
+import { useState } from "react";
 
 const StepClient = () => {
   const { state, dispatch } = useForm();
+  const [search, setSearch] = useState("");
+
+  const locations = [
+    "Bengaluru, Karnataka, India",
+    "Bengaluru Rural, Karnataka, India",
+    "Mysuru, Karnataka, India",
+    "Mangaluru, Karnataka, India",
+    "Hubballi, Karnataka, India"
+  ];
+
+  const filteredLocation = locations.filter((location) => {
+    return location.toLowerCase().includes(search.toLowerCase());
+  });
 
   return (
     <div className="space-y-10">
@@ -18,8 +32,6 @@ const StepClient = () => {
 
       {/* FORM */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        
-     
         <input
           type="text"
           placeholder="ComPany Name"
@@ -85,18 +97,43 @@ const StepClient = () => {
           }
         />
 
-        <input
-          type="text"
-          placeholder="Store Location"
-          className="border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
-          value = {state.client.Location}
-          onChange={ (e)=>
-            dispatch({
-              type: "SET_CLIENT",
-              payload : {Location : e.target.value}
-            })
-           }
-        />
+        <div className="relative">
+          <input
+            type="text"
+            placeholder="Store Location"
+            className="w-full border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
+            value={state.client.Location}
+            onChange={(e) => {
+              setSearch(e.target.value);
+
+              dispatch({
+                type: "SET_CLIENT",
+                payload: { Location: e.target.value }
+              });
+            }}
+          />
+
+          {search && filteredLocation.length > 0 && (
+            <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
+              {filteredLocation.map((location) => (
+                <div
+                  key={location}
+                  onClick={() => {
+                    setSearch("");
+
+                      dispatch({
+                        type: "SET_CLIENT",
+                      payload: { Location: location }
+                    });
+                  }}
+                  className="px-5 py-3 hover:bg-gray-100 cursor-pointer"
+                >
+                  {location}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* TEXTAREA */}
@@ -104,13 +141,13 @@ const StepClient = () => {
         rows={5}
         placeholder="Business Description..."
         className="w-full border border-gray-500 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-indigo-500 hover:border-indigo-400 transition-all duration-300"
-        value = {state.client.Description}
-        onChange={ (e)=> 
-          dispatch ({
-            type:"SET_CLIENT",
-            payload : {Description : e.target.value}
+        value={state.client.Description}
+        onChange={(e) =>
+          dispatch({
+            type: "SET_CLIENT",
+            payload: { Description: e.target.value }
           })
-         }
+        }
       />
 
       {/* BUTTON */}
