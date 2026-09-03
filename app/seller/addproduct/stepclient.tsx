@@ -7,17 +7,7 @@ const StepClient = () => {
   const { state, dispatch } = useForm();
   const [search, setSearch] = useState("");
 
-  const locations = [
-    "Bengaluru, Karnataka, India",
-    "Bengaluru Rural, Karnataka, India",
-    "Mysuru, Karnataka, India",
-    "Mangaluru, Karnataka, India",
-    "Hubballi, Karnataka, India"
-  ];
-
-  const filteredLocation = locations.filter((location) => {
-    return location.toLowerCase().includes(search.toLowerCase());
-  });
+  
 
   return (
     <div className="space-y-10">
