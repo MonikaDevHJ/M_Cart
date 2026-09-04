@@ -1,13 +1,27 @@
 "use client";
 
 import { useForm } from "@/app/context/FormContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const StepClient = () => {
   const { state, dispatch } = useForm();
   const [search, setSearch] = useState("");
+  const [locations, setLocations] = useState<any[]>([]);
 
-  
+  useEffect(() => {
+    if (search.length < 3) {
+      setLocations([]);
+      return;
+    }
+
+    const fetchLocations = async () => {
+      const res = await fetch(`/api/location?q=${search}`);
+      const data = await res.json();
+
+      setLocations(data);
+    };
+    fetchLocations();
+  }, [search]);
 
   return (
     <div className="space-y-10">
@@ -103,16 +117,16 @@ const StepClient = () => {
             }}
           />
 
-          {search && filteredLocation.length > 0 && (
+          {search && locations.length > 0 && (
             <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
-              {filteredLocation.map((location) => (
+              {locations.map((location) => (
                 <div
                   key={location}
                   onClick={() => {
                     setSearch("");
 
-                      dispatch({
-                        type: "SET_CLIENT",
+                    dispatch({
+                      type: "SET_CLIENT",
                       payload: { Location: location }
                     });
                   }}
