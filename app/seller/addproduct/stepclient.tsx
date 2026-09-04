@@ -14,13 +14,14 @@ const StepClient = () => {
       return;
     }
 
-    const fetchLocations = async () => {
+    const timer = setTimeout(async () => {
       const res = await fetch(`/api/location?q=${search}`);
       const data = await res.json();
 
       setLocations(data);
-    };
-    fetchLocations();
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, [search]);
 
   return (
@@ -121,18 +122,18 @@ const StepClient = () => {
             <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
               {locations.map((location) => (
                 <div
-                  key={location}
+                  key={location.place_id}
                   onClick={() => {
                     setSearch("");
 
                     dispatch({
                       type: "SET_CLIENT",
-                      payload: { Location: location }
+                      payload: { Location: location.display_name }
                     });
                   }}
                   className="px-5 py-3 hover:bg-gray-100 cursor-pointer"
                 >
-                  {location}
+                  {location.display_name}
                 </div>
               ))}
             </div>
