@@ -35,8 +35,8 @@ const BuyerProfile = () => {
           <div className="">
             <p className="text-2xl font-bold text-gray-800">Monika H J</p>
 
-            <p className="text-gray-50">monikahj7@gmail.com</p>
-            <p className="text-gray-50">+91 8296612973</p>
+            <p className="text-gray-500">monikahj7@gmail.com</p>
+            <p className="text-gray-500">+91 8296612973</p>
           </div>
         </div>
 
@@ -57,7 +57,6 @@ const BuyerProfile = () => {
               {/* Icon */}
               <div className="w-12 h-12 rounded-xl  bg-fuchsia-100 flex items-center justify-center">
                 <span>{card.icon}</span>
-
               </div>
 
               {/* details */}
@@ -68,6 +67,74 @@ const BuyerProfile = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Personal Information */}
+      <div className="mt-8 bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+        <h2 className="text-2xl font-bold text-gray-800">
+          Personal Information
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+          {/* Full Name */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Full Name
+            </label>
+
+            <input
+              type="text"
+              placeholder="Enter your name"
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-fuchsia-600 focus:ring-1 focus:ring-fuchsia-600"
+            />
+          </div>
+
+          {/* Email */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Email
+            </label>
+
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-fuchsia-600 focus:ring-1 focus:ring-fuchsia-600"
+            />
+          </div>
+
+          {/* Phone */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Phone
+            </label>
+
+            <input
+              type="tel"
+              placeholder="Enter your phone number"
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-fuchsia-600 focus:ring-1 focus:ring-fuchsia-600"
+            />
+          </div>
+
+          {/* Location */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Location
+            </label>
+
+            <input
+              type="text"
+              placeholder="Enter your location"
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-fuchsia-600 focus:ring-1 focus:ring-fuchsia-600"
+            />
+          </div>
+        </div>
+
+        {/* Save Button */}
+        <div className="mt-7">
+          <button className="bg-fuchsia-800 hover:bg-fuchsia-700 text-white px-6 py-3 rounded-xl font-semibold transition">
+            Save Changes
+          </button>
+        </div>
       </div>
     </div>
   );
