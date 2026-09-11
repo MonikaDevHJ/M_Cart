@@ -136,6 +136,71 @@ const BuyerProfile = () => {
           </button>
         </div>
       </div>
+
+      {/* Account Setting */}
+      {/* Account Settings */}
+      <div className="mt-8 bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+        <h2 className="text-2xl font-bold text-gray-800">Account Settings</h2>
+
+        <div className="mt-6">
+          {/* Change Password */}
+          <div className="flex items-center justify-between py-5 border-b border-gray-200 cursor-pointer hover:bg-gray-50 px-3 rounded-xl">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-fuchsia-100 flex items-center justify-center">
+                🔒
+              </div>
+
+              <div>
+                <p className="font-semibold text-gray-800">Change Password</p>
+
+                <p className="text-sm text-gray-500 mt-1">
+                  Update your password for better security
+                </p>
+              </div>
+            </div>
+
+            <span className="text-gray-500 text-xl">→</span>
+          </div>
+
+          {/* Notifications */}
+          <div className="flex items-center justify-between py-5 border-b border-gray-200 cursor-pointer hover:bg-gray-50 px-3 rounded-xl">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-yellow-100 flex items-center justify-center">
+                🔔
+              </div>
+
+              <div>
+                <p className="font-semibold text-gray-800">Notifications</p>
+
+                <p className="text-sm text-gray-500 mt-1">
+                  Manage your notification preferences
+                </p>
+              </div>
+            </div>
+
+            <span className="text-gray-500 text-xl">→</span>
+          </div>
+
+          {/* Logout */}
+          <div className="flex items-center justify-between py-5 cursor-pointer hover:bg-gray-50 px-3 rounded-xl">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center">
+                🚪
+              </div>
+
+              <div>
+                <p className="font-semibold text-gray-800">Logout</p>
+
+                <p className="text-sm text-gray-500 mt-1">
+                  Sign out from your account
+                </p>
+              </div>
+            </div>
+
+            <span className="text-gray-500 text-xl">→</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
