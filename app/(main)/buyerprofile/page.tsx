@@ -1,4 +1,10 @@
+"use client";
+
+import { useState } from "react";
+
 const BuyerProfile = () => {
+  const [isEditOpen, setisEditOpen] = useState(false);
+
   const cards = [
     {
       icon: "📦",
@@ -41,7 +47,10 @@ const BuyerProfile = () => {
         </div>
 
         {/* Edit Button */}
-        <button className="border border-fuchsia-700 text-fuchsia-900 hover:bg-fuchsia-700 hover:text-white px-6 py-3 rounded-xl font-semibold transition">
+        <button
+          onClick={() => setisEditOpen(true)}
+          className="border border-fuchsia-700 text-fuchsia-900 hover:bg-fuchsia-700 hover:text-white px-6 py-3 rounded-xl font-semibold transition"
+        >
           ✏️ Edit Profile
         </button>
       </div>
@@ -137,7 +146,6 @@ const BuyerProfile = () => {
         </div>
       </div>
 
-      {/* Account Setting */}
       {/* Account Settings */}
       <div className="mt-8 bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
         <h2 className="text-2xl font-bold text-gray-800">Account Settings</h2>
