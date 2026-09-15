@@ -211,12 +211,13 @@ const BuyerProfile = () => {
       </div>
 
       {/* Modal */}
+      {/* Edit Profile Modal */}
       {isEditOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white w-full max-w-lg rounded-2xl p-8 shadow-xl">
-            {/* modal Header */}
+            {/* Modal Header */}
             <div className="flex items-center justify-between mb-6">
-              <p className="text-2xl font-bold text-gray-800">Edit Profile</p>
+              <h2 className="text-2xl font-bold text-gray-800">Edit Profile</h2>
 
               <button
                 onClick={() => setIsEditOpen(false)}
@@ -228,12 +229,55 @@ const BuyerProfile = () => {
 
             {/* Modal Content */}
             <div className="space-y-5">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Full Name
+                </label>
 
-              <div className="">
-                <label className="">Full Name</label>
-
+                <input
+                  type="text"
+                  placeholder="Enter your name"
+                  className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-fuchsia-600"
+                />
               </div>
 
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Phone
+                </label>
+
+                <input
+                  type="tel"
+                  placeholder="Enter your phone number"
+                  className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-fuchsia-600"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Location
+                </label>
+
+                <input
+                  type="text"
+                  placeholder="Enter your location"
+                  className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-fuchsia-600"
+                />
+              </div>
+            </div>
+
+            {/* Modal Buttons */}
+            <div className="flex justify-end gap-3 mt-7">
+              <button
+                onClick={() => setIsEditOpen(false)}
+                className="px-5 py-3 rounded-xl border border-gray-300"
+              >
+                Cancel
+              </button>
+
+              <button className="px-5 py-3 rounded-xl bg-fuchsia-800 text-white">
+                Save Changes
+              </button>
             </div>
           </div>
         </div>
