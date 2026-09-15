@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 const BuyerProfile = () => {
-  const [isEditOpen, setisEditOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
 
   const cards = [
     {
@@ -48,7 +48,7 @@ const BuyerProfile = () => {
 
         {/* Edit Button */}
         <button
-          onClick={() => setisEditOpen(true)}
+          onClick={() => setIsEditOpen(true)}
           className="border border-fuchsia-700 text-fuchsia-900 hover:bg-fuchsia-700 hover:text-white px-6 py-3 rounded-xl font-semibold transition"
         >
           ✏️ Edit Profile
@@ -209,6 +209,35 @@ const BuyerProfile = () => {
           </div>
         </div>
       </div>
+
+      {/* Modal */}
+      {isEditOpen && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white w-full max-w-lg rounded-2xl p-8 shadow-xl">
+            {/* modal Header */}
+            <div className="flex items-center justify-between mb-6">
+              <p className="text-2xl font-bold text-gray-800">Edit Profile</p>
+
+              <button
+                onClick={() => setIsEditOpen(false)}
+                className="text-gray-500 hover:text-gray-800 text-2xl"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="space-y-5">
+
+              <div className="">
+                <label className="">Full Name</label>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
