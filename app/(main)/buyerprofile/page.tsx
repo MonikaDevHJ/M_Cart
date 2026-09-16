@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useUser } from "@clerk/nextjs";
 
 const BuyerProfile = () => {
   const [isEditOpen, setIsEditOpen] = useState(false);
+
+  const {user} = useUser();
 
   const cards = [
     {
@@ -41,7 +44,7 @@ const BuyerProfile = () => {
           <div className="">
             <p className="text-2xl font-bold text-gray-800">Monika H J</p>
 
-            <p className="text-gray-500">monikahj7@gmail.com</p>
+            <p className="text-gray-500">{user?.primaryEmailAddress?.emailAddress}</p>
             <p className="text-gray-500">+91 8296612973</p>
           </div>
         </div>
@@ -255,12 +258,12 @@ const BuyerProfile = () => {
 
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Location
+                  Enter You Email
                 </label>
 
                 <input
                   type="text"
-                  placeholder="Enter your location"
+                  placeholder="Enter your Email"
                   className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-fuchsia-600"
                 />
               </div>
