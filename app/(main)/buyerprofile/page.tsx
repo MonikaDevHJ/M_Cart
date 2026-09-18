@@ -1,32 +1,61 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@/redux/store";
+import { setCartItems } from "@/redux/cartSlice";
 
 const BuyerProfile = () => {
   const [isEditOpen, setIsEditOpen] = useState(false);
 
   const { user } = useUser();
 
+    const dispatch = useDispatch();
+
+
+  // Get Cart Item From Redux
+  const cartItem = useSelector((state: RootState) => state.cart.items);
+  // Get Cart Count
+  const cartCount = cartItem.length;
+
+
+  // useEffect(() => {
+  //   const fetchCartItems = async () => {
+  //     try {
+  //       const res = await fetch("/api/cart");
+  //       const data = await res.json();
+
+  //       // Store Cart Item in Redux
+  //       dispatch(setCartItems(data));
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   fetchCartItems();
+  // }, [useDispatch]);
+
   // Card Data
   // Later we will replace count with actual API/database data
+ 
+ 
   const cards = [
     {
       icon: "📦",
       name: "My Orders",
       details: "View your order history",
       count: 5,
-      link: "/buyer/orders",
-      linkText: "View Orders",
+      link: "/myorder",
+      linkText: "View Orders"
     },
     {
       icon: "❤️",
       name: "Wishlist",
       details: "Your saved items",
       count: 10,
-      link: "/buyer/wishlist",
-      linkText: "View Wishlist",
+      link: "/wishlist",
+      linkText: "View Wishlist"
     },
     {
       icon: "📍",
@@ -34,16 +63,16 @@ const BuyerProfile = () => {
       details: "Manage delivery address",
       count: null,
       link: "/buyer/address",
-      linkText: "Manage Address",
+      linkText: "Manage Address"
     },
     {
       icon: "🛒",
       name: "My Cart",
       details: "Your cart items",
-      count: 5,
-      link: "/buyer/cart",
-      linkText: "View Cart",
-    },
+      count: cartCount > 0 ? cartCount.toString() : undefined,
+      link: "/cart",
+      linkText: "View Cart"
+    }
   ];
 
   return (
@@ -59,17 +88,13 @@ const BuyerProfile = () => {
 
           {/* Information */}
           <div>
-            <p className="text-2xl font-bold text-gray-800">
-              Monika H J
-            </p>
+            <p className="text-2xl font-bold text-gray-800">Monika H J</p>
 
             <p className="text-gray-500 mt-1">
               {user?.primaryEmailAddress?.emailAddress}
             </p>
 
-            <p className="text-gray-500 mt-1">
-              +91 8296612973
-            </p>
+            <p className="text-gray-500 mt-1">+91 8296612973</p>
           </div>
         </div>
 
@@ -106,13 +131,9 @@ const BuyerProfile = () => {
 
             {/* Card Details */}
             <div className="mt-5">
-              <p className="font-bold text-gray-800 text-lg">
-                {card.name}
-              </p>
+              <p className="font-bold text-gray-800 text-lg">{card.name}</p>
 
-              <p className="text-sm text-gray-500 mt-1">
-                {card.details}
-              </p>
+              <p className="text-sm text-gray-500 mt-1">{card.details}</p>
             </div>
 
             {/* Link */}
@@ -123,9 +144,7 @@ const BuyerProfile = () => {
               >
                 {card.linkText}
 
-                <span className="text-lg transition-transform">
-                  →
-                </span>
+                <span className="text-lg transition-transform">→</span>
               </Link>
             </div>
           </div>
@@ -202,9 +221,7 @@ const BuyerProfile = () => {
 
       {/* ================= ACCOUNT SETTINGS ================= */}
       <div className="mt-8 bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
-        <h2 className="text-2xl font-bold text-gray-800">
-          Account Settings
-        </h2>
+        <h2 className="text-2xl font-bold text-gray-800">Account Settings</h2>
 
         <div className="mt-6">
           {/* Change Password */}
@@ -215,9 +232,7 @@ const BuyerProfile = () => {
               </div>
 
               <div>
-                <p className="font-semibold text-gray-800">
-                  Change Password
-                </p>
+                <p className="font-semibold text-gray-800">Change Password</p>
 
                 <p className="text-sm text-gray-500 mt-1">
                   Update your password for better security
@@ -225,9 +240,7 @@ const BuyerProfile = () => {
               </div>
             </div>
 
-            <span className="text-gray-500 text-xl">
-              →
-            </span>
+            <span className="text-gray-500 text-xl">→</span>
           </div>
 
           {/* Notifications */}
@@ -238,9 +251,7 @@ const BuyerProfile = () => {
               </div>
 
               <div>
-                <p className="font-semibold text-gray-800">
-                  Notifications
-                </p>
+                <p className="font-semibold text-gray-800">Notifications</p>
 
                 <p className="text-sm text-gray-500 mt-1">
                   Manage your notification preferences
@@ -248,9 +259,7 @@ const BuyerProfile = () => {
               </div>
             </div>
 
-            <span className="text-gray-500 text-xl">
-              →
-            </span>
+            <span className="text-gray-500 text-xl">→</span>
           </div>
 
           {/* Logout */}
@@ -261,9 +270,7 @@ const BuyerProfile = () => {
               </div>
 
               <div>
-                <p className="font-semibold text-gray-800">
-                  Logout
-                </p>
+                <p className="font-semibold text-gray-800">Logout</p>
 
                 <p className="text-sm text-gray-500 mt-1">
                   Sign out from your account
@@ -271,9 +278,7 @@ const BuyerProfile = () => {
               </div>
             </div>
 
-            <span className="text-gray-500 text-xl">
-              →
-            </span>
+            <span className="text-gray-500 text-xl">→</span>
           </div>
         </div>
       </div>
@@ -284,9 +289,7 @@ const BuyerProfile = () => {
           <div className="bg-white w-full max-w-lg rounded-2xl p-8 shadow-xl">
             {/* Modal Header */}
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-800">
-                Edit Profile
-              </h2>
+              <h2 className="text-2xl font-bold text-gray-800">Edit Profile</h2>
 
               <button
                 onClick={() => setIsEditOpen(false)}
