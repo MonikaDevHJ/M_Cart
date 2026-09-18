@@ -2,50 +2,74 @@
 
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
+import Link from "next/link";
 
 const BuyerProfile = () => {
   const [isEditOpen, setIsEditOpen] = useState(false);
 
-  const {user} = useUser();
+  const { user } = useUser();
 
+  // Card Data
+  // Later we will replace count with actual API/database data
   const cards = [
     {
       icon: "📦",
-      name: "My_Order",
-      Details: "View your Order History"
+      name: "My Orders",
+      details: "View your order history",
+      count: 5,
+      link: "/buyer/orders",
+      linkText: "View Orders",
     },
     {
       icon: "❤️",
-      name: "WishList",
-      Details: "Your Saved Items"
+      name: "Wishlist",
+      details: "Your saved items",
+      count: 10,
+      link: "/buyer/wishlist",
+      linkText: "View Wishlist",
     },
     {
       icon: "📍",
-      name: "you Location",
-      Details: "Manage delivery address"
+      name: "My Location",
+      details: "Manage delivery address",
+      count: null,
+      link: "/buyer/address",
+      linkText: "Manage Address",
     },
     {
       icon: "🛒",
-      name: "you Cart",
-      Details: "Your Items"
-    }
+      name: "My Cart",
+      details: "Your cart items",
+      count: 5,
+      link: "/buyer/cart",
+      linkText: "View Cart",
+    },
   ];
 
   return (
     <div>
-      <div className="mt-10 bg-white border border-gray-200 rounded-2xl p-8 flex items-center justify-between shadow-sm ">
-        {/* text */}
+      {/* ================= PROFILE HEADER ================= */}
+      <div className="mt-10 bg-white border border-gray-200 rounded-2xl p-10 flex items-center justify-between shadow-sm">
+        {/* Profile Information */}
         <div className="flex items-center gap-8">
-          {/* profile Image */}
+          {/* Profile Image */}
           <div className="w-28 h-28 rounded-full bg-fuchsia-100 flex items-center justify-center">
             <span className="text-5xl">👤</span>
           </div>
-          {/* Information */}
-          <div className="">
-            <p className="text-2xl font-bold text-gray-800">Monika H J</p>
 
-            <p className="text-gray-500">{user?.primaryEmailAddress?.emailAddress}</p>
-            <p className="text-gray-500">+91 8296612973</p>
+          {/* Information */}
+          <div>
+            <p className="text-2xl font-bold text-gray-800">
+              Monika H J
+            </p>
+
+            <p className="text-gray-500 mt-1">
+              {user?.primaryEmailAddress?.emailAddress}
+            </p>
+
+            <p className="text-gray-500 mt-1">
+              +91 8296612973
+            </p>
           </div>
         </div>
 
@@ -58,30 +82,57 @@ const BuyerProfile = () => {
         </button>
       </div>
 
-      {/* card Section */}
+      {/* ================= CARD SECTION ================= */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-8">
         {cards.map((card, index) => (
           <div
             key={index}
-            className="bg-white border  border-gray-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition cursor-pointer"
+            className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
           >
-            <div className="flex items-center gap-4">
+            {/* Top Section */}
+            <div className="flex items-start justify-between">
               {/* Icon */}
-              <div className="w-12 h-12 rounded-xl  bg-fuchsia-100 flex items-center justify-center">
-                <span>{card.icon}</span>
+              <div className="w-12 h-12 rounded-xl bg-fuchsia-100 flex items-center justify-center">
+                <span className="text-xl">{card.icon}</span>
               </div>
 
-              {/* details */}
-              <div>
-                <p className="font-bold text-gray-800">{card.name}</p>
-                <p className="text-sm text-gray-500 mt-1">{card.Details}</p>
-              </div>
+              {/* Count */}
+              {card.count !== null && (
+                <div className="text-2xl font-bold text-fuchsia-800">
+                  {card.count}
+                </div>
+              )}
+            </div>
+
+            {/* Card Details */}
+            <div className="mt-5">
+              <p className="font-bold text-gray-800 text-lg">
+                {card.name}
+              </p>
+
+              <p className="text-sm text-gray-500 mt-1">
+                {card.details}
+              </p>
+            </div>
+
+            {/* Link */}
+            <div className="mt-5 pt-4 border-t border-gray-100">
+              <Link
+                href={card.link}
+                className="text-fuchsia-700 font-semibold text-sm hover:text-fuchsia-900 flex items-center gap-2"
+              >
+                {card.linkText}
+
+                <span className="text-lg transition-transform">
+                  →
+                </span>
+              </Link>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Personal Information */}
+      {/* ================= PERSONAL INFORMATION ================= */}
       <div className="mt-8 bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
         <h2 className="text-2xl font-bold text-gray-800">
           Personal Information
@@ -149,9 +200,11 @@ const BuyerProfile = () => {
         </div>
       </div>
 
-      {/* Account Settings */}
+      {/* ================= ACCOUNT SETTINGS ================= */}
       <div className="mt-8 bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
-        <h2 className="text-2xl font-bold text-gray-800">Account Settings</h2>
+        <h2 className="text-2xl font-bold text-gray-800">
+          Account Settings
+        </h2>
 
         <div className="mt-6">
           {/* Change Password */}
@@ -162,7 +215,9 @@ const BuyerProfile = () => {
               </div>
 
               <div>
-                <p className="font-semibold text-gray-800">Change Password</p>
+                <p className="font-semibold text-gray-800">
+                  Change Password
+                </p>
 
                 <p className="text-sm text-gray-500 mt-1">
                   Update your password for better security
@@ -170,7 +225,9 @@ const BuyerProfile = () => {
               </div>
             </div>
 
-            <span className="text-gray-500 text-xl">→</span>
+            <span className="text-gray-500 text-xl">
+              →
+            </span>
           </div>
 
           {/* Notifications */}
@@ -181,7 +238,9 @@ const BuyerProfile = () => {
               </div>
 
               <div>
-                <p className="font-semibold text-gray-800">Notifications</p>
+                <p className="font-semibold text-gray-800">
+                  Notifications
+                </p>
 
                 <p className="text-sm text-gray-500 mt-1">
                   Manage your notification preferences
@@ -189,7 +248,9 @@ const BuyerProfile = () => {
               </div>
             </div>
 
-            <span className="text-gray-500 text-xl">→</span>
+            <span className="text-gray-500 text-xl">
+              →
+            </span>
           </div>
 
           {/* Logout */}
@@ -200,7 +261,9 @@ const BuyerProfile = () => {
               </div>
 
               <div>
-                <p className="font-semibold text-gray-800">Logout</p>
+                <p className="font-semibold text-gray-800">
+                  Logout
+                </p>
 
                 <p className="text-sm text-gray-500 mt-1">
                   Sign out from your account
@@ -208,19 +271,22 @@ const BuyerProfile = () => {
               </div>
             </div>
 
-            <span className="text-gray-500 text-xl">→</span>
+            <span className="text-gray-500 text-xl">
+              →
+            </span>
           </div>
         </div>
       </div>
 
-      {/* Modal */}
-      {/* Edit Profile Modal */}
+      {/* ================= EDIT PROFILE MODAL ================= */}
       {isEditOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white w-full max-w-lg rounded-2xl p-8 shadow-xl">
             {/* Modal Header */}
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-800">Edit Profile</h2>
+              <h2 className="text-2xl font-bold text-gray-800">
+                Edit Profile
+              </h2>
 
               <button
                 onClick={() => setIsEditOpen(false)}
@@ -232,6 +298,7 @@ const BuyerProfile = () => {
 
             {/* Modal Content */}
             <div className="space-y-5">
+              {/* Full Name */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                   Full Name
@@ -244,6 +311,7 @@ const BuyerProfile = () => {
                 />
               </div>
 
+              {/* Phone */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                   Phone
@@ -256,14 +324,15 @@ const BuyerProfile = () => {
                 />
               </div>
 
+              {/* Email */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Enter You Email
+                  Enter Your Email
                 </label>
 
                 <input
-                  type="text"
-                  placeholder="Enter your Email"
+                  type="email"
+                  placeholder="Enter your email"
                   className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-fuchsia-600"
                 />
               </div>
@@ -273,12 +342,12 @@ const BuyerProfile = () => {
             <div className="flex justify-end gap-3 mt-7">
               <button
                 onClick={() => setIsEditOpen(false)}
-                className="px-5 py-3 rounded-xl border border-gray-300"
+                className="px-5 py-3 rounded-xl border border-gray-300 hover:bg-gray-50"
               >
                 Cancel
               </button>
 
-              <button className="px-5 py-3 rounded-xl bg-fuchsia-800 text-white">
+              <button className="px-5 py-3 rounded-xl bg-fuchsia-800 hover:bg-fuchsia-700 text-white">
                 Save Changes
               </button>
             </div>
