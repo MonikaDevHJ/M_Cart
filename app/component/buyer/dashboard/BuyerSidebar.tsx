@@ -69,7 +69,6 @@ const BuyerSideBar = () => {
   }, [dispatch]);
 
   // Fetch wishlist Items from api
-
   useEffect(() => {
     const fetchWishlistItems = async () => {
       try {
@@ -110,7 +109,7 @@ const BuyerSideBar = () => {
       name: "Cart",
       icon: <FaShoppingCart />,
       link: "/cart",
-      badge: cartCount > 0 ? cartCount.toString() : undefined
+      badge: cartCount > 0 ? cartCount.toString() : undefined,
     },
     {
       name: "Addresses",
