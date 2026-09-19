@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
-import { setCartItems } from "@/redux/cartSlice";
 
 const BuyerProfile = () => {
   const [isEditOpen, setIsEditOpen] = useState(false);

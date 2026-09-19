@@ -1,15 +1,30 @@
 "use client";
 import Link from "next/link";
-
-
 import {
   ShoppingBag,
   PackageCheck,
   Truck,
   Heart,
+  ShoppingCart,
 } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 const BuyerCard = () => {
+
+ const dispatch = useDispatch();
+
+  // Get Cart Item From Redux
+  const cartItem = useSelector((state: RootState) => state.cart.items);
+  // Get Cart Count
+  const cartCount = cartItem.length;
+
+  // Get WishList Item from 
+  const cartWishList = useSelector((state: RootState) => state.wishlist.items)
+
+  // Get Wish list Count
+ const wishListCount = cartWishList.length;
+
   const cards = [
     {
       title: "Total Orders",
@@ -43,19 +58,31 @@ const BuyerCard = () => {
     },
     {
       title: "Wishlist Items",
-      count: 16,
+      count: wishListCount > 0 ? wishListCount.toString(): undefined,
       linkText: "View wishlist",
       icon: Heart,
+      iconBg: "bg-red-100",
+      iconColor: "text-red-500",
+      linkColor: "text-red-500",
+      Link : "/wishlist"
+    },
+     {
+      title: "Cart Items",
+      count: cartCount > 0 ? cartCount.toString():undefined,
+      linkText: "View CartList",
+      icon: ShoppingCart,
       iconBg: "bg-blue-100",
       iconColor: "text-blue-600",
       linkColor: "text-blue-600",
-      Link : "/wishlist"
+      Link : "/cart"
     },
   ];
 
+  
+
   return (
     <div className="mt-1 sm:mt-4 lg:mt-6 px-1 sm:px-0">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         {cards.map((card, index) => {
           const Icon = card.icon;
 
