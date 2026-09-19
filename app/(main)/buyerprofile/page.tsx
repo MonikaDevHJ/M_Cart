@@ -20,25 +20,12 @@ const BuyerProfile = () => {
   // Get Cart Count
   const cartCount = cartItem.length;
 
+  // Get WishList Item from 
+  const cartWishList = useSelector((state: RootState) => state.wishlist.items)
 
-  // useEffect(() => {
-  //   const fetchCartItems = async () => {
-  //     try {
-  //       const res = await fetch("/api/cart");
-  //       const data = await res.json();
+  // Get Wish list Count
+ const wishListCount = cartWishList.length;
 
-  //       // Store Cart Item in Redux
-  //       dispatch(setCartItems(data));
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   fetchCartItems();
-  // }, [useDispatch]);
-
-  // Card Data
-  // Later we will replace count with actual API/database data
- 
  
   const cards = [
     {
@@ -53,7 +40,7 @@ const BuyerProfile = () => {
       icon: "❤️",
       name: "Wishlist",
       details: "Your saved items",
-      count: 10,
+      count: wishListCount > 0 ? wishListCount.toString() : undefined ,
       link: "/wishlist",
       linkText: "View Wishlist"
     },
