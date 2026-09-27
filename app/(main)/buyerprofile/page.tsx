@@ -23,7 +23,7 @@ const BuyerProfile = () => {
         const response = await fetch("/api/profile");
 
         const data = await response.json();
-        console.log("PROFILE DATA", data)
+        console.log("PROFILE DATA", data);
 
         if (data.success) {
           setProfile(data.user);
@@ -82,6 +82,34 @@ const BuyerProfile = () => {
       linkText: "View Cart"
     }
   ];
+
+
+  const handleSaveProfile = async () => {
+  try {
+    const response = await fetch("/api/profile", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fullName: profile.fullName,
+        phone: profile.phone,
+        location: profile.location,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      setProfile(data.user);
+      setIsEditOpen(false);
+
+      console.log("Profile updated:", data);
+    }
+  } catch (error) {
+    console.log("Error updating profile:", error);
+  }
+};
 
   return (
     <div>
@@ -316,6 +344,13 @@ const BuyerProfile = () => {
                 </label>
 
                 <input
+                  value={profile.fullName}
+                  onChange={(e) =>
+                    setProfile({
+                      ...profile,
+                      fullName: e.target.value
+                    })
+                  }
                   type="text"
                   placeholder="Enter your name"
                   className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-fuchsia-600"
@@ -329,6 +364,13 @@ const BuyerProfile = () => {
                 </label>
 
                 <input
+                  value={profile.phone}
+                  onChange={(e) =>
+                    setProfile({
+                      ...profile,
+                      phone: e.target.value
+                    })
+                  }
                   type="tel"
                   placeholder="Enter your phone number"
                   className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-fuchsia-600"
@@ -342,6 +384,13 @@ const BuyerProfile = () => {
                 </label>
 
                 <input
+                 value={profile.email}
+                 onChange={ (e)=>
+                  setProfile({
+                    ...profile, 
+                    email: e.target.value
+                  })
+                  }
                   type="email"
                   placeholder="Enter your email"
                   className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-fuchsia-600"
@@ -358,7 +407,9 @@ const BuyerProfile = () => {
                 Cancel
               </button>
 
-              <button className="px-5 py-3 rounded-xl bg-fuchsia-800 hover:bg-fuchsia-700 text-white">
+              <button 
+              onClick={handleSaveProfile  }
+              className="px-5 py-3 rounded-xl bg-fuchsia-800 hover:bg-fuchsia-700 text-white">
                 Save Changes
               </button>
             </div>
