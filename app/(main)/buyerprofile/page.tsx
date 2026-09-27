@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,24 +8,46 @@ import { RootState } from "@/redux/store";
 
 const BuyerProfile = () => {
   const [isEditOpen, setIsEditOpen] = useState(false);
+  const [profile, setProfile] = useState({
+    fullName: "",
+    phone: "",
+    location: "",
+    email: ""
+  });
 
   const { user } = useUser();
 
-    const dispatch = useDispatch();
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await fetch("/api/profile");
 
+        const data = await response.json();
+        console.log("PROFILE DATA", data)
+
+        if (data.success) {
+          setProfile(data.user);
+        }
+      } catch (error) {
+        console.log("Error fetching Profile", error);
+      }
+    };
+    fetchProfile();
+  }, []);
+
+  const dispatch = useDispatch();
 
   // Get Cart Item From Redux
   const cartItem = useSelector((state: RootState) => state.cart.items);
   // Get Cart Count
   const cartCount = cartItem.length;
 
-  // Get WishList Item from 
-  const cartWishList = useSelector((state: RootState) => state.wishlist.items)
+  // Get WishList Item from
+  const cartWishList = useSelector((state: RootState) => state.wishlist.items);
 
   // Get Wish list Count
- const wishListCount = cartWishList.length;
+  const wishListCount = cartWishList.length;
 
- 
   const cards = [
     {
       icon: "📦",
@@ -39,7 +61,7 @@ const BuyerProfile = () => {
       icon: "❤️",
       name: "Wishlist",
       details: "Your saved items",
-      count: wishListCount > 0 ? wishListCount.toString() : undefined ,
+      count: wishListCount > 0 ? wishListCount.toString() : undefined,
       link: "/wishlist",
       linkText: "View Wishlist"
     },
