@@ -12,8 +12,11 @@ const BuyerProfile = () => {
     fullName: "",
     phone: "",
     location: "",
-    email: ""
+    email: "",
+    profileImage : ""
   });
+
+  const[profileImage, setProfileImage] = useState <File|null>  (null)
 
   const { user } = useUser();
 
